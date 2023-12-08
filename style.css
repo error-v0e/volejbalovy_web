@@ -4,6 +4,9 @@
   --hover-color: #FED40D;
   --active-color: #FEC90D;
 }
+*{
+  font-family: 'Inter';
+}
 .bg_primary_color {
   background-color: var(--primary-color);
   color: var(--secondary-color) !important;
