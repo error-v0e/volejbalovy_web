@@ -46,18 +46,16 @@ p, h1, h2, h3, h4, h5, h6{
 }
 .nav-item > .nav-link{
   padding-left: 15px;
-  background-color: var(--primary-color);
-  color: var(--secondary-color);
 }
 .dropdown-item{
   padding-left: 20px;
   padding-right: 20px;
 }
-.dropdown-item:hover, .nav-link:hover {
-  background-color: var(--hover-color);
+.dropdown-item:hover, .nav-link:hover{
+  background-color: var(--hover-color) !important;
 }
-.nav-item > .active{
-  background-color: var(--active-color);
+.active{
+  background-color: var(--active-color) !important;
 }
 .dropdown-menu{
   border-style: none;
@@ -79,25 +77,6 @@ p, h1, h2, h3, h4, h5, h6{
   border-top-style: solid;
   border-top-color: var(--primary-color);
 }
-.title-home{
-  padding-bottom: 10px;
-}
-.caption-home{
-  
-  height: fit-content;
-  max-height: 260px;
-  min-width: 200px;
-}
-.caption-home-p::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 35%;
-  height: 20.3px; 
-  background: linear-gradient(to right, rgba(255, 255, 255, 0), white 90%);
-  pointer-events: none;
-}
 .navbar-toggler:focus{
   box-shadow: 0 0 0 ;
 }
@@ -115,9 +94,6 @@ p, h1, h2, h3, h4, h5, h6{
 .akce-box{
   padding-left: 20px;
   padding-bottom: 1px;
-}
-.home{
-  padding-top: 20px;
 }
 .footer{ 
   position: absolute;

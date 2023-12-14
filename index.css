@@ -1,0 +1,23 @@
+.title-home{
+    padding-bottom: 10px;
+}
+.caption-home{
+  
+  height: fit-content;
+  max-height: 260px;
+  min-width: 200px;
+}
+.caption-home-p::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 35%;
+  height: 20.3px; 
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), white 90%);
+  pointer-events: none;
+}
+.home{
+  padding-top: 20px;
+  text-align: justify;
+}
