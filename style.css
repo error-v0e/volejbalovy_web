@@ -152,10 +152,17 @@ body{
   max-width: 250px;
   max-height: 160px;
 }
-.fa-arrow-right-to-bracket::before{
+.fa-arrow-right-to-bracket::before, .fa-angle-down::before {
   margin-left: 43%;
   transform: translate(-50%);
 }
 .media-link{
   text-decoration: none;
+}
+.universal{
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.universal > p{
+  text-align: center;
 }
