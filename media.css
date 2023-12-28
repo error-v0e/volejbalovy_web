@@ -9,3 +9,21 @@
   padding-top: 20px;
   text-align: justify;
 }
+.filter-box{
+  display: none;
+  position:fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 15px;
+  padding-top: 17px;
+  z-index: 1;
+  border-radius: 19px;
+}
+.x-button{
+  position:fixed;
+  top: 5px;
+  right: 8px;
+}
