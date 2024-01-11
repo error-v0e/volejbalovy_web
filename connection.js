@@ -24,7 +24,7 @@ const Klub = sequelize.define('klub', {
     type: DataTypes.STRING(64),
     allowNull: false,
   },
-});
+}, {freezeTableName: true,});
 
 // Definice modelu pro kategorie
 const Kategorie = sequelize.define('kategorie', {
@@ -38,6 +38,10 @@ const Kategorie = sequelize.define('kategorie', {
     type: DataTypes.STRING(45),
     allowNull: false,
   },
+  href: {
+    type: DataTypes.STRING(64),
+    allowNull: false,
+  },
   poradi: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -46,7 +50,7 @@ const Kategorie = sequelize.define('kategorie', {
     type: DataTypes.TINYINT,
     allowNull: false,
   },
-});
+}, {freezeTableName: true,});
 
 // Definice modelu pro universal
 const Universal = sequelize.define('universal', {
@@ -64,7 +68,7 @@ const Universal = sequelize.define('universal', {
     type: DataTypes.STRING(256),
     allowNull: true,
   },
-});
+}, {freezeTableName: true,});
 // Definice modelu pro sponzor
 const Sponzor = sequelize.define('sponzor', {
   id_sponzor: {
@@ -81,7 +85,7 @@ const Sponzor = sequelize.define('sponzor', {
     type: DataTypes.STRING(200),
     allowNull: false,
   },
-});
+}, {freezeTableName: true,});
 
 // Definice modelu pro pohlavi
 const Pohlavi = sequelize.define('pohlavi', {
@@ -95,7 +99,7 @@ const Pohlavi = sequelize.define('pohlavi', {
     type: DataTypes.STRING(45),
     allowNull: false,
   },
-});
+}, {freezeTableName: true,});
 
 // Definice modelu pro tag
 const Tag = sequelize.define('tag', {
@@ -109,7 +113,7 @@ const Tag = sequelize.define('tag', {
     type: DataTypes.STRING(45),
     allowNull: false,
   },
-});
+}, {freezeTableName: true,});
 
 // Definice modelu pro tym
 const Tym = sequelize.define('tym', {
@@ -127,7 +131,7 @@ const Tym = sequelize.define('tym', {
     type: DataTypes.STRING(500),
     allowNull: true,
   },
-});
+}, {freezeTableName: true,});
 
 // Definice modelu pro prispevek
 const Prispevek = sequelize.define('prispevek', {
@@ -150,17 +154,17 @@ const Prispevek = sequelize.define('prispevek', {
     allowNull: false,
     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
   },
-});
+}, {freezeTableName: true,});
 
 // Definice modelu pro tags
-const Tagy = sequelize.define('tagy', {
-  id_tagy: {
+const Tags = sequelize.define('tags', {
+  id_tags: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
     allowNull: false,
   },
-});
+}, {freezeTableName: true,});
 
 // Definice modelu pro sit
 const Sit = sequelize.define('sit', {
@@ -178,7 +182,7 @@ const Sit = sequelize.define('sit', {
     type: DataTypes.STRING(200),
     allowNull: false,
   },
-});
+}, {freezeTableName: true,});
 
 // Definice vztahů mezi modely
 Kategorie.belongsTo(Klub, { foreignKey: 'id_klub', onDelete: 'NO ACTION', onUpdate: 'NO ACTION' });
@@ -186,8 +190,9 @@ Universal.belongsTo(Kategorie, { foreignKey: 'id_kategorie', onDelete: 'NO ACTIO
 Sponzor.belongsTo(Klub, { foreignKey: 'id_klub', onDelete: 'NO ACTION', onUpdate: 'NO ACTION' });
 Tag.belongsTo(Pohlavi, { foreignKey: 'id_pohlavi', onDelete: 'NO ACTION', onUpdate: 'NO ACTION' });
 Tym.belongsTo(Tag, { foreignKey: 'id_tag', onDelete: 'NO ACTION', onUpdate: 'NO ACTION' });
-Tagy.belongsTo(Tag, { foreignKey: 'id_tag', onDelete: 'NO ACTION', onUpdate: 'NO ACTION' });
-Tagy.belongsTo(Prispevek, { foreignKey: 'id_prispevek', onDelete: 'NO ACTION', onUpdate: 'NO ACTION' });
+Tym.belongsTo(Klub, { foreignKey: 'id_klub', onDelete: 'NO ACTION', onUpdate: 'NO ACTION' });
+Tags.belongsTo(Tag, { foreignKey: 'id_tag', onDelete: 'NO ACTION', onUpdate: 'NO ACTION' });
+Tags.belongsTo(Prispevek, { foreignKey: 'id_prispevek', onDelete: 'NO ACTION', onUpdate: 'NO ACTION' });
 Sit.belongsTo(Klub, { foreignKey: 'id_klub', onDelete: 'NO ACTION', onUpdate: 'NO ACTION' });
 
 
@@ -203,4 +208,4 @@ sequelize.sync({ force: true }) // force: true vymaže stávající tabulky (pou
   
 
 sequelize.authenticate()
-module.exports = sequelize;
+module.exports.sequelize = sequelize;
