@@ -4,7 +4,7 @@ const sequelize = new Sequelize('vkteplice', 'root', '', {
   dialect: 'mysql',
 });
 
-// Definice modelu pro klub
+
 const Klub = sequelize.define('klub', {
   id_klub: {
     type: DataTypes.INTEGER,
@@ -26,7 +26,6 @@ const Klub = sequelize.define('klub', {
   },
 }, {freezeTableName: true,});
 
-// Definice modelu pro kategorie
 const Kategorie = sequelize.define('kategorie', {
   id_kategorie: {
     type: DataTypes.INTEGER,
@@ -52,7 +51,6 @@ const Kategorie = sequelize.define('kategorie', {
   },
 }, {freezeTableName: true,});
 
-// Definice modelu pro universal
 const Universal = sequelize.define('universal', {
   id_universal: {
     type: DataTypes.INTEGER,
@@ -69,7 +67,7 @@ const Universal = sequelize.define('universal', {
     allowNull: true,
   },
 }, {freezeTableName: true,});
-// Definice modelu pro sponzor
+
 const Sponzor = sequelize.define('sponzor', {
   id_sponzor: {
     type: DataTypes.INTEGER,
@@ -87,7 +85,6 @@ const Sponzor = sequelize.define('sponzor', {
   },
 }, {freezeTableName: true,});
 
-// Definice modelu pro pohlavi
 const Pohlavi = sequelize.define('pohlavi', {
   id_pohlavi: {
     type: DataTypes.INTEGER,
@@ -101,7 +98,6 @@ const Pohlavi = sequelize.define('pohlavi', {
   },
 }, {freezeTableName: true,});
 
-// Definice modelu pro tag
 const Tag = sequelize.define('tag', {
   id_tag: {
     type: DataTypes.INTEGER,
@@ -115,7 +111,6 @@ const Tag = sequelize.define('tag', {
   },
 }, {freezeTableName: true,});
 
-// Definice modelu pro tym
 const Tym = sequelize.define('tym', {
   id_tym: {
     type: DataTypes.INTEGER,
@@ -133,7 +128,6 @@ const Tym = sequelize.define('tym', {
   },
 }, {freezeTableName: true,});
 
-// Definice modelu pro prispevek
 const Prispevek = sequelize.define('prispevek', {
   id_prispevek: {
     type: DataTypes.INTEGER,
@@ -156,7 +150,6 @@ const Prispevek = sequelize.define('prispevek', {
   },
 }, {freezeTableName: true,});
 
-// Definice modelu pro tags
 const Tags = sequelize.define('tags', {
   id_tags: {
     type: DataTypes.INTEGER,
@@ -166,7 +159,6 @@ const Tags = sequelize.define('tags', {
   },
 }, {freezeTableName: true,});
 
-// Definice modelu pro sit
 const Sit = sequelize.define('sit', {
   id_sit: {
     type: DataTypes.INTEGER,
@@ -184,7 +176,6 @@ const Sit = sequelize.define('sit', {
   },
 }, {freezeTableName: true,});
 
-// Definice vztahů mezi modely
 Kategorie.belongsTo(Klub, { foreignKey: 'id_klub', onDelete: 'NO ACTION', onUpdate: 'NO ACTION' });
 Universal.belongsTo(Kategorie, { foreignKey: 'id_kategorie', onDelete: 'NO ACTION', onUpdate: 'NO ACTION' });
 Sponzor.belongsTo(Klub, { foreignKey: 'id_klub', onDelete: 'NO ACTION', onUpdate: 'NO ACTION' });
@@ -196,8 +187,8 @@ Tags.belongsTo(Prispevek, { foreignKey: 'id_prispevek', onDelete: 'NO ACTION', o
 Sit.belongsTo(Klub, { foreignKey: 'id_klub', onDelete: 'NO ACTION', onUpdate: 'NO ACTION' });
 
 
-// Synchronizace s databází
-sequelize.sync({ force: true }) // force: true vymaže stávající tabulky (používat opatrně)
+
+sequelize.sync({ force: true }) // force: true vymaže stávající tabulky!!!
   .then(() => {
     console.log('Databáze synchronizována.');
   })
