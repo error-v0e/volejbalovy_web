@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { Klub, Kategorie, Sponzor, Tym, Prispevek, Sit } = require('../item');
-const id_kategorie = 4;
+const { Klub, Kategorie, Sponzor, Tym, Prispevek, Sit, Universal} = require('../item');
+const id_kategorie = 6;
 
 router.get('/', async (req, res) => {
   try {
@@ -13,14 +13,19 @@ router.get('/', async (req, res) => {
     const sponzori = await Sponzor.findAll();
     const tymy = await Tym.findAll();
     const prispevky = await Prispevek.findAll({
-      limit: 6,
+      limit: 2,
       order: [['cas_pridani', 'DESC']]
     });
+    const universal = await Universal.findOne({
+      where: {
+        id_kategorie: id_kategorie
+      }
+    });
     const site = await Sit.findAll();
-    res.render('media', { kluby, kategorie, sponzori, tymy, prispevky, site, id_kategorie });
+    res.render('universal', { kluby, kategorie, sponzori, tymy, prispevky, site, universal, id_kategorie });
   } catch (error) {
     console.error(error);
-    res.status(500).send('Chyba serveru'); 
+    res.status(500).send('Chyba serveru');
   }
 });
 

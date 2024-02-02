@@ -5,9 +5,11 @@ const {Klub, Kategorie, Universal, Sponzor, Pohlavi, Tag, Tym, Prispevek, Tags, 
 
 var home_routes = require('./routes/home.routes');
 var media_routes = require('./routes/media.routes');
+var nabor_routes = require('./routes/nabor.routes');
+var kontakty_routes = require('./routes/kontakty.routes');
 
 const app = express();
-
+app.use(express.static('public'));
 // Nastavení view engine na EJS
 app.set('view engine', 'ejs');
 
@@ -19,6 +21,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/', home_routes);
+app.use('/media', media_routes);
+app.use('/nabor', nabor_routes);
+app.use('/kontakty', kontakty_routes);
+
 
 app.use(express.static('public'));
 

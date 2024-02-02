@@ -59,7 +59,7 @@ const Universal = sequelize.define('universal', {
     allowNull: false,
   },
   obsah: {
-    type: DataTypes.STRING(256),
+    type: DataTypes.STRING(1024),
     allowNull: true,
   },
 }, {freezeTableName: true,});
@@ -143,6 +143,10 @@ const Prispevek = sequelize.define('prispevek', {
     type: DataTypes.DATE,
     allowNull: false,
     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+  },
+  cesta: {
+    type: DataTypes.STRING(128),
+    allowNull: false,
   },
 }, {freezeTableName: true,});
 
