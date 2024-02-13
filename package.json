@@ -1,0 +1,18 @@
+{
+  "name": "volejbalovy_web",
+  "version": "1.0.0",
+  "description": "e",
+  "main": "media.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "pvl",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "jquery": "^3.7.1",
+    "mysql2": "^3.9.1",
+    "sequelize": "^6.35.2"
+  }
+}
