@@ -1,0 +1,46 @@
+<nav class="bg_primary_color navbar navbar-expand-md container-fluid" aria-label="Fourth navbar example">
+    <div class="container-xl container-fluid">
+      <a class="navbar-brand " href="/">
+        <img class="logo" src="/img/<%= kluby.logo %>" alt="Logo" height="110">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExample04">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <% kategorie.forEach(item => { %> 
+            <% if(item.id_kategorie == id_kategorie) { %>
+              <% if(item.id_kategorie == 2){ %>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle bg_primary_color active" href="/tymy/U20" id="dropdown04" data-bs-toggle="dropdown" aria-expanded="false"><%= item.nazev %></a>
+                  <ul class="dropdown-menu bg_navbar-collapse collapse bg_primary_color" aria-labelledby="dropdown04">
+                    <li><a class="dropdown-item active bg_primary_color" aria-current="page" href="/tymy/U20">U-20</a></li>
+                    <li><a class="dropdown-item bg_primary_color" href="/tymy/U20">U-16</a></li>
+                    <li><a class="dropdown-item bg_primary_color" href="/tymy/U20">U-14</a></li>
+                  </ul>
+                </li>
+              <% } else{ %>
+                <li class="nav-item">
+                  <a class="nav-link active primary_color" aria-current="page" href="<%= item.href %>"><%= item.nazev %></a>
+                </li>
+              <% } %>
+            <% } else if(item.id_kategorie == 2){ %>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle bg_primary_color" href="/tymy/U20" id="dropdown04" data-bs-toggle="dropdown" aria-expanded="false"><%= item.nazev %></a>
+                <ul class="dropdown-menu bg_navbar-collapse collapse bg_primary_color" aria-labelledby="dropdown04">
+                  <li><a class="dropdown-item bg_primary_color" href="/tymy/U20">U-20</a></li>
+                  <li><a class="dropdown-item bg_primary_color" href="/tymy/U20">U-16</a></li>
+                  <li><a class="dropdown-item bg_primary_color" href="/tymy/U20">U-14</a></li>
+                </ul>
+              </li>
+            <% } else { %>
+              <li class="nav-item">
+                <a class="nav-link primary_color" aria-current="page" href="<%= item.href %> "><%= item.nazev %></a>
+              </li>
+            <% } %>
+          <% }); %>
+        </ul>
+      </div>
+    </div>
+  </nav>

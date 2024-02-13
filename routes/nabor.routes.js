@@ -22,7 +22,7 @@ router.get('/', async (req, res) => {
       }
     });
     const site = await Sit.findAll();
-    res.render('universal', { kluby, kategorie, sponzori, tymy, prispevky, site, universal, id_kategorie });
+    res.render('public_views/universal', { kluby, kategorie, sponzori, tymy, prispevky, site, universal, id_kategorie });
   } catch (error) {
     console.error(error);
     res.status(500).send('Chyba serveru');
