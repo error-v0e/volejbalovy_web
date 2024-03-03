@@ -19,7 +19,6 @@
 				</div> 
 			</nav> 
 		</header> 
-		<% if (name) { %> 
 		<div class="pt-10"> 
 			<h1 class="text-4xl font-bold tracking-tight 
 					text-gray-900 sm:text-6xl"> 
@@ -38,28 +37,6 @@
 					Logout 
 				</a> 
 			</div> 
-
-			<% } else { %> 
-			<div class="pt-4 mt-2"> 
-				<h1 class="text-sm font-bold tracking-tight 
-						text-gray-900 sm:text-6xl"> 
-					Invalid User 
-				</h1> 
-				<p class="mt-6 text-lg leading-8 text-gray-600"> 
-					You're Not Authenticated please Login 
-				</p> 
-				<div class="mt-10 flex gap-x-6"> 
-					<a href="/login"
-					class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm 
-							font-semibold text-white shadow-sm 
-							hover:bg-indigo-500 focus-visible:outline 
-							focus-visible:outline-2 focus-visible:outline-offset-2 
-							focus-visible:outline-indigo-600"> 
-						Login 
-					</a> 
-				</div> 
-			</div> 
-			<% } %> 
 		</div> 
 	</div> 
 </body> 

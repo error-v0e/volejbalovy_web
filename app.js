@@ -59,6 +59,6 @@ app.use("/", routes);
 
 app.use(express.static('public'));
 
-app.listen(3001, () => {
+app.listen(3000, () => {
   console.log('Server běží na portu 3000');
 });
