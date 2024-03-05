@@ -38,6 +38,7 @@
   padding:8px;
   display:block;
   border:none;
+  align-items: left;
   border-bottom:3px solid var(--primary-color);
   
 }
@@ -62,13 +63,15 @@
   max-width: 440px;
   margin:auto;
   margin-top: 10%;
+  font-weight: bold;
+  font-size: 90%;
 }
 .form-signin > form{
-  padding: 25px;
+  padding: 40px;
   border-radius: 20px;
   background-color: white;
   box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
 }
-.facebook{
-  background-color: #0866ff;
+.form-signin > form > div > input{
+  width: 100%;
 }

@@ -2,6 +2,7 @@
   --primary-color: #FEDE0D; 
   --secondary-color: #323693;
   --hover-color: #FED40D;
+  --secondary-hover-color: #292b7a;
   --active-color: #FEC90D;
 }
 *{
@@ -12,14 +13,14 @@ p, h1, h2, h3, h4, h5, h6{
 }
 .bg_primary_color {
   background-color: var(--primary-color) !important;
-  color: var(--secondary-color) !important;
+  color: var(--secondary-color) ;
 }
 .primary_color{
   color: var(--secondary-color) !important;
 }
 .bg_secondary_color {
   background-color: var(--secondary-color) !important;
-  color: var(--primary-color) !important;
+  color: var(--primary-color) ;
 }
 .secondary_color{
   color: var(--primary-color) !important;
@@ -171,4 +172,12 @@ body{
 }
 .form-check-input:checked{
   background-color: var(--secondary-color);
+}
+button.bg_secondary_color:hover {
+  background-color: var(--secondary-hover-color) !important;
+  color: var(--hover-color);
+}
+::placeholder { 
+  color: #32359369; 
+  
 }

@@ -6,19 +6,18 @@ const bcrypt = require("bcrypt");
 
 // User registration route
 router.post("/register", async (req, res) => {
-  console.log(req.body);
   const { username, email, password, confirmpassword } = req.body;
 
   if (!username || !email || !password || !confirmpassword) {
     return res
       .status(403)
-      .render("public_views/register", { error: "All Fields are required" });
+      .render("admin_views/register", { error: "Nejsou vyplněna všechna pole" });
   }
 
   if (confirmpassword !== password) {
     return res
       .status(403)
-      .render("public_views/register", { error: "Password do not match" });
+      .render("admin_views/register", { error: "Hesla se musi schodovat" });
   }
 
   try {
@@ -28,7 +27,7 @@ router.post("/register", async (req, res) => {
     if (existingUser) {
       return res
         .status(409)
-        .render("public_views/register", { error: "Username already exists" });
+        .render("admin_views/register", { error: "Jméno již existuje" });
     }
 
     // Hash the password before saving it to the database
@@ -42,21 +41,35 @@ router.post("/register", async (req, res) => {
       password: hashedPassword,
     });
 
-    return res.redirect("/login");
+    return res.redirect("/sprava");
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
 });
 
 // User login route
-router.post("/login", passport.authenticate("local", { session: false }),
-  (req, res) => {
-    req.session.name = req.body.username;
-    req.session.save();
+router.post("/login", (req, res, next) => {
+  passport.authenticate("local", { session: false }, (err, user, info) => {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      // Autentizace selhala, přesměrujeme na stránku s přihlášením
+      return res.render("admin_views/login", { error: "prihlasit se nepovedlo" });
+    }
+    req.logIn(user, { session: false }, (err) => {
+      if (err) {
+        return next(err);
+      }
+      // Uložíme uživatelské jméno do session
+      req.session.name = req.body.username;
+      req.session.save();
 
-    return res.redirect("/sprava");
-  }
-);
+      // Přesměrujeme na stránku "/sprava"
+      return res.redirect("/sprava");
+    });
+  })(req, res, next);
+});
 
 router.get("/logout", (req, res) => {
   req.session.destroy();
