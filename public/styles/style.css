@@ -25,6 +25,10 @@ p, h1, h2, h3, h4, h5, h6{
 .secondary_color{
   color: var(--primary-color) !important;
 }
+.bg_secondary_white_color {
+  background-color: var(--secondary-color) !important;
+  color: white ;
+}
 .logo{
   border-style: solid;
   border-radius: 50%;
@@ -173,11 +177,38 @@ body{
 .form-check-input:checked{
   background-color: var(--secondary-color);
 }
-button.bg_secondary_color:hover {
+button.bg_secondary_white_color:hover {
   background-color: var(--secondary-hover-color) !important;
-  color: var(--hover-color);
+  color: #dbdbdb !important;
+}
+input[type=button]:hover {
+  background-color: var(--secondary-hover-color) !important;
+  color: #dbdbdb !important;
 }
 ::placeholder { 
-  color: #32359369; 
-  
+  color: #32359369;
+}
+input[type=button].bg_secondary_white_color{
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 100%;
+  max-width: 290px;
+}
+#previewimg{
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 320px;
+  width: 100%;
+}
+#previewico{
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 150px;
+  width: 100%;
 }

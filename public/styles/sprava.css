@@ -50,8 +50,6 @@
 .buttplus{
   width: 100%;
   height: 100%;
-  background-color: #7B7ECE;
-  color: white;
   border: none;
   border-radius: 22px;
   font-size: 150%;
@@ -74,4 +72,30 @@
 }
 .form-signin > form > div > input{
   width: 100%;
+}
+.fa-pen{
+ 
+  top: 0;
+}
+.editeble{
+  position: relative;
+  display: inline-block;
+}
+.img-fluid {
+  width: 100%;
+  height: auto;
+}
+
+.fa-pen {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #292b64b4; /* Change this to the color you want for the icon */
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.editeble:hover .fa-pen {
+  visibility: visible;
+  opacity: 1;
 }
