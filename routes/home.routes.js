@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
       order: [['cas_pridani', 'DESC']]
     });
     const site = await Sit.findAll();
-    res.render('public_views/index', {res, kluby, kategorie, sponzori, tymy, prispevky, site, id_kategorie });
+    res.render('public_views/index', {res, kluby, kategorie, sponzori, tymy, prispevky, site, id_kategorie});
   } catch (error) {
     console.error(error);
     res.status(500).send('Chyba serveru');

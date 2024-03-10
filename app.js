@@ -9,7 +9,7 @@ const cookieParser = require("cookie-parser");
 const sequelize = require("./user_db.js"); // Assuming this file initializes and exports your Sequelize instance
 const ejs = require("ejs");
 const bodyParser = require("body-parser");
-const routes = require("./admin_pages.js");
+const sprava_routes = require("./admin_pages.js");
 const session = require("express-session");
 
 
@@ -54,7 +54,7 @@ app.use('/media', media_routes);
 app.use('/nabor', nabor_routes);
 app.use('/kontakty', kontakty_routes);
 app.use("/api/", controllers); // Path to your authentication routes file
-app.use("/", routes);
+app.use("/", sprava_routes);
 
 
 app.use(express.static('public'));

@@ -3,6 +3,9 @@ const router = express.Router();
 const User = require("./models");
 const passport = require("passport");
 const bcrypt = require("bcrypt");
+const { Klub, Kategorie, Sponzor } = require('./item');
+const fs = require('fs');
+const path = require('path');
 
 // User registration route
 router.post("/register", async (req, res) => {
@@ -75,5 +78,41 @@ router.get("/logout", (req, res) => {
   req.session.destroy();
   res.redirect("/sprava");
 });
+
+router.post("/sprava_klubu", async (req, res) => {
+  const { cname, icon, logo } = req.body;
+  const kluby = await Klub.findOne();
+  const pathL = './public/img/' + kluby.logo;
+  const pathI = './public/img/' + kluby.icona;
+
+  if (cname || icon || logo ) {
+    if(cname != kluby.jmeno){
+      try {
+        await Klub.update({ jmeno: cname }, { where: { id_klub: kluby.id_klub } });
+      } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: err.message });
+      }
+    }
+    if (logo) {
+      if (kluby.logo) {
+        try {
+          fs.unlinkSync(path.join(__dirname, pathL));
+        } catch (err) {
+          console.error(err);
+          return res.status(500).json({ message: err.message });
+        }
+      }
+      try {
+        await Klub.update({ logo: logo }, { where: { id_klub: kluby.id_klub } });
+      } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: err.message });
+      }
+    }
+  }
+  return res.redirect("/sprava");
+});
+
 
 module.exports = router;
