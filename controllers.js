@@ -95,16 +95,16 @@ router.post("/sprava_klubu", async (req, res) => {
       }
     }
     if (logo) {
-      if (kluby.logo) {
-        try {
-          fs.unlinkSync(path.join(__dirname, pathL));
-        } catch (err) {
-          console.error(err);
-          return res.status(500).json({ message: err.message });
-        }
-      }
+      const newLogoPath = './public/img/' + logo;
       try {
+        // Save new logo
+        fs.writeFileSync(newLogoPath, logo.file.data);
+        // Update logo name in the database
         await Klub.update({ logo: logo }, { where: { id_klub: kluby.id_klub } });
+        // Delete old logo
+        if (fs.existsSync(pathL)) {
+          fs.unlinkSync(pathL);
+        }
       } catch (err) {
         console.error(err);
         return res.status(500).json({ message: err.message });
