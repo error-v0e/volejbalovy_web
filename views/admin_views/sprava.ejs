@@ -71,7 +71,7 @@
                 </div>
                 <div class="col-xl-6 mb-2 editeble"> <!--Logo-->
                   <input type="file" id="LogoImg" accept="image/*" onchange="previewImg()" name="logo" style="display: none;" />
-                  <img class="editeble" id="previewimg" src="/img/logo.png" onclick="document.getElementById('LogoImg').click();" alt="Image preview...">
+                  <img class="editeble" id="previewimg" src="/img/<%= kluby.logo %>" onclick="document.getElementById('LogoImg').click();" alt="Image preview...">
                   <i class="fa-solid fa-10x fa-pen" onclick="document.getElementById('LogoImg').click();"></i>
                 </div>
               </div>

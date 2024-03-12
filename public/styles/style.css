@@ -33,6 +33,7 @@ p, h1, h2, h3, h4, h5, h6{
   border-style: solid;
   border-radius: 50%;
   border-width: 5px;
+  background-color: white;
   border-color: white;
   margin-top: -85px;
 }

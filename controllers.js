@@ -6,6 +6,16 @@ const bcrypt = require("bcrypt");
 const { Klub, Kategorie, Sponzor } = require('./item');
 const fs = require('fs');
 const path = require('path');
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+  destination: './public/img/', // Specify the directory where the files will be saved
+  filename: (req, file, cb) => {
+    cb(null, file.originalname); // Generate a unique file name
+  }
+});
+
+const upload = multer({ storage });
 
 // User registration route
 router.post("/register", async (req, res) => {
@@ -79,14 +89,15 @@ router.get("/logout", (req, res) => {
   res.redirect("/sprava");
 });
 
-router.post("/sprava_klubu", async (req, res) => {
-  const { cname, icon, logo } = req.body;
+router.post("/sprava_klubu", upload.single('logo'), async (req, res) => {
+  const { cname, icon , logo} = req.body;
   const kluby = await Klub.findOne();
   const pathL = './public/img/' + kluby.logo;
   const pathI = './public/img/' + kluby.icona;
 
   if (cname || icon || logo ) {
     if(cname != kluby.jmeno){
+      console.log("nazev");
       try {
         await Klub.update({ jmeno: cname }, { where: { id_klub: kluby.id_klub } });
       } catch (err) {
@@ -95,16 +106,17 @@ router.post("/sprava_klubu", async (req, res) => {
       }
     }
     if (logo) {
-      const newLogoPath = './public/img/' + logo;
-      try {
-        // Save new logo
-        fs.writeFileSync(newLogoPath, logo.file.data);
-        // Update logo name in the database
-        await Klub.update({ logo: logo }, { where: { id_klub: kluby.id_klub } });
-        // Delete old logo
-        if (fs.existsSync(pathL)) {
-          fs.unlinkSync(pathL);
+      console.log(logo);
+      if (kluby.logo) {
+        try {
+          fs.unlinkSync(path.join(__dirname, pathL));
+        } catch (err) {
+          console.error(err);
+          return res.status(500).json({ message: err.message });
         }
+      }
+      try {
+        await Klub.update({ logo: logo }, { where: { id_klub: kluby.id_klub } });
       } catch (err) {
         console.error(err);
         return res.status(500).json({ message: err.message });
