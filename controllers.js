@@ -11,7 +11,7 @@ const multer = require('multer');
 const storage = multer.diskStorage({
   destination: './public/img/', // Specify the directory where the files will be saved
   filename: (req, file, cb) => {
-    cb(null, file); // Generate a unique file name
+    cb(null, file.originalname); // Generate a unique file name
   }
 });
 
@@ -89,8 +89,10 @@ router.get("/logout", (req, res) => {
   res.redirect("/sprava");
 });
 
-router.post("/sprava_klubu", upload.single('logo'), async (req, res) => {
-  const { cname, icon , logo} = req.body;
+router.post("/sprava_klubu", upload.fields([{ name: 'logo', maxCount: 1 }, { name: 'icon', maxCount: 1 }]), async (req, res) => {
+  const { cname } = req.body;
+  const logo = req.files['logo'] ? req.files['logo'][0] : null; // Získání nahrávaného souboru
+  const icon = req.files['icon'] ? req.files['icon'][0] : null; // Získání nahrávaného souboru
   const kluby = await Klub.findOne();
   const pathL = './public/img/' + kluby.logo;
   const pathI = './public/img/' + kluby.icona;
@@ -116,7 +118,25 @@ router.post("/sprava_klubu", upload.single('logo'), async (req, res) => {
         }
       }
       try {
-        await Klub.update({ logo: logo }, { where: { id_klub: kluby.id_klub } });
+        await Klub.update({ logo: logo.originalname }, { where: { id_klub: kluby.id_klub } });
+      } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: err.message });
+      }
+    }
+    if (icon) {
+      console.log(icon);
+      if (kluby.icona) {
+        try {
+          fs.unlinkSync(path.join(__dirname, pathI));
+        } catch (err) {
+          console.error(err);
+          return res.status(500).json({ message: err.message });
+        }
+      }
+      try {
+        // Uložení cesty k souboru do databáze místo obsahu souboru
+        await Klub.update({ icona: icon.path }, { where: { id_klub: kluby.id_klub } });
       } catch (err) {
         console.error(err);
         return res.status(500).json({ message: err.message });
