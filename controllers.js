@@ -136,7 +136,7 @@ router.post("/sprava_klubu", upload.fields([{ name: 'logo', maxCount: 1 }, { nam
       }
       try {
         // Uložení cesty k souboru do databáze místo obsahu souboru
-        await Klub.update({ icona: icon.path }, { where: { id_klub: kluby.id_klub } });
+        await Klub.update({ icona: icon.originalname }, { where: { id_klub: kluby.id_klub } });
       } catch (err) {
         console.error(err);
         return res.status(500).json({ message: err.message });

@@ -55,7 +55,7 @@
           <div class="mb-2 col-xl-6"> <!--Sprava-klubu-->
             <form method="post" action="/api/sprava_klubu" enctype="multipart/form-data">
               <div class="action"><!--Ulozit-->
-                <button class="butt-dis butt mb-1">Zahodit zmeny</button>
+                <a class="butt-dis butt mb-1" href="/sprava">Zahodit zmeny</a>
                 <input  class="butt-sub butt" type="submit" value="Ulozit">
               </div>
               <div class="name primary_color">
@@ -65,7 +65,7 @@
               <div class="row">
                 <div class="col-xl-4 editeble"> <!--Icona-->
                   <input type="file" id="LogoIco" accept="image/x-icon" onchange="previewIco()" name="icon" style="display: none;" />
-                  <img class="editeble" id="previewico" src="/img/icon.ico" onclick="document.getElementById('LogoIco').click();" alt="Ico preview...">
+                  <img class="editeble" id="previewico" src="/img/<%= kluby.icona %>" onclick="document.getElementById('LogoIco').click();" alt="Ico preview...">
                   <i class="fa-solid fa-5x fa-pen" onclick="document.getElementById('LogoIco').click();"></i>
                   
                 </div>

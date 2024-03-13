@@ -21,15 +21,17 @@ router.get("/sprava", async (req, res) => {
         return res.redirect("login");
     }
 }); 
-router.get("/login", (req, res) => { 
+router.get("/login", async (req, res) => { 
     if (req.session.name) { 
         res.redirect("sprava"); 
     } 
-    return res.render("admin_views/login", { error: null }); 
+    const kluby = await Klub.findOne();
+    return res.render("admin_views/login", { error: null, kluby }); 
 }); 
-router.get("/register", (req, res) => { 
+router.get("/register", async (req, res) => { 
     if (req.session.name) { 
-        return res.render("admin_views/register", { error: null }); 
+        const kluby = await Klub.findOne();
+        return res.render("admin_views/register", { error: null, kluby }); 
     } 
     return res.redirect("login");
 }); 
