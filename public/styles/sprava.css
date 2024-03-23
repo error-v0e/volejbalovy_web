@@ -46,6 +46,7 @@
   display:block;
   border:none;
   align-items: left;
+  max-width: 100%;
   border-bottom:3px solid var(--primary-color);
   
 }
@@ -105,4 +106,23 @@
 .editeble:hover .fa-pen {
   visibility: visible;
   opacity: 1;
+}
+.popup{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 100%;
+  z-index: 20;
+  padding: 40px;
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: 0px 0px 1000px 600px rgba(0,0,0,0.38);
+}
+body.popup-active {
+  pointer-events: none;
+}
+
+body.popup-active .popup {
+  pointer-events: all;
 }

@@ -15,7 +15,28 @@
     <title><%= kluby.jmeno %></title>
     <link rel="icon" href="/img/sprava.ico">
 </head>
-<body class="d-flex flex-column">
+<body class="d-flex flex-column popup-active">
+
+  <div class="popup">
+    <form method="post" action="/api/sprava_klubu" enctype="multipart/form-data">
+      <div class="action"><!--Ulozit-->
+        <a class="butt-dis butt mb-1" href="/sprava">Zahodit změny</a>
+        <input  class="butt-sub butt" type="submit" value="Ulozit">
+      </div>
+      <div class="name primary_color mb-3">
+        <label for="cname">Odkaz:</label><br>
+        <input class="cname primary_color" type="text" id="cname" name="cname" value="<%= kluby.jmeno %>"><br>
+      </div>
+      <div class="row">
+        <div class="mb-2 editeble"> <!--Logo-->
+          <input type="file" id="LogoSponzor" accept="image/*" onchange="previewSponzor()" name="sponzor" style="display: none;" />
+          <img class="editeble" id="previewsponzor" src="/img/uk.png" onclick="document.getElementById('LogoSponzor').click();" alt="Image preview...">
+          <i class="fa-solid fa-5x fa-pen" onclick="document.getElementById('LogoSponzor').click();"></i>
+        </div>
+      </div>
+      
+    </form>
+  </div>
 
   <div class="bg_primary_color p-2 stat-box" onmouseover="toggleVisibility('logout')">
     <div class="px-1 pe-3"onmouseover="toggleVisibility('logout')"><i class="fa-solid fa-gear fa-lg pe-1"></i> Sprava</div>
@@ -189,14 +210,28 @@
             reader.readAsDataURL(file);
           }
         }
-        function toggleVisibility(id) {
-        var element = document.getElementById(id);
-        if (element.style.display === "none") {
-          element.style.display = "block";
-        } else {
-          element.style.display = "none";
+        function previewSponzor() {
+          const preview = document.querySelector('#previewsponzor');
+          const file = document.querySelector('#LogoSponzor').files[0];
+          const reader = new FileReader();
+        
+          reader.addEventListener("load", function () {
+            // convert image file to base64 string
+            preview.src = reader.result;
+          }, false);
+        
+          if (file) {
+            reader.readAsDataURL(file);
+          }
         }
-}
+        function toggleVisibility(id) {
+          var element = document.getElementById(id);
+          if (element.style.display === "none") {
+            element.style.display = "block";
+          } else {
+            element.style.display = "none";
+          }
+        } 
         </script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>

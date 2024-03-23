@@ -1,4 +1,16 @@
-<footer class="footer py-2 pt-3 bg_secondary_color">
+<footer class="footer  pt-3 ">
+  <div class="container px-4 pt-5 pb-5  mt-4 pt-4 ">
+    <div class="row row-cols-1 row-cols-lg-3 align-items-stretch align-items-lg-center align-items-md-center g-4 pt-5 pt-0  sponzors-container bordert">
+      
+      <% sponzori.forEach(item => { %> 
+        <a class="col sponzors" target=”_blank” href="<%= item.odkaz %>">
+          <img class="img-fluid sponzor" src="/img/<%= item.logo %>" alt="sponzor">
+        </a>
+      <% }) %>
+
+    </div>
+  </div>
+  <div class="bg_secondary_color foote py-2 pt-3">
     <div class="footer-container">
       <a class="secondary_color" href="<%= kategorie[0].href %>">Domu</a>
       <a class="secondary_color" href="<%= kategorie[4].href %>">Nabor</a>
@@ -9,4 +21,5 @@
       <a href="https://www.instagram.com/vk.teplice/?hl=cs" target=”_blank” class="fa-brands fa-instagram fa-2xl secondary_color"></a>
       <a href="https://www.facebook.com/vk.teplice/" target=”_blank” class="fa-brands fa-facebook fa-2xl secondary_color"></a>
     </div>
-  </footer>
+  </div>
+</footer>

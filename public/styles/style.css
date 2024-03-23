@@ -5,6 +5,10 @@
   --secondary-hover-color: #292b7a;
   --active-color: #FEC90D;
 }
+body{
+  display: flex;
+  flex-direction: column;
+}
 *{
   font-family: 'Inter', sans-serif;
 }
@@ -102,9 +106,15 @@ p, h1, h2, h3, h4, h5, h6{
   padding-bottom: 1px;
 }
 .footer{ 
-  position: absolute;
+  flex-shrink: 0;
   bottom: 0;
   width: 100%;
+}
+.content {
+  flex: 1 0 auto; /* flex-grow, flex-shrink, flex-basis */
+}
+.foote{
+  height: 55px;
 }
 .footer-container{
   display: flex;
@@ -212,4 +222,15 @@ input[type=button].bg_secondary_white_color{
   transform: translate(-50%, -50%);
   max-width: 150px;
   width: 100%;
+}
+#previewsponzor{
+  object-fit: contain;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: fit-content;
+  max-width: 250px;
+  width: 100%;
+  max-height: 160px;
 }
