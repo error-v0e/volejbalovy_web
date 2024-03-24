@@ -17,27 +17,6 @@
 </head>
 <body class="d-flex flex-column popup-active">
 
-  <div class="popup">
-    <form method="post" action="/api/sprava_klubu" enctype="multipart/form-data">
-      <div class="action"><!--Ulozit-->
-        <a class="butt-dis butt mb-1" href="/sprava">Zahodit změny</a>
-        <input  class="butt-sub butt" type="submit" value="Ulozit">
-      </div>
-      <div class="name primary_color mb-3">
-        <label for="cname">Odkaz:</label><br>
-        <input class="cname primary_color" type="text" id="cname" name="cname" value="<%= kluby.jmeno %>"><br>
-      </div>
-      <div class="row">
-        <div class="mb-2 editeble"> <!--Logo-->
-          <input type="file" id="LogoSponzor" accept="image/*" onchange="previewSponzor()" name="sponzor" style="display: none;" />
-          <img class="editeble" id="previewsponzor" src="/img/uk.png" onclick="document.getElementById('LogoSponzor').click();" alt="Image preview...">
-          <i class="fa-solid fa-5x fa-pen" onclick="document.getElementById('LogoSponzor').click();"></i>
-        </div>
-      </div>
-      
-    </form>
-  </div>
-
   <div class="bg_primary_color p-2 stat-box" onmouseover="toggleVisibility('logout')">
     <div class="px-1 pe-3"onmouseover="toggleVisibility('logout')"><i class="fa-solid fa-gear fa-lg pe-1"></i> Sprava</div>
     <a href="/api/logout" class="primary_color rounded p-1 nav-link" style="display: none;" id="logout" onmouseover="toggleVisibility('logout')"><i class="fa-solid fa-sign-out fa-lg pe-1"></i>Odhlasit</a>
@@ -145,29 +124,14 @@
       </div>
       
       <div class="container px-4 py-5 pb-5 mb-3 mt-4 pt-4 ">
-        <div class="row row-cols-1 row-cols-lg-3 align-items-stretch align-items-lg-center align-items-md-center g-4 py-5 pt-0  sponzors-container bordert">
-          
-          <div class="col sponzors editeble" href="#">
-            <img class="img-fluid sponzor" src="/img/cv.png" alt="sponzor">
-            <i class="fa-solid fa-5x fa-pen"></i>
-          </div>
-
-          <div class="col sponzors editeble" href="#">
-            <img class="img-fluid sponzor" src="/img/j.jpg" alt="sponzor">
-            <i class="fa-solid fa-5x fa-pen"></i>
-          </div>
-    
-          <div class="col sponzors editeble" href="#">
-            <img class="img-fluid sponzor editeble" src="/img/tep.svg" alt="sponzor">
-            <i class="fa-solid fa-5x fa-pen"></i>
-          </div>
-
-          <div class="col sponzors editeble" href="#">
-            <img class="img-fluid sponzor" src="/img/uk.png" alt="sponzor">
-            <i class="fa-solid fa-5x fa-pen"></i>
-          </div>
-        </div>
-      </div>
+        <div class="row row-cols-1 row-cols-lg-3 align-items-stretch align-items-lg-center align-items-md-center g-4 pt-5 pt-0  sponzors-container bordert">
+      
+          <% sponzori.forEach(item => { %> 
+            <div class="col sponzors editeble">
+              <img class="img-fluid sponzor" src="/img/sponzor/<%= item.logo %>" alt="sponzor">
+              <i class="fa-solid fa-5x fa-pen"></i>
+            </div>
+          <% }) %>
 
       <footer class="footer py-2 pt-3 bg_secondary_color">
         <div class="footer-container">

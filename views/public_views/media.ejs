@@ -80,18 +80,6 @@
           
         </div>
       </div>
-      
-      <div class="container px-4 py-5 pb-5 mb-3 mt-4 pt-4 ">
-        <div class="row row-cols-1 row-cols-lg-3 align-items-stretch align-items-lg-center align-items-md-center g-4 py-5 pt-0  sponzors-container bordert">
-          
-          <% sponzori.forEach(item => { %> 
-            <a class="col sponzors" target=”_blank” href="<%= item.odkaz %>">
-              <img class="img-fluid sponzor" src="./img/<%= item.logo %>" alt="sponzor">
-            </a>
-          <% }) %>
-
-        </div>
-      </div>
 
       <%- include('./universal_components/footer', { kategorie, site}) %>
       <script src="./media.js"></script>

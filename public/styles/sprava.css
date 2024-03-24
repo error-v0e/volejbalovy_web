@@ -67,12 +67,14 @@
 }
 .form-signin{
   max-width: 440px;
+  width: 100%;
   margin:auto;
   margin-top: 10%;
   font-weight: bold;
   font-size: 90%;
 }
 .form-signin > form{
+  width: 100%;
   padding: 40px;
   border-radius: 20px;
   background-color: white;

@@ -20,17 +20,18 @@ const upload = multer({ storage });
 // User registration route
 router.post("/register", async (req, res) => {
   const { username, email, password, confirmpassword } = req.body;
+  const kluby = await Klub.findOne();
 
   if (!username || !email || !password || !confirmpassword) {
     return res
       .status(403)
-      .render("admin_views/register", { error: "Nejsou vyplněna všechna pole" });
+      .render("admin_views/register", { error: "Nejsou vyplněna všechna pole", kluby  });
   }
 
   if (confirmpassword !== password) {
     return res
       .status(403)
-      .render("admin_views/register", { error: "Hesla se musi schodovat" });
+      .render("admin_views/register", { error: "Hesla se musi schodovat", kluby  });
   }
 
   try {
@@ -40,7 +41,7 @@ router.post("/register", async (req, res) => {
     if (existingUser) {
       return res
         .status(409)
-        .render("admin_views/register", { error: "Jméno již existuje" });
+        .render("admin_views/register", { error: "Jméno již existuje", kluby  });
     }
 
     // Hash the password before saving it to the database
