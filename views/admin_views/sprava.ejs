@@ -15,7 +15,7 @@
     <title><%= kluby.jmeno %></title>
     <link rel="icon" href="/img/sprava.ico">
 </head>
-<body class="d-flex flex-column popup-active">
+<body class="d-flex flex-column "> <!-- popup-active -->
 
   <div class="bg_primary_color p-2 stat-box" onmouseover="toggleVisibility('logout')">
     <div class="px-1 pe-3"onmouseover="toggleVisibility('logout')"><i class="fa-solid fa-gear fa-lg pe-1"></i> Sprava</div>
@@ -123,7 +123,7 @@
         </div>
       </div>
       
-      <div class="container px-4 py-5 pb-5 mb-3 mt-4 pt-4 ">
+      <div class="container px-4 py-5 pb-5 mb-5 mt-4 pt-4 ">
         <div class="row row-cols-1 row-cols-lg-3 align-items-stretch align-items-lg-center align-items-md-center g-4 pt-5 pt-0  sponzors-container bordert">
       
           <% sponzori.forEach(item => { %> 
@@ -132,8 +132,10 @@
               <i class="fa-solid fa-5x fa-pen"></i>
             </div>
           <% }) %>
+        </div>
+      </div>
 
-      <footer class="footer py-2 pt-3 bg_secondary_color">
+      <footer class="footer footerSprava py-2 pt-3 bg_secondary_color">
         <div class="footer-container">
           <a class="secondary_color" href="/index">Domu</a>
           <a class="secondary_color" href="/nabor">Nabor</a>

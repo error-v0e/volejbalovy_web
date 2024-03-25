@@ -65,6 +65,10 @@
 .akce-box{
   padding-left: 0;
 }
+.footerSprava{
+  position: absolute;
+  bottom: 0;
+}
 .form-signin{
   max-width: 440px;
   width: 100%;
@@ -95,7 +99,6 @@
   width: 100%;
   height: auto;
 }
-
 .fa-pen {
   position: absolute;
   top: 50%;

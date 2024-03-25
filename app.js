@@ -2,11 +2,11 @@ const express = require('express');
 const path = require('path');
 const {Klub, Kategorie, Universal, Sponzor, Pohlavi, Tag, Tym, Prispevek, Tags, Sit} = require('./item'); 
 const passport = require("passport");
-const { User } = require("./models"); // Assuming you have defined your User model with Sequelize
+const { User } = require("./models"); 
 const localStrategy = require("./passp.js");
 const controllers = require("./controllers.js");
 const cookieParser = require("cookie-parser");
-const sequelize = require("./user_db.js"); // Assuming this file initializes and exports your Sequelize instance
+const sequelize = require("./user_db.js"); 
 const ejs = require("ejs");
 const bodyParser = require("body-parser");
 const sprava_routes = require("./admin_pages.js");
@@ -17,10 +17,11 @@ var home_routes = require('./routes/home.routes');
 var media_routes = require('./routes/media.routes');
 var nabor_routes = require('./routes/nabor.routes');
 var kontakty_routes = require('./routes/kontakty.routes');
+var tymy_routes = require('./routes/tymy.routes');
 
 const app = express();
 app.use(express.static('public'));
-sequelize.authenticate(); // Test the connection
+sequelize.authenticate(); 
 app.use(
     session({
         secret: "GFGLogin346",
@@ -37,15 +38,15 @@ app.set('view engine', 'ejs');
 
 passport.serializeUser((user, done) => done(null, user.id));
 passport.deserializeUser((id, done) => {
-    User.findByPk(id) // Use findByPk with Sequelize
+    User.findByPk(id)
         .then((user) => done(null, user))
         .catch((err) => done(err));
 });
 
-// Nastavení adresáře views
+
 app.set('views', path.join(__dirname, 'views'));
 
-// Middleware pro zpracování JSON a URL-encoded těl požadavků
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -53,7 +54,8 @@ app.use('/', home_routes);
 app.use('/media', media_routes);
 app.use('/nabor', nabor_routes);
 app.use('/kontakty', kontakty_routes);
-app.use("/api/", controllers); // Path to your authentication routes file
+app.use('/tymy/', tymy_routes);
+app.use("/api/", controllers); 
 app.use("/", sprava_routes);
 
 
