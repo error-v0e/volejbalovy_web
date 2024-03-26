@@ -13,11 +13,11 @@
             <% if(item.id_kategorie == id_kategorie) { %>
               <% if(item.id_kategorie == 2){ %>
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle bg_primary_color active" href="/tymy/U20" id="dropdown04" data-bs-toggle="dropdown" aria-expanded="false"><%= item.nazev %></a>
+                  <a class="nav-link active dropdown-toggle bg_primary_color" href="/tymy" id="dropdown04" data-bs-toggle="dropdown" aria-expanded="false"><%= item.nazev %></a>
                   <ul class="dropdown-menu bg_navbar-collapse collapse bg_primary_color" aria-labelledby="dropdown04">
-                    <li><a class="dropdown-item active bg_primary_color" aria-current="page" href="/tymy/U20">U-20</a></li>
-                    <li><a class="dropdown-item bg_primary_color" href="/tymy/U20">U-16</a></li>
-                    <li><a class="dropdown-item bg_primary_color" href="/tymy/U20">U-14</a></li>
+                    <% tag.forEach(item => { %> 
+                      <li><a class="dropdown-item bg_primary_color" href="/tymy/<%= item.nazev %>"><%= item.nazev %></a></li>
+                    <% }) %>
                   </ul>
                 </li>
               <% } else{ %>
@@ -27,11 +27,11 @@
               <% } %>
             <% } else if(item.id_kategorie == 2){ %>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle bg_primary_color" href="/tymy/U20" id="dropdown04" data-bs-toggle="dropdown" aria-expanded="false"><%= item.nazev %></a>
+                <a class="nav-link dropdown-toggle bg_primary_color" href="/tymy" id="dropdown04" data-bs-toggle="dropdown" aria-expanded="false"><%= item.nazev %></a>
                 <ul class="dropdown-menu bg_navbar-collapse collapse bg_primary_color" aria-labelledby="dropdown04">
-                  <li><a class="dropdown-item bg_primary_color" href="/tymy/U20">U-20</a></li>
-                  <li><a class="dropdown-item bg_primary_color" href="/tymy/U20">U-16</a></li>
-                  <li><a class="dropdown-item bg_primary_color" href="/tymy/U20">U-14</a></li>
+                  <% tag.forEach(item => { %> 
+                    <li><a class="dropdown-item bg_primary_color" href="/tymy/<%= item.nazev %>"><%= item.nazev %></a></li>
+                  <% }) %>
                 </ul>
               </li>
             <% } else { %>

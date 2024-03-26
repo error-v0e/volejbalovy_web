@@ -1,13 +1,10 @@
 const express = require('express');
 const path = require('path');
-const {Klub, Kategorie, Universal, Sponzor, Pohlavi, Tag, Tym, Prispevek, Tags, Sit} = require('./item'); 
 const passport = require("passport");
 const { User } = require("./models"); 
-const localStrategy = require("./passp.js");
 const controllers = require("./controllers.js");
 const cookieParser = require("cookie-parser");
 const sequelize = require("./user_db.js"); 
-const ejs = require("ejs");
 const bodyParser = require("body-parser");
 const sprava_routes = require("./admin_pages.js");
 const session = require("express-session");
