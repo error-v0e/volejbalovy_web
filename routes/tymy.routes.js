@@ -17,9 +17,13 @@ router.get('/:tym', async function(req, res) {
         order: [['poradi', 'ASC']]
       });
       const tymy = await Tym.findOne({
-        where: {
-          id_tag: tagTymu.id_tag
-        }
+        where: { id_tag: tagTymu.id_tag }
+      });
+      const tags = await Tym.findAll({
+        include: [{
+          association: "tag",
+          attributes: ['nazev']
+        }]
       });
       const sponzori = await Sponzor.findAll();
       const prispevky = await Prispevek.findAll({
@@ -27,7 +31,7 @@ router.get('/:tym', async function(req, res) {
         order: [['cas_pridani', 'DESC']]
       });
       const site = await Sit.findAll();
-      res.render('public_views/tym', {res, kluby, kategorie, tagTymu, sponzori, tymy, tag, prispevky, site, id_kategorie});
+      res.render('public_views/tym', {res, kluby, kategorie, tagTymu, sponzori, tymy, tags, prispevky, site, id_kategorie});
     } catch (error) {
       console.error(error);
       res.status(500).send('Chyba serveru');

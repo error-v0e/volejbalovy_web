@@ -15,8 +15,8 @@
                 <li class="nav-item dropdown">
                   <a class="nav-link active dropdown-toggle bg_primary_color" href="/tymy" id="dropdown04" data-bs-toggle="dropdown" aria-expanded="false"><%= item.nazev %></a>
                   <ul class="dropdown-menu bg_navbar-collapse collapse bg_primary_color" aria-labelledby="dropdown04">
-                    <% tag.forEach(item => { %> 
-                      <li><a class="dropdown-item bg_primary_color" href="/tymy/<%= item.nazev %>"><%= item.nazev %></a></li>
+                    <% tags.forEach(item => { %> 
+                      <li><a class="dropdown-item bg_primary_color" href="/tymy/<%= item.tag.nazev %>"><%= item.tag.nazev %></a></li>
                     <% }) %>
                   </ul>
                 </li>
@@ -29,8 +29,8 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle bg_primary_color" href="/tymy" id="dropdown04" data-bs-toggle="dropdown" aria-expanded="false"><%= item.nazev %></a>
                 <ul class="dropdown-menu bg_navbar-collapse collapse bg_primary_color" aria-labelledby="dropdown04">
-                  <% tag.forEach(item => { %> 
-                    <li><a class="dropdown-item bg_primary_color" href="/tymy/<%= item.nazev %>"><%= item.nazev %></a></li>
+                  <% tags.forEach(item => { %> 
+                    <li><a class="dropdown-item bg_primary_color" href="/tymy/<%= item.tag.nazev %>"><%= item.tag.nazev %></a></li>
                   <% }) %>
                 </ul>
               </li>
