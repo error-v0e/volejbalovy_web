@@ -114,7 +114,7 @@ p, h1, h2, h3, h4, h5, h6{
   flex: 1 0 auto; /* flex-grow, flex-shrink, flex-basis */
 }
 .foote{
-  height: 55px;
+  display: flex;
 }
 .footer-container{
   display: flex;

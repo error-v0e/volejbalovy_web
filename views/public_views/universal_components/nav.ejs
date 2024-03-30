@@ -22,7 +22,7 @@
                 </li>
               <% } else{ %>
                 <li class="nav-item">
-                  <a class="nav-link active primary_color" aria-current="page" href="<%= item.href %>"><%= item.nazev %></a>
+                  <a class="nav-link active bg_primary_color" aria-current="page" href="<%= item.href %>"><%= item.nazev %></a>
                 </li>
               <% } %>
             <% } else if(item.id_kategorie == 2){ %>
@@ -36,7 +36,7 @@
               </li>
             <% } else { %>
               <li class="nav-item">
-                <a class="nav-link primary_color" aria-current="page" href="<%= item.href %> "><%= item.nazev %></a>
+                <a class="nav-link bg_primary_color" aria-current="page" href="<%= item.href %> "><%= item.nazev %></a>
               </li>
             <% } %>
           <% }); %>
