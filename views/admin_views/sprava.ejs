@@ -127,10 +127,13 @@
         <div class="row row-cols-1 row-cols-lg-3 align-items-stretch align-items-lg-center align-items-md-center g-4 pt-5 pt-0  sponzors-container bordert">
       
           <% sponzori.forEach(item => { %> 
-            <div class="col sponzors editeble">
-              <img class="img-fluid sponzor" src="/img/sponzor/<%= item.logo %>" alt="sponzor">
-              <i class="fa-solid fa-5x fa-pen"></i>
-            </div>
+            <form class="sponForm" method="post", action="/api/sponzori_popup">
+              <a class="col sponzors editeble">
+                <img class="img-fluid sponzor" src="/img/sponzor/<%= item.logo %>" alt="sponzor">
+                <i class="fa-solid fa-5x fa-pen"></i>
+              </a>
+              <input type="hidden" name="id" value="<%= item.id_sponzor %>">
+            </form>
           <% }) %>
         </div>
       </div>
@@ -198,6 +201,12 @@
             element.style.display = "none";
           }
         } 
+
+        document.querySelectorAll('.col.sponzors.editeble').forEach(function(element) {
+          element.addEventListener('click', function() {
+            this.parentNode.submit();
+          });
+        });
         </script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>

@@ -62,14 +62,15 @@ router.post("/register", async (req, res) => {
 });
 
 // User login route
-router.post("/login", (req, res, next) => {
+router.post("/login", async (req, res, next) => {
+  const kluby = await Klub.findOne();
   passport.authenticate("local", { session: false }, (err, user, info) => {
     if (err) {
       return next(err);
     }
     if (!user) {
       // Autentizace selhala, přesměrujeme na stránku s přihlášením
-      return res.render("admin_views/login", { error: "prihlasit se nepovedlo" });
+      return res.render("admin_views/login", { error: "prihlasit se nepovedlo", kluby });
     }
     req.logIn(user, { session: false }, (err) => {
       if (err) {
@@ -146,6 +147,30 @@ router.post("/sprava_klubu", upload.fields([{ name: 'logo', maxCount: 1 }, { nam
   }
   return res.redirect("/sprava");
 });
-
+router.post("/sponzori_popup", async (req, res) => {
+  const { id } = req.body;
+  console.log("-----------------------------------------------------");
+  console.log(id);
+  console.log("-----------------------------------------------------");
+  if (id) {
+    if (req.session.name) { 
+      var name = req.session.name; 
+      try {
+          const kluby = await Klub.findOne();
+          const kategorie = await Kategorie.findAll({
+            attributes: ['id_kategorie','nazev', 'href'],
+            order: [['poradi', 'ASC']]
+          });
+          const sponzori = await Sponzor.findAll();
+          res.render('admin_views/sprava', {res, kluby, kategorie, sponzori});
+      } catch (error) {
+          console.error(error);
+          res.status(500).send('Chyba serveru');
+      }
+    } else {
+      return res.redirect("login");
+    }
+  }
+});
 
 module.exports = router;

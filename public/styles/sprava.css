@@ -131,3 +131,6 @@ body.popup-active {
 body.popup-active .popup {
   pointer-events: all;
 }
+.sponForm{
+  width: fit-content;
+}
