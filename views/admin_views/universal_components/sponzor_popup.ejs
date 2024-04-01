@@ -1,19 +1,19 @@
-<div class="popup">
-    <form method="post" action="/api/sprava_klubu" enctype="multipart/form-data">
-      <div class="action"><!--Ulozit-->
-        <a class="butt-dis butt mb-1" href="/sprava">Zahodit změny</a>
-        <input  class="butt-sub butt" type="submit" value="Ulozit">
+<div class="popup" id="popup<%= item.id_sponzor %>" style="display: none;">
+  <form method="post" action="/api/sponzori_popup" enctype="multipart/form-data">
+    <div class="action"><!--Ulozit-->
+      <a class="butt-dis butt mb-1" href="/sprava">Zahodit změny</a>
+      <input  class="butt-sub butt" type="submit" value="Ulozit">
+    </div>
+    <div class="name primary_color mb-3">
+      <label for="cname">Odkaz:</label><br>
+      <input class="cname primary_color" type="text" id="cname" name="cname" value="<%= item.odkaz %>"><br>
+    </div>
+    <div class="row">
+      <div class="mb-2 editeble"> <!--Logo-->
+        <input type="file" id="LogoSponzor" accept="image/*" onchange="previewSponzor()" name="sponzor" style="display: none;" />
+        <img class="editeble" id="previewsponzor" src="/img/sponzor/<%= item.logo %>" onclick="document.getElementById('LogoSponzor').click();" alt="Image preview...">
+        <i class="fa-solid fa-5x fa-pen" onclick="document.getElementById('LogoSponzor').click();"></i>
       </div>
-      <div class="name primary_color mb-3">
-        <label for="cname">Odkaz:</label><br>
-        <input class="cname primary_color" type="text" id="cname" name="cname" value="<%= kluby.jmeno %>"><br>
-      </div>
-      <div class="row">
-        <div class="mb-2 editeble"> <!--Logo-->
-          <input type="file" id="LogoSponzor" accept="image/*" onchange="previewSponzor()" name="sponzor" style="display: none;" />
-          <img class="editeble" id="previewsponzor" src="/img/sponzor/<%= sponzori[1].logo %>" onclick="document.getElementById('LogoSponzor').click();" alt="Image preview...">
-          <i class="fa-solid fa-5x fa-pen" onclick="document.getElementById('LogoSponzor').click();"></i>
-        </div>
-      </div>
-    </form>
-  </div>
+    </div>
+  </form>
+</div>
