@@ -64,13 +64,13 @@
               </div>
               <div class="row">
                 <div class="col-xl-4 editeble"> <!--Icona-->
-                  <input type="file" id="LogoIco" accept="image/x-icon" onchange="previewIco()" name="icon" style="display: none;" />
+                  <input type="file" id="LogoIco" accept="image/x-icon" name="icon" style="display: none;" />
                   <img class="editeble" id="previewico" src="/img/<%= kluby.icona %>" onclick="document.getElementById('LogoIco').click();" alt="Ico preview...">
                   <i class="fa-solid fa-5x fa-pen" onclick="document.getElementById('LogoIco').click();"></i>
                   
                 </div>
                 <div class="col-xl-6 mb-2 editeble"> <!--Logo-->
-                  <input type="file" id="LogoImg" accept="image/*" onchange="previewImg()" name="logo" style="display: none;" />
+                  <input type="file" id="LogoImg" accept="image/*" name="logo" style="display: none;" />
                   <img class="editeble" id="previewimg" src="/img/<%= kluby.logo %>" onclick="document.getElementById('LogoImg').click();" alt="Image preview...">
                   <i class="fa-solid fa-10x fa-pen" onclick="document.getElementById('LogoImg').click();"></i>
                 </div>
@@ -131,7 +131,6 @@
                 <img class="img-fluid sponzor" src="/img/sponzor/<%= item.logo %>" alt="sponzor">
                 <i class="fa-solid fa-5x fa-pen"></i>
               </a>
-              <input type="hidden" name="id" value="<%= item.id_sponzor %>">
             <%- include('./universal_components/sponzor_popup', { item }) %>
           <% }) %>
         </div>
@@ -150,48 +149,31 @@
         </div>
       </footer>
       <script>
-        function previewIco() {
-          const preview = document.querySelector('#previewico');
-          const file = document.querySelector('#LogoIco').files[0];
-          const reader = new FileReader();
-        
-          reader.addEventListener("load", function () {
-            // convert image file to base64 string
-            preview.src = reader.result;
-          }, false);
-        
-          if (file) {
-            reader.readAsDataURL(file);
-          }
+        function previewImage(inputId, previewId) {
+        const preview = document.querySelector(previewId);
+        const file = document.querySelector(inputId).files[0];
+        const reader = new FileReader();
+
+        reader.addEventListener("load", function () {
+          // convert image file to base64 string
+          preview.src = reader.result;
+        }, false);
+
+        if (file) {
+          reader.readAsDataURL(file);
         }
-        function previewImg() {
-          const preview = document.querySelector('#previewimg');
-          const file = document.querySelector('#LogoImg').files[0];
-          const reader = new FileReader();
+      }
+
+      // Použití funkce pro náhled ikony
+      document.getElementById('LogoIco').addEventListener('change', function() {
+        previewImage('#LogoIco', '#previewico');
+      });
+
+      // Použití funkce pro náhled obrázku
+      document.getElementById('LogoImg').addEventListener('change', function() {
+        previewImage('#LogoImg', '#previewimg');
+      });
         
-          reader.addEventListener("load", function () {
-            // convert image file to base64 string
-            preview.src = reader.result;
-          }, false);
-        
-          if (file) {
-            reader.readAsDataURL(file);
-          }
-        }
-        function previewSponzor() {
-          const preview = document.querySelector('#previewsponzor');
-          const file = document.querySelector('#LogoSponzor').files[0];
-          const reader = new FileReader();
-        
-          reader.addEventListener("load", function () {
-            // convert image file to base64 string
-            preview.src = reader.result;
-          }, false);
-        
-          if (file) {
-            reader.readAsDataURL(file);
-          }
-        }
         function toggleVisibility(id) {
           var element = document.getElementById(id);
           if (element.style.display === "none") {
@@ -210,7 +192,11 @@
         <% sponzori.forEach(item => { %> 
           document.querySelector('#sponzor<%= item.id_sponzor %>').addEventListener('click', function() {
           document.querySelector('#popup<%= item.id_sponzor %>').style.display = 'block';
-        });
+          });
+
+          document.getElementById('LogoSponzor<%= item.id_sponzor %>').addEventListener('change', function() {
+          previewImage('#LogoSponzor<%= item.id_sponzor %>', '#previewsponzor<%= item.id_sponzor %>');
+          });
         <% }) %>
         </script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

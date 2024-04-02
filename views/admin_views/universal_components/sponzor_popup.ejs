@@ -5,14 +5,15 @@
       <input  class="butt-sub butt" type="submit" value="Ulozit">
     </div>
     <div class="name primary_color mb-3">
-      <label for="cname">Odkaz:</label><br>
-      <input class="cname primary_color" type="text" id="cname" name="cname" value="<%= item.odkaz %>"><br>
+      <label for="odkaz">Odkaz:</label><br>
+      <input class="cname primary_color" type="text" id="cname" name="odkaz" value="<%= item.odkaz %>"><br>
     </div>
     <div class="row">
       <div class="mb-2 editeble"> <!--Logo-->
-        <input type="file" id="LogoSponzor" accept="image/*" onchange="previewSponzor()" name="sponzor" style="display: none;" />
-        <img class="editeble" id="previewsponzor" src="/img/sponzor/<%= item.logo %>" onclick="document.getElementById('LogoSponzor').click();" alt="Image preview...">
-        <i class="fa-solid fa-5x fa-pen" onclick="document.getElementById('LogoSponzor').click();"></i>
+        <input type="file" id="LogoSponzor<%= item.id_sponzor %>" accept="image/*" name="logo" style="display: none;" />
+        <img class="editeble previewsponzor" id="previewsponzor<%= item.id_sponzor %>" src="/img/sponzor/<%= item.logo %>" onclick="document.getElementById('LogoSponzor<%= item.id_sponzor %>').click();" alt="Image preview...">
+        <i class="fa-solid fa-5x fa-pen" onclick="document.getElementById('LogoSponzor<%= item.id_sponzor %>').click();"></i>
+        <input type="hidden" name="id" value="<%= item.id_sponzor %>">
       </div>
     </div>
   </form>

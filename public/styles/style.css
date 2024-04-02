@@ -223,7 +223,7 @@ input[type=button].bg_secondary_white_color{
   max-width: 150px;
   width: 100%;
 }
-#previewsponzor{
+.previewsponzor{
   object-fit: contain;
   position: relative;
   top: 50%;

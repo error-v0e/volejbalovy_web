@@ -17,6 +17,16 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
+const sponzorStorage = multer.diskStorage({
+  destination: './public/img/sponzor/', // Specify the directory where the files will be saved
+  filename: (req, file, cb) => {
+    cb(null, file.originalname); // Generate a unique file name
+  }
+});
+
+const uploadSponzor = multer({ storage: sponzorStorage });
+
+
 // User registration route
 router.post("/register", async (req, res) => {
   const { username, email, password, confirmpassword } = req.body;
@@ -101,7 +111,6 @@ router.post("/sprava_klubu", upload.fields([{ name: 'logo', maxCount: 1 }, { nam
 
   if (cname || icon || logo ) {
     if(cname != kluby.jmeno){
-      console.log("nazev");
       try {
         await Klub.update({ jmeno: cname }, { where: { id_klub: kluby.id_klub } });
       } catch (err) {
@@ -127,7 +136,6 @@ router.post("/sprava_klubu", upload.fields([{ name: 'logo', maxCount: 1 }, { nam
       }
     }
     if (icon) {
-      console.log(icon);
       if (kluby.icona) {
         try {
           fs.unlinkSync(path.join(__dirname, pathI));
@@ -147,8 +155,42 @@ router.post("/sprava_klubu", upload.fields([{ name: 'logo', maxCount: 1 }, { nam
   }
   return res.redirect("/sprava");
 });
-router.post("/sponzori_popup", async (req, res) => {
-  
+
+router.post("/sponzori_popup", uploadSponzor.fields([{ name: 'logo', maxCount: 1 }]), async (req, res) => {
+  const { odkaz, id } = req.body;
+  const logo = req.files['logo'] ? req.files['logo'][0] : null; 
+  const sponzor = await Sponzor.findOne({
+    where: { id_sponzor: id }
+  });
+  const pathL = './public/img/sponzor/' + sponzor.logo;
+
+  if (odkaz || logo ) {
+    if(odkaz != sponzor.odkaz){
+      try {
+        await Sponzor.update({ odkaz: odkaz }, { where: { id_sponzor: id } });
+      } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: err.message });
+      }
+    }
+    if (logo) {
+      if (sponzor.logo) {
+        try {
+          fs.unlinkSync(path.join(__dirname, pathL));
+        } catch (err) {
+          console.error(err);
+          return res.status(500).json({ message: err.message });
+        }
+      }
+      try {
+        await Sponzor.update({ logo: logo.originalname }, { where: { id_sponzor: id } });
+      } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: err.message });
+      }
+    }
+  }
+  return res.redirect("/sprava");
 });
 
 module.exports = router;
