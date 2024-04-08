@@ -122,7 +122,6 @@ p, h1, h2, h3, h4, h5, h6{
   justify-content: center;
   width: 80%;
   float: left;
-  transform: translate(10%);
   margin-right: 10px;
   margin-bottom: 10px;
 }
@@ -136,6 +135,7 @@ p, h1, h2, h3, h4, h5, h6{
   flex-wrap: wrap;
   justify-content:right;
   float: right;
+  right: 0;
 }
 .footer-media-container > a{
   margin-right: 10px;
