@@ -15,139 +15,145 @@
     <title><%= kluby.jmeno %></title>
     <link rel="icon" href="/img/sprava.ico">
 </head>
-<body class="d-flex flex-column "> <!-- popup-active -->
-
-  <div class="bg_primary_color p-2 stat-box" onmouseover="toggleVisibility('logout')">
-    <div class="px-1 pe-3"onmouseover="toggleVisibility('logout')"><i class="fa-solid fa-gear fa-lg pe-1"></i> Sprava</div>
-    <a href="/api/logout" class="primary_color rounded p-1 nav-link" style="display: none;" id="logout" onmouseover="toggleVisibility('logout')"><i class="fa-solid fa-sign-out fa-lg pe-1"></i>Odhlasit</a>
+<body class="d-flex flex-column ">
+  <div class="container bg_primary_color p-2 stat-box " onmouseover="toggleVisibility('logout')">
+    <div class="px-1 pe-3" onmouseover="toggleVisibility('logout')"><i class="fa-solid fa-gear fa-lg pe-1"></i> Sprava
+    </div>
+    <a href="/api/logout" class="primary_color rounded p-1 nav-link" style="display: none;" id="logout"
+      onmouseover="toggleVisibility('logout')"><i class="fa-solid fa-sign-out fa-lg pe-1"></i>Odhlasit</a>
   </div>
-
-    <nav class="bg_primary_color navbar navbar-expand-md container-fluid" aria-label="Fourth navbar example">
-        <div class="container-xl container-fluid">
-          <a class="navbar-brand " href="/sprava">
-            <img class="logo" src="/img/<%= kluby.logo %>" alt="Logo" height="110">
-          </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-    
-          <div class="collapse navbar-collapse" id="navbarsExample04">
-            <ul class="navbar-nav me-auto mb-2 mb-md-0">
-              <li class="nav-item">
-                <a class="nav-link active primary_color" aria-current="page" href="/sprava">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link bg_primary_color" href="/sprava/tymy">Týmy</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link bg_primary_color" href="/sprava/media">Media</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link bg_primary_color" href="/sprava/universal">Universalni tap</a>
-              </li>
-            </ul>
+  
+  <nav class="bg_primary_color navbar navbar-expand-md container-fluid" aria-label="Fourth navbar example">
+    <div class="container-xl container-fluid">
+      <a class="navbar-brand " href="/sprava">
+        <img class="logo" src="/img/<%= kluby.logo %>" alt="Logo" height="110">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04"
+        aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="navbarsExample04">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link active primary_color" aria-current="page" href="/sprava">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link bg_primary_color" href="/sprava/tymy">Týmy</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link bg_primary_color" href="/sprava/media">Media</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link bg_primary_color" href="/sprava/universal">Universalni tap</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  <div class="container pt-4">
+    <div class="row align-items-stretch mx-auto container-xl home">
+      <div class="mb-2 col-xl-6"> <!--Sprava-klubu-->
+        <form method="post" action="/api/sprava_klubu" enctype="multipart/form-data">
+          <div class="action"><!--Ulozit-->
+            <a class="butt-dis butt mb-1" href="/sprava">Zahodit změny</a>
+            <input class="butt-sub butt" type="submit" value="Ulozit">
           </div>
-        </div>
-      </nav>
-
-      <div class="container pt-4">
-        <div class="row align-items-stretch mx-auto container-xl home">
-          <div class="mb-2 col-xl-6"> <!--Sprava-klubu-->
-            <form method="post" action="/api/sprava_klubu" enctype="multipart/form-data">
-              <div class="action"><!--Ulozit-->
-                <a class="butt-dis butt mb-1" href="/sprava">Zahodit změny</a>
-                <input  class="butt-sub butt" type="submit" value="Ulozit">
-              </div>
-              <div class="name primary_color">
-                <label for="cname">Jmeno klubu:</label><br>
-                <input class="cname primary_color" type="text" id="cname" name="cname" value="<%= kluby.jmeno %>"><br>
-              </div>
-              <div class="row">
-                <div class="col-xl-4 editeble"> <!--Icona-->
-                  <input type="file" id="LogoIco" accept="image/x-icon" name="icon" style="display: none;" />
-                  <img class="editeble" id="previewico" src="/img/<%= kluby.icona %>" onclick="document.getElementById('LogoIco').click();" alt="Ico preview...">
-                  <i class="fa-solid fa-5x fa-pen" onclick="document.getElementById('LogoIco').click();"></i>
-                  
-                </div>
-                <div class="col-xl-6 mb-2 editeble"> <!--Logo-->
-                  <input type="file" id="LogoImg" accept="image/*" name="logo" style="display: none;" />
-                  <img class="editeble" id="previewimg" src="/img/<%= kluby.logo %>" onclick="document.getElementById('LogoImg').click();" alt="Image preview...">
-                  <i class="fa-solid fa-10x fa-pen" onclick="document.getElementById('LogoImg').click();"></i>
-                </div>
-              </div>
-              
-            </form>
+          <div class="name primary_color">
+            <label for="cname">Jmeno klubu:</label><br>
+            <input class="cname primary_color" type="text" id="cname" name="cname" value="<%= kluby.jmeno %>"><br>
           </div>
-          <div class="col-xl-6 borderl"> <!--Akce-->
-
-            <div class="row ps-3">
-              <div class="col-xl-2 p-0 pe-3"> <!--Akce-plus-->
-    
-                <button class="py-3 buttplus bg_secondary_white_color" type="button"> 
-                  <i class="fa-solid fa-plus fa-2xl"></i> 
-                </button>
-                
-              </div>
-              <div class="col-xl-10 ps-0"> <!--Akce-list-->
-                <div class="akce-box  position-sticky" style="top: 2rem;">
-                  <h2>Nadcházející akce</h2>
-                  <ul class="akce-list">
-    
-                    <li class="borderl akce ml-3"> <!--Akce-->
-                      <div>
-                        <p>8. 10. 2023</p>
-                        <h4>U20 - Volejbal Sokolov XXXX</h4>
-                      </div>
-                    </li>
-                    
-                    <li class="borderl akce"> <!--Akce-->
-                      <div>
-                        <p>8. 10. 2023</p>
-                        <h4>U20 - SKV Usti n.L.</h4>
-                      </div>
-                    </li>
-                    
-                    <li class="borderl akce"> <!--Akce-->
-                      <div>
-                        <p>8. 10. 2023</p>
-                        <h4>U20 - Volejbal Sokolov</h4>
-                      </div>
-                    </li>
-    
-                  </ul>
-                </div>
-              </div>
+          <div class="row">
+            <div class="col-xl-4 editeble"> <!--Icona-->
+              <input type="file" id="LogoIco" accept="image/x-icon" name="icon" style="display: none;" />
+              <img class="editeble" id="previewico" src="/img/<%= kluby.icona %>"
+                onclick="document.getElementById('LogoIco').click();" alt="Ico preview...">
+              <i class="fa-solid fa-5x fa-pen" onclick="document.getElementById('LogoIco').click();"></i>
+  
             </div>
-
+            <div class="col-xl-6 mb-2 editeble"> <!--Logo-->
+              <input type="file" id="LogoImg" accept="image/*" name="logo" style="display: none;" />
+              <img class="editeble" id="previewimg" src="/img/<%= kluby.logo %>"
+                onclick="document.getElementById('LogoImg').click();" alt="Image preview...">
+              <i class="fa-solid fa-10x fa-pen" onclick="document.getElementById('LogoImg').click();"></i>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-xl-6 borderl"> <!--Akce-->
+        <div class="row ps-3">
+          <div class="col-xl-2 p-0 pe-3"> <!--Akce-plus-->
+            <button class="py-3 buttplus bg_secondary_white_color" type="button">
+              <i class="fa-solid fa-plus fa-2xl"></i>
+            </button>
+          </div>
+          <div class="col-xl-10 ps-0"> <!--Akce-list-->
+            <div class="akce-box  position-sticky" style="top: 2rem;">
+              <h2>Nadcházející akce</h2>
+              <ul class="akce-list">
+  
+                <li class="borderl akce ml-3"> <!--Akce-->
+                  <div>
+                    <p>8. 10. 2023</p>
+                    <h4>U20 - Volejbal Sokolov XXXX</h4>
+                  </div>
+                </li>
+  
+                <li class="borderl akce"> <!--Akce-->
+                  <div>
+                    <p>8. 10. 2023</p>
+                    <h4>U20 - SKV Usti n.L.</h4>
+                  </div>
+                </li>
+  
+                <li class="borderl akce"> <!--Akce-->
+                  <div>
+                    <p>8. 10. 2023</p>
+                    <h4>U20 - Volejbal Sokolov</h4>
+                  </div>
+                </li>
+            </div>
           </div>
         </div>
       </div>
-      
-      <div class="container px-4 py-5 pb-5 mb-5 mt-4 pt-4 ">
-        <div class="row row-cols-1 row-cols-lg-3 align-items-stretch align-items-lg-center align-items-md-center g-4 pt-5 pt-0  sponzors-container bordert">
-      
-          <% sponzori.forEach(item => { %> 
-              <a class="col sponzors editeble" id="sponzor<%= item.id_sponzor %>">
-                <img class="img-fluid sponzor" src="/img/sponzor/<%= item.logo %>" alt="sponzor">
-                <i class="fa-solid fa-5x fa-pen"></i>
-              </a>
-            <%- include('./universal_components/sponzor_popup', { item }) %>
-          <% }) %>
-        </div>
+  
+    </div>
+  </div>
+  
+  <footer class="footer  pt-3 ">
+    <div class="container px-4 pt-5 pb-5  mt-4 pt-4 ">
+      <div
+        class="row row-cols-1 row-cols-lg-3 align-items-stretch align-items-lg-center align-items-md-center g-4 pt-5 pt-0  sponzors-container bordert">
+  
+        <% sponzori.forEach(item=> { %>
+          <a class="col sponzors editeble" id="sponzor<%= item.id_sponzor %>">
+            <img class="img-fluid sponzor" src="/img/sponzor/<%= item.logo %>" alt="sponzor">
+            <i class="fa-solid fa-5x fa-pen"></i>
+          </a>
+          <%- include('./universal_components/sponzor_popup', { item }) %>
+            <% }) %>
+  
       </div>
+    </div>
+    <div class="bg_secondary_color foote py-1 pt-3">
+      <div class="footer-container">
+        <a class="secondary_color" href="<%= kategorie[0].href %>">Domu</a>
+        <a class="secondary_color" href="<%= kategorie[4].href %>">Nabor</a>
+        <a class="secondary_color" href="<%= kategorie[5].href %>">Kontakty</a>
+        <a class="secondary_color" href="#">Finance</a>
+      </div>
+      <div class="footer-media-container">
+        <a href="https://www.instagram.com/vk.teplice/?hl=cs" target=”_blank”
+          class="fa-brands fa-instagram mb-1 fa-2xl secondary_color"></a>
+        <a href="https://www.facebook.com/vk.teplice/" target=”_blank”
+          class="fa-brands fa-facebook fa-2xl secondary_color"></a>
+      </div>
+    </div>
+  </footer>
 
-      <footer class="footer footerSprava py-2 pt-3 bg_secondary_color">
-        <div class="footer-container">
-          <a class="secondary_color" href="/index">Domu</a>
-          <a class="secondary_color" href="/nabor">Nabor</a>
-          <a class="secondary_color" href="/kontaky">Kontakty</a>
-          <a class="secondary_color" href="#">Finance</a>
-        </div>
-        <div class="footer-media-container">
-          <a href="https://www.instagram.com/vk.teplice/?hl=cs" target=”_blank” class="fa-brands fa-instagram fa-2xl secondary_color"></a>
-          <a href="https://www.facebook.com/vk.teplice/" target=”_blank” class="fa-brands fa-facebook fa-2xl secondary_color"></a>
-        </div>
-      </footer>
+
+
       <script>
         function previewImage(inputId, previewId) {
         const preview = document.querySelector(previewId);
