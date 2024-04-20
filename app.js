@@ -11,11 +11,11 @@ const sprava_routes = require("./admin_pages.js");
 const session = require("express-session");
 
 
-var home_routes = require('./routes/home.routes');
-var media_routes = require('./routes/media.routes');
-var nabor_routes = require('./routes/nabor.routes');
-var kontakty_routes = require('./routes/kontakty.routes');
-var tymy_routes = require('./routes/tymy.routes');
+var home_routes = require('./routes/public/home.routes.js');
+var media_routes = require('./routes/public/media.routes');
+var nabor_routes = require('./routes/public/nabor.routes');
+var kontakty_routes = require('./routes/public/kontakty.routes');
+var tymy_routes = require('./routes/public/tymy.routes');
 
 const app = express();
 app.use(express.static('public'));

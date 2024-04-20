@@ -144,10 +144,6 @@ const Prispevek = sequelize.define('prispevek', {
     allowNull: false,
     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
   },
-  cesta: {
-    type: DataTypes.STRING(128),
-    allowNull: false,
-  },
 }, {freezeTableName: true,});
 
 const Tags = sequelize.define('tags', {
@@ -176,6 +172,20 @@ const Sit = sequelize.define('sit', {
   },
 }, {freezeTableName: true,});
 
+const Img = sequelize.define('img', {
+  id_img: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+    allowNull: false,
+  },
+  img: {
+    type: DataTypes.BLOB('long'),
+    allowNull: false,
+  },
+}, {freezeTableName: true,});
+
+Img.belongsTo(Prispevek, { foreignKey: 'id_prispevek', onDelete: 'NO ACTION', onUpdate: 'NO ACTION' });
 Kategorie.belongsTo(Klub, { foreignKey: 'id_klub', onDelete: 'NO ACTION', onUpdate: 'NO ACTION' });
 Universal.belongsTo(Kategorie, { foreignKey: 'id_kategorie', onDelete: 'NO ACTION', onUpdate: 'NO ACTION' });
 Sponzor.belongsTo(Klub, { foreignKey: 'id_klub', onDelete: 'NO ACTION', onUpdate: 'NO ACTION' });
@@ -186,6 +196,7 @@ Tags.belongsTo(Tag, { foreignKey: 'id_tag', onDelete: 'NO ACTION', onUpdate: 'NO
 Tags.belongsTo(Prispevek, { foreignKey: 'id_prispevek', onDelete: 'NO ACTION', onUpdate: 'NO ACTION' });
 Sit.belongsTo(Klub, { foreignKey: 'id_klub', onDelete: 'NO ACTION', onUpdate: 'NO ACTION' });
 
+sequelize.sync();
 
 module.exports = {
   Klub,
@@ -197,5 +208,6 @@ module.exports = {
   Tym,
   Prispevek,
   Tags,
-  Sit
+  Sit,
+  Img
 };

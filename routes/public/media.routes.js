@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { Klub, Kategorie, Sponzor, Tym, Prispevek, Sit, Universal} = require('../item');
-const id_kategorie = 6;
+const { Klub, Kategorie, Sponzor, Tym, Prispevek, Sit } = require('../../item');
+const id_kategorie = 4;
 
 router.get('/', async (req, res) => {
   try {
@@ -11,6 +11,7 @@ router.get('/', async (req, res) => {
       order: [['poradi', 'ASC']]
     });
     const sponzori = await Sponzor.findAll();
+    
     const tags = await Tym.findAll({
       include: [{
         association: "tag",
@@ -18,19 +19,14 @@ router.get('/', async (req, res) => {
       }]
     });
     const prispevky = await Prispevek.findAll({
-      limit: 2,
+      limit: 6,
       order: [['cas_pridani', 'DESC']]
     });
-    const universal = await Universal.findOne({
-      where: {
-        id_kategorie: id_kategorie
-      }
-    });
     const site = await Sit.findAll();
-    res.render('public_views/universal', { kluby, kategorie, sponzori, tags, prispevky, site, universal, id_kategorie });
+    res.render('public_views/media', { kluby, kategorie, sponzori, tags, prispevky, site, id_kategorie });
   } catch (error) {
     console.error(error);
-    res.status(500).send('Chyba serveru');
+    res.status(500).send('Chyba serveru'); 
   }
 });
 

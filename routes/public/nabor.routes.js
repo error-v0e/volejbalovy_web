@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Klub, Kategorie, Sponzor, Tym, Prispevek, Sit, Universal} = require('../item');
+const { Klub, Kategorie, Sponzor, Tym, Prispevek, Sit, Universal} = require('../../item');
 const id_kategorie = 5;
 
 router.get('/', async (req, res) => {

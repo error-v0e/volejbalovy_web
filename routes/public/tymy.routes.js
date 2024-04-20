@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Klub, Kategorie, Sponzor, Tag, Prispevek, Sit, Tym } = require('../item');
+const { Klub, Kategorie, Sponzor, Tag, Prispevek, Sit, Tym } = require('../../item');
 const id_kategorie = 2;
 
 
