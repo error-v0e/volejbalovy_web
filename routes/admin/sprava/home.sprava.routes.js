@@ -12,7 +12,7 @@ router.get('/', async function(req, res) {
               order: [['poradi', 'ASC']]
             });
             const sponzori = await Sponzor.findAll();
-            res.render('admin_views/sprava', {res, kluby, kategorie, sponzori});
+            res.render('admin_views/home_sprava', {res, kluby, kategorie, sponzori});
         } catch (error) {
             console.error(error);
             res.status(500).send('Chyba serveru');
