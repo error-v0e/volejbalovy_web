@@ -16,11 +16,10 @@
     <link rel="icon" href="/img/sprava.ico">
 </head>
 <body class="d-flex flex-column ">
-  <div class="container bg_primary_color p-2 stat-box " onmouseover="toggleVisibility('logout')">
-    <div class="px-1 pe-3" onmouseover="toggleVisibility('logout')"><i class="fa-solid fa-gear fa-lg pe-1"></i> Sprava
+  <div class="container bg_primary_color p-2 stat-box " onmouseover="toggleVisibility('logout', true)" onmouseout="toggleVisibility('logout', false)">
+    <div class="px-1 pe-3" "><i class="fa-solid fa-gear fa-lg pe-1"></i> Sprava
     </div>
-    <a href="/api/logout" class="primary_color rounded p-1 nav-link" style="display: none;" id="logout"
-      onmouseover="toggleVisibility('logout')"><i class="fa-solid fa-sign-out fa-lg pe-1"></i>Odhlasit</a>
+    <a href="/api/logout" class="primary_color rounded p-1 nav-link" style="display: none;" id="logout"><i class="fa-solid fa-sign-out fa-lg pe-1"></i>Odhlasit</a>
   </div>
   
   <nav class="bg_primary_color navbar navbar-expand-md container-fluid" aria-label="Fourth navbar example">
@@ -45,7 +44,7 @@
             <a class="nav-link bg_primary_color" href="/sprava/media">Media</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link bg_primary_color" href="/sprava/universal">Universalni tap</a>
+            <a class="nav-link bg_primary_color" href="/sprava/kategorie">Kategorie</a>
           </li>
         </ul>
       </div>
@@ -152,59 +151,48 @@
     </div>
   </footer>
 
+<script>
+  function previewImage(inputId, previewId) {
+    const preview = document.querySelector(previewId);
+    const file = document.querySelector(inputId).files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener("load", function () {
+      // convert image file to base64 string
+      preview.src = reader.result;
+    }, false);
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }
+
+  document.getElementById('LogoIco').addEventListener('change', function () {
+    previewImage('#LogoIco', '#previewico');
+  });
+
+  document.getElementById('LogoImg').addEventListener('change', function () {
+    previewImage('#LogoImg', '#previewimg');
+  });
 
 
-      <script>
-        function previewImage(inputId, previewId) {
-        const preview = document.querySelector(previewId);
-        const file = document.querySelector(inputId).files[0];
-        const reader = new FileReader();
+  document.querySelectorAll('.col.sponzors.editeble').forEach(function (element) {
+    element.addEventListener('click', function () {
+      this.parentNode.submit();
+    });
+  });
 
-        reader.addEventListener("load", function () {
-          // convert image file to base64 string
-          preview.src = reader.result;
-        }, false);
+        <% sponzori.forEach(item => { %>
+    document.querySelector('#sponzor<%= item.id_sponzor %>').addEventListener('click', function () {
+      document.querySelector('#popup<%= item.id_sponzor %>').style.display = 'block';
+    });
 
-        if (file) {
-          reader.readAsDataURL(file);
-        }
-      }
-
-      // Použití funkce pro náhled ikony
-      document.getElementById('LogoIco').addEventListener('change', function() {
-        previewImage('#LogoIco', '#previewico');
-      });
-
-      // Použití funkce pro náhled obrázku
-      document.getElementById('LogoImg').addEventListener('change', function() {
-        previewImage('#LogoImg', '#previewimg');
-      });
-        
-        function toggleVisibility(id) {
-          var element = document.getElementById(id);
-          if (element.style.display === "none") {
-            element.style.display = "block";
-          } else {
-            element.style.display = "none";
-          }
-        } 
-
-        document.querySelectorAll('.col.sponzors.editeble').forEach(function(element) {
-          element.addEventListener('click', function() {
-            this.parentNode.submit();
-          });
-        });
-
-        <% sponzori.forEach(item => { %> 
-          document.querySelector('#sponzor<%= item.id_sponzor %>').addEventListener('click', function() {
-          document.querySelector('#popup<%= item.id_sponzor %>').style.display = 'block';
-          });
-
-          document.getElementById('LogoSponzor<%= item.id_sponzor %>').addEventListener('change', function() {
-          previewImage('#LogoSponzor<%= item.id_sponzor %>', '#previewsponzor<%= item.id_sponzor %>');
-          });
+    document.getElementById('LogoSponzor<%= item.id_sponzor %>').addEventListener('change', function () {
+      previewImage('#LogoSponzor<%= item.id_sponzor %>', '#previewsponzor<%= item.id_sponzor %>');
+    });
         <% }) %>
-        </script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </script>
+  <script src="/scripts/adminPanel.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>
