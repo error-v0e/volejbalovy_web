@@ -239,3 +239,16 @@ input[type=button].bg_secondary_white_color{
   width: 100%;
   max-height: 160px;
 }
+select {
+  padding: 8px;
+  display: block;
+  border: none;
+  align-items: left;
+  max-width: 100%; 
+  border-bottom: 3px solid var(--primary-color);
+}
+select:hover{
+  outline: none;
+  box-shadow: none;
+  border-bottom:3px solid var(--active-color);
+} 

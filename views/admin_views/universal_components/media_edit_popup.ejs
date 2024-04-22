@@ -1,0 +1,27 @@
+<div class="popup media" id="popup" style="display: block;">
+  <form method="post" action="/api/sponzori_popup" enctype="multipart/form-data">
+    <div class="action"><!--Ulozit-->
+      <a class="butt-dis butt mb-1" href="/sprava">Zahodit změny</a>
+      <input class="butt-sub butt" type="submit" value="Ulozit">
+    </div>
+    <div class="row prispevekEdit my-2">
+      <div class="editeble"> <!--Logo-->
+        <input type="file" id="LogoSponzor<%= item.id_sponzor %>" accept="image/*" name="logo" style="display: none;" />
+        <img class="editeble" id="previewsponzor<%= item.id_sponzor %>" src="./public/img/U20.jpg"
+          onclick="document.getElementById('LogoSponzor<%= item.id_sponzor %>').click();" alt="Image preview..."
+          width="650px">
+        <i class="fa-solid fa-10x fa-pen"
+          onclick="document.getElementById('LogoSponzor<%= item.id_sponzor %>').click();"></i>
+        <input type="hidden" name="id" value="<%= item.id_sponzor %>">
+      </div>
+      <div class="name primary_color">
+        <label for="odkaz">Nadpis:</label><br>
+        <input class="cname primary_color" type="text" id="cname" name="odkaz" value="<%= item.odkaz %>"><br>
+      </div>
+      <div class="name primary_color mb-3">
+        <label for="odkaz">Popisek:</label><br>
+        <textarea class="popisek primary_color" id="cname" name="odkaz"><%= item.odkaz %></textarea><br>
+      </div>
+    </div>
+  </form>
+</div>
