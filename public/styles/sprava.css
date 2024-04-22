@@ -45,7 +45,6 @@
   padding:8px;
   display:block;
   border:none;
-  align-items: left;
   max-width: 100%;
   border-bottom:3px solid var(--primary-color);
   
@@ -133,8 +132,13 @@ body.popup-active .popup {
 }
 .prispevekEdit{
   display: inline-block;
+  width: 100%;
+}
+.prispevekEdit > div{
+  width: 100%;
 }
 .popup.media{
+  overflow-y: scroll;
   padding-left: 65px;
   padding-right: 65px;
 }
@@ -157,6 +161,8 @@ body.popup-active .popup {
   box-shadow: inset rgb(32, 32, 32) 0px 0px 10px -5px; 
 }
 #previewImage{
-  max-width: 650px;
+  max-width: 100%;
   max-height: 400px;
+  left: 50%;
+  transform: translate(-50%, 0);
 }

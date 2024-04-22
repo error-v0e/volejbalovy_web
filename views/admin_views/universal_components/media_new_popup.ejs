@@ -1,34 +1,36 @@
-<div class="popup media" id="popup" style="display: block;">
-  <form method="post" action="/api/sponzori_popup" enctype="multipart/form-data">
-    <div class="action"><!--Ulozit-->
-      <a class="butt-dis butt mb-1" href="/sprava">Zahodit změny</a>
-      <input class="butt-sub butt" type="submit" value="Ulozit">
-    </div>
-    <div class="row prispevekEdit my-2">
-      <div class="editeble"> <!--Logo-->
-        <input type="file" id="image" accept="image/*" name="logo" style="display: none;" />
-        <img class="editeble" id="previewImage" src="/img/add_img.png"
-          onclick="document.getElementById('image').click();" alt="Image preview...">
-        <i class="fa-solid fa-10x fa-pen"
-          onclick="document.getElementById('image').click();"></i>
+<div class="row-cols-1 row-cols-lg-3">
+  <div class="popup media" id="popup" style="display: block;">
+    <form method="post" action="/api/sponzori_popup" enctype="multipart/form-data">
+      <div class="action"><!--Ulozit-->
+        <a class="butt-dis butt mb-1" href="/sprava/media">Zahodit změny</a>
+        <input class="butt-sub butt" type="submit" value="Ulozit">
       </div>
-      <div class="name primary_color">
-        <label for="odkaz">Nadpis:</label><br>
-        <input class="cname primary_color" type="text" id="cname" name="odkaz" value=""><br>
+      <div class="prispevekEdit my-2">
+        <div class="editeble"> <!--Logo-->
+          <input type="file" id="image" accept="image/*" name="foto" style="display: none;" />
+          <img class="editeble" id="previewImage" src="/img/add_img.png"
+            onclick="document.getElementById('image').click();" alt="Image preview...">
+          <i class="fa-solid fa-10x fa-pen"
+            onclick="document.getElementById('image').click();"></i>
+        </div>
+        <div class="primary_color">
+          <label for="odkaz">Nadpis:</label><br>
+          <input class="cname primary_color" type="text" id="cname" name="odkaz" value=""><br>
+        </div>
+        <div class="primary_color">
+          <label for="tag">Tag:</label><br>
+          <select id="tag" name="tag"><br>
+            <% tag.forEach(item => { %> 
+            <option value="<%= item.nadpis %>"><%= item.nazev %></option>
+            <% }); %>
+          </select>
+    
+        </div>
+        <div class="primary_color mb-3">
+          <label for="odkaz">Popisek:</label><br>
+          <textarea class="popisek primary_color" id="cname" name="odkaz"></textarea><br>
+        </div>
       </div>
-      <div class="name primary_color">
-        <label for="country">Country</label><br>
-        <select id="country" name="country"><br>
-          <option value="australia">Australia</option>
-          <option value="canada">Canada</option>
-          <option value="usa">USA</option>
-        </select>
-  
-      </div>
-      <div class="name primary_color mb-3">
-        <label for="odkaz">Popisek:</label><br>
-        <textarea class="popisek primary_color" id="cname" name="odkaz"></textarea><br>
-      </div>
-    </div>
-  </form>
+    </form>
+  </div>
 </div>
