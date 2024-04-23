@@ -193,4 +193,41 @@ router.post("/sponzori_popup", uploadSponzor.fields([{ name: 'logo', maxCount: 1
   return res.redirect("/sprava");
 });
 
+router.post("/sponzori_popup", uploadSponzor.fields([{ name: 'logo', maxCount: 1 }]), async (req, res) => {
+  const { odkaz, id } = req.body;
+  const logo = req.files['logo'] ? req.files['logo'][0] : null; 
+  const sponzor = await Sponzor.findOne({
+    where: { id_sponzor: id }
+  });
+  const pathL = './public/img/sponzor/' + sponzor.logo;
+
+  if (odkaz || logo ) {
+    if(odkaz != sponzor.odkaz){
+      try {
+        await Sponzor.update({ odkaz: odkaz }, { where: { id_sponzor: id } });
+      } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: err.message });
+      }
+    }
+    if (logo) {
+      if (sponzor.logo) {
+        try {
+          fs.unlinkSync(path.join(__dirname, pathL));
+        } catch (err) {
+          console.error(err);
+          return res.status(500).json({ message: err.message });
+        }
+      }
+      try {
+        await Sponzor.update({ logo: logo.originalname }, { where: { id_sponzor: id } });
+      } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: err.message });
+      }
+    }
+  }
+  return res.redirect("/sprava");
+});
+
 module.exports = router;

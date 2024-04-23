@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/styles/sprava.css">
     <link rel="stylesheet" href="/styles/media.css">
     <title><%= kluby.jmeno %></title>
-    <link rel="icon" href="/img/<%= kluby.icona %>">
+    <link rel="icon" href="/img/sprava.ico">
 </head>
 <body class="d-flex flex-column">
   <div class="container bg_primary_color p-2 stat-box " onmouseover="toggleVisibility('logout', true)" onmouseout="toggleVisibility('logout', false)">
@@ -56,7 +56,7 @@
         <div class="row align-items-stretch mx-auto container-xl media">
           <div class=""> <!--Media-->
             <div class="mb-5"> <!--Plus-->
-              <button class="py-3 buttplus bg_secondary_white_color" type="button">
+              <button class="py-3 buttplus bg_secondary_white_color" id="add" type="button">
                 <i class="fa-solid fa-plus fa-2xl"></i>
               </button>
             </div>
@@ -107,6 +107,10 @@
         }
         document.getElementById('image').addEventListener('change', function () {
           previewImage('#image', '#previewImage');
+        });
+        
+        document.querySelector('#add').addEventListener('click', function () {
+          document.querySelector('#add_popup').style.display = 'block';
         });
       </script>
       <script src="/scripts/adminPanel.js"></script>
