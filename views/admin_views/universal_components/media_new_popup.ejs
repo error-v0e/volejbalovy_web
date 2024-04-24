@@ -14,20 +14,19 @@
             onclick="document.getElementById('image').click();"></i>
         </div>
         <div class="primary_color">
-          <label for="odkaz">Nadpis:</label><br>
-          <input class="cname primary_color" type="text" id="cname" name="odkaz" value=""><br>
+          <label for="nadpis">Nadpis:</label><br>
+          <input class="cname primary_color" type="text" id="nadpis" name="nadpis" value=""><br>
         </div>
         <div class="primary_color">
-          <label for="tag">Tag:</label><br>
+          <label>Tag:</label><br>
           <% tag.forEach(item => { %> 
-            <input type="checkbox" class="btn-check" id="btncheck<%= item.nazev %>" autocomplete="off">
+            <input type="checkbox" class="btn-check" id="btncheck<%= item.nazev %>" name="tag" autocomplete="off">
             <label class="btn btn-outline-primary primary_color" for="btncheck<%= item.nazev %>"><%= item.nazev %></label>
           <% }); %>
-    
         </div>
         <div class="primary_color mb-3">
-          <label for="odkaz">Popisek:</label><br>
-          <textarea class="popisek primary_color" id="cname" name="odkaz"></textarea><br>
+          <label for="popisek">Popisek:</label><br>
+          <textarea class="popisek primary_color" id="popisek" name="popisek"></textarea><br>
         </div>
       </div>
     </form>

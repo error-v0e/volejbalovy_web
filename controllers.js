@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require("./models");
 const passport = require("passport");
 const bcrypt = require("bcrypt");
-const { Klub, Kategorie, Sponzor } = require('./item');
+const { Klub, Sponzor, Prispevek, Tag, Tags, Img } = require('./item');
 const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
@@ -25,7 +25,7 @@ const sponzorStorage = multer.diskStorage({
 });
 
 const uploadSponzor = multer({ storage: sponzorStorage });
-
+const uploadPrispevek = multer({ storage: multer.memoryStorage() });
 
 // User registration route
 router.post("/register", async (req, res) => {
@@ -193,41 +193,49 @@ router.post("/sponzori_popup", uploadSponzor.fields([{ name: 'logo', maxCount: 1
   return res.redirect("/sprava");
 });
 
-router.post("/sponzori_popup", uploadSponzor.fields([{ name: 'logo', maxCount: 1 }]), async (req, res) => {
-  const { odkaz, id } = req.body;
-  const logo = req.files['logo'] ? req.files['logo'][0] : null; 
-  const sponzor = await Sponzor.findOne({
-    where: { id_sponzor: id }
-  });
-  const pathL = './public/img/sponzor/' + sponzor.logo;
+router.post("/add_prispevek", uploadPrispevek.single('foto'), async (req, res) => {
+  const { nadpis, popisek, tag } = req.body;
+  const foto = req.file ? req.file.buffer : null; 
 
-  if (odkaz || logo ) {
-    if(odkaz != sponzor.odkaz){
-      try {
-        await Sponzor.update({ odkaz: odkaz }, { where: { id_sponzor: id } });
-      } catch (err) {
-        console.error(err);
-        return res.status(500).json({ message: err.message });
+
+  
+  if (nadpis && popisek && foto) {
+      // Create new Prispevek
+    const prispevek = await Prispevek.create({
+      nadpis,
+      popisek,
+      // Add other Prispevek fields if necessary
+    });
+
+    if(tag){
+        // Get all tags from the database
+      const allTags = await Tag.findAll({
+        where: {
+          id_tag: tag // Assuming `tag` is an array of tag IDs
+        }
+      });
+      for (let t of allTags) {
+        const newTag = await Tags.create({
+          id_prispevek: prispevek.id_prispevek,
+          id_tag: t.id_tag
+        });
       }
     }
-    if (logo) {
-      if (sponzor.logo) {
-        try {
-          fs.unlinkSync(path.join(__dirname, pathL));
-        } catch (err) {
-          console.error(err);
-          return res.status(500).json({ message: err.message });
-        }
-      }
-      try {
-        await Sponzor.update({ logo: logo.originalname }, { where: { id_sponzor: id } });
-      } catch (err) {
-        console.error(err);
-        return res.status(500).json({ message: err.message });
-      }
+
+    // If a photo was uploaded, save it to the database
+    if (foto) {
+      // Create a new Img
+      const img = await Img.create({
+        img: foto,
+        id_prispevek: prispevek.id_prispevek // Add this line
+      });
     }
   }
-  return res.redirect("/sprava");
+
+  
+  return res.redirect("/sprava/media");
 });
+
+
 
 module.exports = router;
