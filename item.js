@@ -195,6 +195,11 @@ Tym.belongsTo(Klub, { foreignKey: 'id_klub', onDelete: 'NO ACTION', onUpdate: 'N
 Tags.belongsTo(Tag, { foreignKey: 'id_tag', onDelete: 'NO ACTION', onUpdate: 'NO ACTION' });
 Tags.belongsTo(Prispevek, { foreignKey: 'id_prispevek', onDelete: 'NO ACTION', onUpdate: 'NO ACTION' });
 Sit.belongsTo(Klub, { foreignKey: 'id_klub', onDelete: 'NO ACTION', onUpdate: 'NO ACTION' });
+Prispevek.hasMany(Img, {
+  foreignKey: 'id_prispevek',
+  as: 'imgs'
+});
+
 
 sequelize.sync();
 
