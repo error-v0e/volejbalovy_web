@@ -20,7 +20,7 @@
         <div class="primary_color">
           <label>Tag:</label><br>
           <% tag.forEach(item => { %> 
-            <input type="checkbox" class="btn-check" id="btncheck<%= item.nazev %>" name="tag" autocomplete="off">
+            <input type="checkbox" class="btn-check" id="btncheck<%= item.nazev %>" name="tag" value="<%= item.id_tag %>" autocomplete="off">
             <label class="btn btn-outline-primary primary_color" for="btncheck<%= item.nazev %>"><%= item.nazev %></label>
           <% }); %>
         </div>
