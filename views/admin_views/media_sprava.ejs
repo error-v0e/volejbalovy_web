@@ -66,8 +66,8 @@
             <% prispevky.forEach(item => { %> 
               <div class=""> <!--prispevek-->
                 <div class="prispevky_options">
+                  <i class="fa-solid fa-pen" id="prispevek<%= item.id_prispevek %>"></i>
                   <i class="fa-solid fa-trash"></i>
-                  <i class="fa-solid fa-pen"></i>
                 </div>
                 <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
                   <div class="col-auto me-4 mb-3 d-lg-block">
@@ -81,6 +81,7 @@
                   </div>
                 </div>
               </div>
+              <%- include('./universal_components/media_edit_popup', { item }) %>
             <% }); %>
 
 
@@ -130,6 +131,16 @@
             alert('není vše vyplněno');
           }
         });
+
+        <% prispevky.forEach(item => { %>
+        document.querySelector('#prispevek<%= item.id_prispevek %>').addEventListener('click', function () {
+          document.querySelector('#popup<%= item.id_prispevek %>').style.display = 'block';
+        });
+
+        document.getElementById('image<%= item.id_prispevek %>').addEventListener('change', function () {
+          previewImage('#image<%= item.id_prispevek %>', '#previewImage<%= item.id_prispevek %>');
+        });
+        <% }) %>
       </script>
       <script src="/scripts/adminPanel.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
