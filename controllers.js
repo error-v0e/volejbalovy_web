@@ -241,6 +241,63 @@ router.post("/add_prispevek", uploadPrispevek.fields([{ name: 'foto', maxCount: 
   return res.redirect("/sprava/media");
 });
 
+router.post("/edit_prispevek", uploadPrispevek.fields([{ name: 'foto', maxCount: 1 }]), async (req, res) => {
+  const { id_prispevek, nadpis, popisek, tag } = req.body;
+  const foto = req.files['foto'] ? req.files['foto'][0].originalname : null; // Get the filename of the uploaded file
 
+  if (id_prispevek && nadpis && popisek) {
+    // Find the Prispevek
+    const prispevek = await Prispevek.findByPk(id_prispevek);
+
+    if (!prispevek) {
+      return res.status(404).send({ message: "Prispevek not found" });
+    }
+
+    // Update Prispevek
+    prispevek.nadpis = nadpis;
+    prispevek.popisek = popisek;
+    // Update other Prispevek fields if necessary
+    await prispevek.save();
+
+    if(tag){
+      // Get all tags from the database
+      const allTags = await Tag.findAll({
+        where: {
+          id_tag: tag // Assuming `tag` is an array of tag IDs
+        }
+      });
+      for (let t of allTags) {
+        const newTag = await Tags.create({
+          id_prispevek: prispevek.id_prispevek,
+          id_tag: t.id_tag
+        });
+      }
+    }
+
+    // If a photo was uploaded, update its filename in the database
+    if (foto) {
+      // Find the Img
+      const img = await Img.findOne({
+        where: {
+          id_prispevek: prispevek.id_prispevek
+        }
+      });
+
+      if (img) {
+        // Update the Img
+        img.img = foto; // This will now be the filename
+        await img.save();
+      } else {
+        // If no Img was found, create a new one
+        const newImg = await Img.create({
+          img: foto, // This will now be the filename
+          id_prispevek: prispevek.id_prispevek // Add this line
+        });
+      }
+    }
+  }
+
+  return res.redirect("/sprava/media");
+});
 
 module.exports = router;

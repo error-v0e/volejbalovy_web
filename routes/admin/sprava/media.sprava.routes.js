@@ -25,14 +25,6 @@ router.get('/', async function(req, res) {
         }]
       });
 
-      // Convert BLOB to base64
-      prispevky.forEach(prispevek => {
-        prispevek.imgs.forEach(img => {
-          const buffer = Buffer.from(img.img, 'binary');
-          img.data = buffer.toString('base64');
-        });
-      });
-
       res.render('admin_views/media_sprava', {res, kluby, tag, tags, prispevky });
     } catch (error) {
       console.error(error);

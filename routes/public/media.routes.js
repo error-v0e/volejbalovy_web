@@ -26,12 +26,6 @@ router.get('/', async (req, res) => {
         attributes: ['id_img', 'img'],
       }]
     });
-    prispevky.forEach(prispevek => {
-      prispevek.imgs.forEach(img => {
-        const buffer = Buffer.from(img.img, 'binary');
-        img.data = buffer.toString('base64');
-      });
-    });
     const site = await Sit.findAll();
     res.render('public_views/media', { kluby, kategorie, sponzori, tags, prispevky, site, id_kategorie });
   } catch (error) {

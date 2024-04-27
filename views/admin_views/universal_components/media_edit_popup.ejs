@@ -7,12 +7,12 @@
       </div>
       <div class="prispevekEdit my-2">
         <div class="editeble"> <!--Logo-->
-          <input type="file" id="image" accept="image/*" name="foto" style="display: none;" />
+          <input type="file" id="image<%= item.id_prispevek %>" accept="image/*" name="foto" style="display: none;" />
           <% item.imgs.forEach(img => { %>
-            <img class="editeble" id="previewImage" src="/img/prispevky/<%= img.img %>"
-            onclick="document.getElementById('image').click();" alt="Image preview...">
+            <img class="editeble previewImage" id="previewImage<%= item.id_prispevek %>" src="/img/prispevky/<%= img.img %>"
+            onclick="document.getElementById('image<%= item.id_prispevek %>').click();" alt="Image preview...">
           <i class="fa-solid fa-10x fa-pen pen"
-            onclick="document.getElementById('image').click();"></i>
+            onclick="document.getElementById('image<%= item.id_prispevek %>').click();"></i>
           <% }); %>
         </div>
         <div class="primary_color">
@@ -22,14 +22,15 @@
         <div class="primary_color">
           <label>Tag:</label><br>
           <% tag.forEach(i => { %> 
-            <input type="checkbox" class="btn-check" id="btncheck<%= i.nazev %>" name="tag" value="<%= i.id_tag %>" autocomplete="off">
-            <label class="btn btn-outline-primary primary_color" for="btncheck<%= i.nazev %>"><%= i.nazev %></label>
+            <input type="checkbox" class="btn-check" id="btncheck<%= i.nazev %><%= item.id_prispevek %>" name="tag" value="<%= i.id_tag %>" autocomplete="off">
+            <label class="btn btn-outline-primary primary_color" for="btncheck<%= i.nazev %><%= item.id_prispevek %>"><%= i.nazev %></label>
           <% }); %>
         </div>
         <div class="primary_color mb-3">
           <label for="popisek">Popisek:</label><br>
           <textarea class="popisek primary_color" id="popisek" name="popisek"><%= item.popisek %></textarea><br>
         </div>
+        <input type="hidden" name="id_prispevek" value="<%= item.id_prispevek %>">
       </div>
     </form>
   </div>
