@@ -242,6 +242,10 @@ router.post("/add_prispevek", uploadPrispevek.fields([{ name: 'foto', maxCount: 
 });
 
 router.post("/edit_prispevek", uploadPrispevek.fields([{ name: 'foto', maxCount: 1 }]), async (req, res) => {
+
+  // zkontolovat (tagy zmena hlavne), tagy vybarvit 
+
+
   const { id_prispevek, nadpis, popisek, tag } = req.body;
   const foto = req.files['foto'] ? req.files['foto'][0].originalname : null; // Get the filename of the uploaded file
 
