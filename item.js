@@ -180,7 +180,7 @@ const Img = sequelize.define('img', {
     allowNull: false,
   },
   img: {
-    type: DataTypes.BLOB('long'),
+    type: DataTypes.STRING(64),
     allowNull: false,
   },
 }, {freezeTableName: true,});

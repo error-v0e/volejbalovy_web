@@ -25,7 +25,15 @@ const sponzorStorage = multer.diskStorage({
 });
 
 const uploadSponzor = multer({ storage: sponzorStorage });
-const uploadPrispevek = multer({ storage: multer.memoryStorage() });
+
+const prispevekStorage = multer.diskStorage({
+  destination: './public/img/prispevky/', // Specify the directory where the files will be saved
+  filename: (req, file, cb) => {
+    cb(null, file.originalname); // Generate a unique file name
+  }
+});
+
+const uploadPrispevek = multer({ storage: prispevekStorage });
 
 // User registration route
 router.post("/register", async (req, res) => {
@@ -193,14 +201,12 @@ router.post("/sponzori_popup", uploadSponzor.fields([{ name: 'logo', maxCount: 1
   return res.redirect("/sprava");
 });
 
-router.post("/add_prispevek", uploadPrispevek.single('foto'), async (req, res) => {
+router.post("/add_prispevek", uploadPrispevek.fields([{ name: 'foto', maxCount: 1 }]), async (req, res) => {
   const { nadpis, popisek, tag } = req.body;
-  const foto = req.file ? req.file.buffer : null; 
+  const foto = req.files['foto'] ? req.files['foto'][0].originalname : null; // Get the filename of the uploaded file
 
-
-  
   if (nadpis && popisek && foto) {
-      // Create new Prispevek
+    // Create new Prispevek
     const prispevek = await Prispevek.create({
       nadpis,
       popisek,
@@ -208,7 +214,7 @@ router.post("/add_prispevek", uploadPrispevek.single('foto'), async (req, res) =
     });
 
     if(tag){
-        // Get all tags from the database
+      // Get all tags from the database
       const allTags = await Tag.findAll({
         where: {
           id_tag: tag // Assuming `tag` is an array of tag IDs
@@ -222,17 +228,16 @@ router.post("/add_prispevek", uploadPrispevek.single('foto'), async (req, res) =
       }
     }
 
-    // If a photo was uploaded, save it to the database
+    // If a photo was uploaded, save its filename to the database
     if (foto) {
       // Create a new Img
       const img = await Img.create({
-        img: foto,
+        img: foto, // This will now be the filename
         id_prispevek: prispevek.id_prispevek // Add this line
       });
     }
   }
 
-  
   return res.redirect("/sprava/media");
 });
 

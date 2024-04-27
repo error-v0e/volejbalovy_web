@@ -65,10 +65,14 @@
 
             <% prispevky.forEach(item => { %> 
               <div class=""> <!--prispevek-->
+                <div class="prispevky_options">
+                  <i class="fa-solid fa-trash"></i>
+                  <i class="fa-solid fa-pen"></i>
+                </div>
                 <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
                   <div class="col-auto me-4 mb-3 d-lg-block">
                     <% item.imgs.forEach(img => { %>
-                      <img class="img-fluid" src="data:image/jpeg;base64,<%= img.data %>" alt="Foto" width="800px">
+                      <img class="img-fluid" src="/img/prispevky/<%= img.img %>" alt="Foto" width="800px">
                     <% }); %>
                   </div>
                   <div class="col d-flex flex-column position-static caption-media">

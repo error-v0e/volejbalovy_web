@@ -68,14 +68,14 @@
               <input type="file" id="LogoIco" accept="image/x-icon" name="icon" style="display: none;" />
               <img class="editeble" id="previewico" src="/img/<%= kluby.icona %>"
                 onclick="document.getElementById('LogoIco').click();" alt="Ico preview...">
-              <i class="fa-solid fa-5x fa-pen" onclick="document.getElementById('LogoIco').click();"></i>
+              <i class="fa-solid fa-5x fa-pen pen" onclick="document.getElementById('LogoIco').click();"></i>
   
             </div>
             <div class="col-xl-6 mb-2 editeble"> <!--Logo-->
               <input type="file" id="LogoImg" accept="image/*" name="logo" style="display: none;" />
               <img class="editeble" id="previewimg" src="/img/<%= kluby.logo %>"
                 onclick="document.getElementById('LogoImg').click();" alt="Image preview...">
-              <i class="fa-solid fa-10x fa-pen" onclick="document.getElementById('LogoImg').click();"></i>
+              <i class="fa-solid fa-10x fa-pen pen" onclick="document.getElementById('LogoImg').click();"></i>
             </div>
           </div>
         </form>
@@ -128,7 +128,7 @@
         <% sponzori.forEach(item=> { %>
           <a class="col sponzors editeble" id="sponzor<%= item.id_sponzor %>">
             <img class="img-fluid sponzor" src="/img/sponzor/<%= item.logo %>" alt="sponzor">
-            <i class="fa-solid fa-5x fa-pen"></i>
+            <i class="fa-solid fa-5x fa-pen pen"></i>
           </a>
           <%- include('./universal_components/sponzor_popup', { item }) %>
             <% }) %>

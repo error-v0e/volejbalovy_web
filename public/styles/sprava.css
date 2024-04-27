@@ -82,7 +82,7 @@
 .form-signin > form > div > input{
   width: 100%;
 }
-.fa-pen{
+.pen{
  
   top: 0;
 }
@@ -90,11 +90,7 @@
   position: relative;
   display: inline-block;
 }
-.img-fluid {
-  width: 100%;
-  height: auto;
-}
-.fa-pen {
+.pen {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -103,7 +99,7 @@
   opacity: 0;
   transition: opacity 0.4s;
 }
-.editeble:hover .fa-pen {
+.editeble:hover .pen {
   visibility: visible;
   opacity: 1;
 }
@@ -165,4 +161,27 @@ body.popup-active .popup {
   max-height: 400px;
   left: 50%;
   transform: translate(-50%, 0);
+}
+.prispevky_options{
+  float: right;
+}
+.prispevky_options > i{
+  margin-left: 5px;
+  padding: 7px;
+  border-radius: 7px;
+  opacity: 40%;
+}
+.prispevky_options > .fa-pen{
+  background-color: green;
+  color: white;
+}
+.prispevky_options > .fa-trash{
+  background-color: red;
+  color: white;
+}
+.prispevky_options > .fa-pen:hover{
+  opacity: 100%;
+}
+.prispevky_options > .fa-trash:hover{
+  opacity: 100%;
 }

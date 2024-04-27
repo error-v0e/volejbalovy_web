@@ -12,7 +12,7 @@
       <div class="mb-2 editeble"> <!--Logo-->
         <input type="file" id="LogoSponzor<%= item.id_sponzor %>" accept="image/*" name="logo" style="display: none;" />
         <img class="editeble previewsponzor" id="previewsponzor<%= item.id_sponzor %>" src="/img/sponzor/<%= item.logo %>" onclick="document.getElementById('LogoSponzor<%= item.id_sponzor %>').click();" alt="Image preview...">
-        <i class="fa-solid fa-5x fa-pen" onclick="document.getElementById('LogoSponzor<%= item.id_sponzor %>').click();"></i>
+        <i class="fa-solid fa-5x fa-pen pen" onclick="document.getElementById('LogoSponzor<%= item.id_sponzor %>').click();"></i>
         <input type="hidden" name="id" value="<%= item.id_sponzor %>">
       </div>
     </div>

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Klub, Kategorie, Sponzor, Tym, Prispevek, Sit, Tag } = require('../../item');
+const { Klub, Kategorie, Sponzor, Tym, Prispevek, Sit, Tag, Img } = require('../../item');
 const id_kategorie = 4;
 
 router.get('/', async (req, res) => {
@@ -19,8 +19,18 @@ router.get('/', async (req, res) => {
       }]
     });
     const prispevky = await Prispevek.findAll({
-      limit: 6,
-      order: [['cas_pridani', 'DESC']]
+      include: [{
+        model: Img,
+        as: 'imgs',
+        required: false,
+        attributes: ['id_img', 'img'],
+      }]
+    });
+    prispevky.forEach(prispevek => {
+      prispevek.imgs.forEach(img => {
+        const buffer = Buffer.from(img.img, 'binary');
+        img.data = buffer.toString('base64');
+      });
     });
     const site = await Sit.findAll();
     res.render('public_views/media', { kluby, kategorie, sponzori, tags, prispevky, site, id_kategorie });
