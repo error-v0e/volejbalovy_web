@@ -22,7 +22,8 @@
         <div class="primary_color">
           <label>Tag:</label><br>
           <% tag.forEach(i => { %> 
-            <input type="checkbox" class="btn-check" id="btncheck<%= i.nazev %><%= item.id_prispevek %>" name="tag" value="<%= i.id_tag %>" autocomplete="off">
+            <input type="checkbox" class="btn-check" id="btncheck<%= i.nazev %><%= item.id_prispevek %>" name="tag" value="<%= i.id_tag %>" 
+            <% item.tags.forEach(t => { if(t.id_tag === i.id_tag) { %> checked <% } }); %> autocomplete="off">
             <label class="btn btn-outline-primary primary_color" for="btncheck<%= i.nazev %><%= item.id_prispevek %>"><%= i.nazev %></label>
           <% }); %>
         </div>

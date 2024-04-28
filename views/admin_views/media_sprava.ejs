@@ -67,7 +67,7 @@
               <div class=""> <!--prispevek-->
                 <div class="prispevky_options">
                   <i class="fa-solid fa-pen" id="prispevek<%= item.id_prispevek %>"></i>
-                  <i class="fa-solid fa-trash"></i>
+                  <i class="fa-solid fa-trash" id="prispevekDel<%= item.id_prispevek %>"></i>
                 </div>
                 <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
                   <div class="col-auto me-4 mb-3 d-lg-block">
@@ -82,6 +82,7 @@
                 </div>
               </div>
               <%- include('./universal_components/media_edit_popup', { item }) %>
+              <%- include('./universal_components/media_delete_popup', { item }) %>
             <% }); %>
 
 
@@ -139,6 +140,10 @@
 
         document.getElementById('image<%= item.id_prispevek %>').addEventListener('change', function () {
           previewImage('#image<%= item.id_prispevek %>', '#previewImage<%= item.id_prispevek %>');
+        });
+
+        document.querySelector('#prispevekDel<%= item.id_prispevek %>').addEventListener('click', function () {
+          document.querySelector('#popupDel<%= item.id_prispevek %>').style.display = 'block';
         });
         <% }) %>
       </script>

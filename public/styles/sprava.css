@@ -13,6 +13,7 @@
 }
 .butt-sub{
   background-color: green;
+    text-decoration: none;
 }
 .butt-sub:hover{
   background-color: rgb(0, 105, 0);
@@ -26,6 +27,16 @@
   border-radius: 5px;
   float: right;
   margin-left: 10px;
+}
+.buttDel{
+  color: white;
+  padding: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-style:none;
+  border-radius: 5px;
+  float:left;
+  margin: 10px;
 }
 .stat-box{
   z-index: 10;
@@ -137,6 +148,11 @@ body.popup-active .popup {
   overflow-y: scroll;
   padding-left: 65px;
   padding-right: 65px;
+}
+.popup.media.del{
+  height: fit-content;
+  width: fit-content;
+  padding: 50px;
 }
 .popisek{
   margin-top: 10px;

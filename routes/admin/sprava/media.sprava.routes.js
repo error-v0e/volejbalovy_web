@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const fs = require('fs');
 const path = require('path');
-const { Klub, Prispevek, Tym, Tag, Img } = require('../../../item');
+const { Klub, Prispevek, Tym, Tag, Img, Tags } = require('../../../item');
 
 router.get('/', async function(req, res) {
   if (req.session.name) { 
@@ -22,6 +22,12 @@ router.get('/', async function(req, res) {
           as: 'imgs',
           required: false,
           attributes: ['id_img', 'img'],
+        },
+        {
+          model: Tag,
+          as: 'tags',
+          required: false,
+          attributes: ['id_tag'],
         }]
       });
 

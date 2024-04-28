@@ -248,8 +248,8 @@ router.post("/edit_prispevek", uploadPrispevek.fields([{ name: 'foto', maxCount:
 
   const { id_prispevek, nadpis, popisek, tag } = req.body;
   const foto = req.files['foto'] ? req.files['foto'][0].originalname : null; // Get the filename of the uploaded file
-
-  if (id_prispevek && nadpis && popisek) {
+  console.log(id_prispevek);
+  if (id_prispevek) {
     // Find the Prispevek
     const prispevek = await Prispevek.findByPk(id_prispevek);
 
@@ -262,6 +262,7 @@ router.post("/edit_prispevek", uploadPrispevek.fields([{ name: 'foto', maxCount:
     prispevek.popisek = popisek;
     // Update other Prispevek fields if necessary
     await prispevek.save();
+    await prispevek.setTags([]);
 
     if(tag){
       // Get all tags from the database
@@ -286,6 +287,12 @@ router.post("/edit_prispevek", uploadPrispevek.fields([{ name: 'foto', maxCount:
           id_prispevek: prispevek.id_prispevek
         }
       });
+      fs.unlink(path.join(__dirname, '../public', img.img), err => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+      });
 
       if (img) {
         // Update the Img
@@ -300,6 +307,43 @@ router.post("/edit_prispevek", uploadPrispevek.fields([{ name: 'foto', maxCount:
       }
     }
   }
+
+  return res.redirect("/sprava/media");
+});
+
+router.post('/del_prispevek', async (req, res) => {
+  const { id_prispevek } = req.body;
+
+  // Fetch the post from the database
+  const prispevek = await Prispevek.findByPk(id_prispevek, {
+    include: [
+      {
+        model: Img,
+        as: 'imgs',
+      }
+    ]
+  });
+
+  // If the post does not exist, return an error
+  if (!prispevek) {
+    return res.status(404).send('Prispevek not found');
+  }
+
+  // Remove all images associated with the post
+  for (let img of prispevek.imgs) {
+    // Remove the image from the local storage
+    fs.unlink(path.join(__dirname, './public/img/prispevky/', img.img), err => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+    });
+    await img.destroy();
+  }
+  await prispevek.setTags([]);
+
+  // Remove the post itself
+  await prispevek.destroy();
 
   return res.redirect("/sprava/media");
 });
