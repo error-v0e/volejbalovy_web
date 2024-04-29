@@ -241,13 +241,13 @@ router.post("/add_prispevek", uploadPrispevek.fields([{ name: 'foto', maxCount: 
   return res.redirect("/sprava/media");
 });
 
-router.post("/edit_prispevek", uploadPrispevek.fields([{ name: 'foto', maxCount: 1 }]), async (req, res) => {
+router.post("/edit_prispevek", uploadPrispevek.fields([{ name: 'foto_to_edit', maxCount: 1 }]), async (req, res) => {
 
   // zkontolovat (tagy zmena hlavne), tagy vybarvit 
 
 
   const { id_prispevek_to_edit, nadpis_to_edit, popisek_to_edit, tag_to_edit } = req.body;
-  const foto = req.files['foto'] ? req.files['foto'][0].originalname : null; // Get the filename of the uploaded file
+  const foto_to_edit = req.files['foto_to_edit'] ? req.files['foto_to_edit'][0].originalname : null; // Get the filename of the uploaded file
   console.log(id_prispevek_to_edit);
   if (id_prispevek_to_edit) {
     // Find the Prispevek
@@ -280,7 +280,7 @@ router.post("/edit_prispevek", uploadPrispevek.fields([{ name: 'foto', maxCount:
     }
 
     // If a photo was uploaded, update its filename in the database
-    if (foto) {
+    if (foto_to_edit) {
       // Find the Img
       const img = await Img.findOne({
         where: {
@@ -296,12 +296,12 @@ router.post("/edit_prispevek", uploadPrispevek.fields([{ name: 'foto', maxCount:
 
       if (img) {
         // Update the Img
-        img.img = foto; // This will now be the filename
+        img.img = foto_to_edit; // This will now be the filename
         await img.save();
       } else {
         // If no Img was found, create a new one
         const newImg = await Img.create({
-          img: foto, // This will now be the filename
+          img: foto_to_edit, // This will now be the filename
           id_prispevek: prispevek.id_prispevek // Add this line
         });
       }
