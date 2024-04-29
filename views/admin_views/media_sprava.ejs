@@ -135,7 +135,7 @@
 
         <% prispevky.forEach(item => { %>
         document.querySelector('#prispevek<%= item.id_prispevek %>').addEventListener('click', function () {
-          document.querySelector('#popup<%= item.id_prispevek %>').style.display = 'block';
+          document.querySelector('#popupEdit<%= item.id_prispevek %>').style.display = 'block';
         });
 
         document.getElementById('image<%= item.id_prispevek %>').addEventListener('change', function () {

@@ -246,29 +246,29 @@ router.post("/edit_prispevek", uploadPrispevek.fields([{ name: 'foto', maxCount:
   // zkontolovat (tagy zmena hlavne), tagy vybarvit 
 
 
-  const { id_prispevek, nadpis, popisek, tag } = req.body;
+  const { id_prispevek_to_edit, nadpis_to_edit, popisek_to_edit, tag_to_edit } = req.body;
   const foto = req.files['foto'] ? req.files['foto'][0].originalname : null; // Get the filename of the uploaded file
-  console.log(id_prispevek);
-  if (id_prispevek) {
+  console.log(id_prispevek_to_edit);
+  if (id_prispevek_to_edit) {
     // Find the Prispevek
-    const prispevek = await Prispevek.findByPk(id_prispevek);
+    const prispevek = await Prispevek.findByPk(id_prispevek_to_edit);
 
     if (!prispevek) {
       return res.status(404).send({ message: "Prispevek not found" });
     }
 
     // Update Prispevek
-    prispevek.nadpis = nadpis;
-    prispevek.popisek = popisek;
+    prispevek.nadpis = nadpis_to_edit;
+    prispevek.popisek = popisek_to_edit;
     // Update other Prispevek fields if necessary
     await prispevek.save();
     await prispevek.setTags([]);
 
-    if(tag){
+    if(tag_to_edit){
       // Get all tags from the database
       const allTags = await Tag.findAll({
         where: {
-          id_tag: tag // Assuming `tag` is an array of tag IDs
+          id_tag: tag_to_edit // Assuming `tag` is an array of tag IDs
         }
       });
       for (let t of allTags) {
@@ -312,10 +312,10 @@ router.post("/edit_prispevek", uploadPrispevek.fields([{ name: 'foto', maxCount:
 });
 
 router.post('/del_prispevek', async (req, res) => {
-  const { id_prispevek } = req.body;
+  const { id_prispevek_to_del } = req.body;
 
   // Fetch the post from the database
-  const prispevek = await Prispevek.findByPk(id_prispevek, {
+  const prispevek = await Prispevek.findByPk(id_prispevek_to_del, {
     include: [
       {
         model: Img,
