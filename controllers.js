@@ -287,7 +287,7 @@ router.post("/edit_prispevek", uploadPrispevek.fields([{ name: 'foto_to_edit', m
           id_prispevek: prispevek.id_prispevek
         }
       });
-      fs.unlink(path.join(__dirname, '../public', img.img), err => {
+      fs.unlink(path.join(__dirname, './public/img/prispevky/', img.img), err => {
         if (err) {
           console.error(err);
           return;
