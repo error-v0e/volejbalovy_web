@@ -81,19 +81,6 @@ const Sponzor = sequelize.define('sponzor', {
   },
 }, {freezeTableName: true,});
 
-const Pohlavi = sequelize.define('pohlavi', {
-  id_pohlavi: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-    allowNull: false,
-  },
-  nazev: {
-    type: DataTypes.STRING(45),
-    allowNull: false,
-  },
-}, {freezeTableName: true,});
-
 const Tag = sequelize.define('tag', {
   id_tag: {
     type: DataTypes.INTEGER,
@@ -189,7 +176,6 @@ Img.belongsTo(Prispevek, { foreignKey: 'id_prispevek', onDelete: 'NO ACTION', on
 Kategorie.belongsTo(Klub, { foreignKey: 'id_klub', onDelete: 'NO ACTION', onUpdate: 'NO ACTION' });
 Universal.belongsTo(Kategorie, { foreignKey: 'id_kategorie', onDelete: 'NO ACTION', onUpdate: 'NO ACTION' });
 Sponzor.belongsTo(Klub, { foreignKey: 'id_klub', onDelete: 'NO ACTION', onUpdate: 'NO ACTION' });
-Tag.belongsTo(Pohlavi, { foreignKey: 'id_pohlavi', onDelete: 'NO ACTION', onUpdate: 'NO ACTION' });
 Tym.belongsTo(Tag, { foreignKey: 'id_tag', onDelete: 'NO ACTION', onUpdate: 'NO ACTION' });
 Tym.belongsTo(Klub, { foreignKey: 'id_klub', onDelete: 'NO ACTION', onUpdate: 'NO ACTION' });
 Tags.belongsTo(Tag, { foreignKey: 'id_tag', onDelete: 'NO ACTION', onUpdate: 'NO ACTION' });
@@ -207,7 +193,6 @@ module.exports = {
   Kategorie,
   Universal,
   Sponzor,
-  Pohlavi,
   Tag,
   Tym,
   Prispevek,

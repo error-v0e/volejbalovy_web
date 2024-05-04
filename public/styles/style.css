@@ -252,6 +252,9 @@ select:hover{
   box-shadow: none;
   border-bottom:3px solid var(--active-color);
 } 
+select:focus-visible{
+  outline: none;
+}
 .btn-check:checked+.btn{
   background-color: var(--active-color);
 }
