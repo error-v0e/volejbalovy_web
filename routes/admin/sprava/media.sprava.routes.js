@@ -28,7 +28,10 @@ router.get('/', async function(req, res) {
           as: 'tags',
           required: false,
           attributes: ['id_tag'],
-        }]
+        }],
+        order: [
+          ['cas_pridani', 'DESC']
+        ]
       });
 
       res.render('admin_views/media_sprava', {res, kluby, tag, tags, prispevky });
