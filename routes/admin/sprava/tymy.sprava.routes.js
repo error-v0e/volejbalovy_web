@@ -9,32 +9,10 @@ router.get('/', async function(req, res) {
     var name = req.session.name; 
     try {
       const kluby = await Klub.findOne();
-      const tag = await Tag.findAll();
-      const tags = await Tym.findAll({
-        include: [{
-          association: "tag",
-          attributes: ['nazev']
-        }]
+      const tymy = await Tym.findAll({
+        include: Tag
       });
-      const prispevky = await Prispevek.findAll({
-        include: [{
-          model: Img,
-          as: 'imgs',
-          required: false,
-          attributes: ['id_img', 'img'],
-        },
-        {
-          model: Tag,
-          as: 'tags',
-          required: false,
-          attributes: ['id_tag'],
-        }],
-        order: [
-          ['cas_pridani', 'DESC']
-        ]
-      });
-
-      res.render('admin_views/tymy_sprava', {res, kluby, tag, tags, prispevky });
+      res.render('admin_views/tymy_sprava', {res, kluby, tymy });
     } catch (error) {
       console.error(error);
       res.status(500).send('Chyba serveru');

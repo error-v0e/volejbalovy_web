@@ -54,17 +54,27 @@
 
       <div class="container mt-3">
         <div class="row align-items-stretch mx-auto container-xl media">
-          <div class="col-md-3 primary_color">
-            <label for="cname">Nazev tymu:</label>
-            <input class="cname primary_color" type="text" id="cname" name="cname" value="<%= kluby.jmeno %>">
-          </div>
-          <div class="col-md-3 primary_color">
-            <label for="cname">Popisek:</label>
-            <input class="cname primary_color" type="text" id="cname" name="cname" value="<%= kluby.jmeno %>">
-          </div>
+          <div class="col-md-2 primary_color">Fotografie:</div>
+          <div class="col-md-2 primary_color">Nazev tymu:</div>
+          <div class="col-md-6 primary_color">Popisek:</div>
           
         </div>
       </div>
+      <% tymy.forEach(item => { %> 
+        <div class="container mt-3 bordert">
+          <div class="row align-items-stretch mx-auto container-xl media">
+            <div class="col-md-2 primary_color"></div>
+            <div class="col-md-2 primary_color"><%= item.tag.nazev %></div>
+            <div class="col-md-7 primary_color"><%= item.popisek %></div>
+            <div class="col-md-1 prispevky_options">
+              <i class="fa-solid fa-pen" id="prispevek"></i>
+              <i class="fa-solid fa-trash" id="prispevekDel"></i>
+            </div>
+            
+          </div>
+        </div>
+      <% }); %>
+      
 
       <script>
         
