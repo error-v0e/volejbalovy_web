@@ -201,3 +201,11 @@ body.popup-active .popup {
 .prispevky_options > .fa-trash:hover{
   opacity: 100%;
 }
+.tym_img_preview{
+  max-height: 70px;
+  max-width: 100%;
+}
+.popisek_tym{
+  height: 70px;
+    overflow: hidden;
+}
