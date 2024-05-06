@@ -50,6 +50,14 @@
       </div>
     </div>
   </nav>
+  <div class="container mt-3">
+    <div class="row align-items-stretch mx-auto container-xl media">
+      <div class="my-3"> <!--Plus-->
+        <button class="py-3 buttplus bg_secondary_white_color" id="add" type="button">
+          <i class="fa-solid fa-plus fa-2xl"></i>
+        </button>
+      </div>
+      <%- include('./universal_components/tym_new_popup') %>
 
       <div class="container mt-3">
         <div class="row align-items-stretch mx-auto container-xl media">
@@ -63,7 +71,7 @@
         <div class="container mt-3 bordert">
           <div class="row align-items-stretch mx-auto container-xl media">
             <div class="col-md-2 primary_color p-2">
-              <img class="tym_img_preview" src="/img/tymy/<%= item.photo %>" alt="sponzor">
+              <img class="tym_img_preview" src="/img/tymy/<%= item.photo %>" alt="photo">
             </div>
             <div class="col-md-2 primary_color p-2"><%= item.tag.nazev %></div>
             <div class="col-md-7 primary_color popisek_tym p-2"><%= item.popisek %></div>
@@ -75,10 +83,14 @@
           </div>
         </div>
       <% }); %>
+    </div>
+  </div>
       
 
       <script>
-        
+        document.querySelector('#add').addEventListener('click', function () {
+          document.querySelector('#add_popup').style.display = 'block';
+        });
       </script>
       <script src="/scripts/adminPanel.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
