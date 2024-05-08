@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require("./models");
 const passport = require("passport");
 const bcrypt = require("bcrypt");
-const { Klub, Sponzor, Prispevek, Tag, Tags, Img } = require('./item');
+const { Klub, Sponzor, Prispevek, Tag, Tags, Img, Tym } = require('./item');
 const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
@@ -34,6 +34,15 @@ const prispevekStorage = multer.diskStorage({
 });
 
 const uploadPrispevek = multer({ storage: prispevekStorage });
+
+const tymStorage = multer.diskStorage({
+  destination: './public/img/tymy/', // Specify the directory where the files will be saved
+  filename: (req, file, cb) => {
+    cb(null, file.originalname); // Generate a unique file name
+  }
+});
+
+const uploadTym = multer({ storage: tymStorage });
 
 // User registration route
 router.post("/register", async (req, res) => {
@@ -346,6 +355,111 @@ router.post('/del_prispevek', async (req, res) => {
   await prispevek.destroy();
 
   return res.redirect("/sprava/media");
+});
+
+router.post("/add_tym", uploadTym.fields([{ name: 'foto', maxCount: 1 }]), async (req, res) => {
+  const { nazev, popisek } = req.body;
+  const foto = req.files['foto'] ? req.files['foto'][0].originalname : null; // Get the filename of the uploaded file
+
+  if (nazev && popisek && foto) {
+    // Create new Tym
+    const tym = await Tym.create({
+      photo: foto,
+      popisek,
+      id_klub: 1,
+      // Add other Tym fields if necessary
+    });
+
+    // Create a new Tag
+    const tag = await Tag.create({
+      nazev: nazev, // This will now be the name of the tag
+    });
+
+    // Associate the tag with the team
+    await tym.setTag(tag);
+  }
+
+  return res.redirect("/sprava/tymy");
+});
+router.post("/edit_tym", uploadTym.fields([{ name: 'foto', maxCount: 1 }]), async (req, res) => {
+  const { id_tym_to_edit, nazev, popisek } = req.body;
+  const foto = req.files['foto'] ? req.files['foto'][0].originalname : null;
+
+  if (id_tym_to_edit) {
+    const tym = await Tym.findByPk(id_tym_to_edit);
+
+    if (!tym) {
+      return res.status(404).send({ message: "Tym not found" });
+    }
+
+    const tag = await Tag.findByPk(tym.id_tag);
+    if (tag) {
+      tag.nazev = nazev;
+      await tag.save();
+    }
+
+    tym.popisek = popisek;
+    await tym.save();
+
+    if (foto) {
+      fs.unlink(path.join(__dirname, './public/img/tymy/', tym.photo), err => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+      });
+
+      tym.photo = foto;
+      await tym.save();
+    }
+  }
+
+  return res.redirect("/sprava/tymy");
+});
+router.post('/del_tym', async (req, res) => {
+  const { id_tym_to_del } = req.body;
+  console.log(1)
+
+
+  // Fetch the team from the database
+  const tym = await Tym.findByPk(id_tym_to_del, {
+  });
+  console.log(2)
+
+  // If the team does not exist, return an error
+  if (!tym) {
+    return res.status(404).send('Tym not found');
+  }
+  console.log(3)
+
+  // Fetch the associated tag
+  const tag = await Tag.findByPk(tym.id_tag);
+
+// If the tag exists, delete all entries in the Tags table that reference it
+if (tag) {
+  const tags = await Tags.findOne({ where: { id_tag: tag.id_tag } });
+  if (tags) {
+    await tags.destroy();
+  }
+
+  // Remove the association between the tym and the tag
+  await tym.setTag(null);
+
+  // Now you can safely delete the tag
+  await tag.destroy();
+}
+
+fs.unlink(path.join(__dirname, './public/img/tymy/', tym.photo), err => {
+  if (err) {
+    console.error(err);
+    return;
+  }
+});
+
+// Remove the team itself
+await tym.destroy();
+
+return res.redirect("/sprava/tymy");
 });
 
 module.exports = router;

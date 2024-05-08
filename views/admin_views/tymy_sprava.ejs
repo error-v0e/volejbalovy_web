@@ -76,10 +76,11 @@
             <div class="col-md-2 primary_color p-2"><%= item.tag.nazev %></div>
             <div class="col-md-7 primary_color popisek_tym p-2"><%= item.popisek %></div>
             <div class="col-md-1 prispevky_options p-2">
-              <i class="fa-solid fa-pen" id="prispevek"></i>
-              <i class="fa-solid fa-trash" id="prispevekDel"></i>
+              <i class="fa-solid fa-pen" id="tym<%= item.id_tym %>"></i>
+              <i class="fa-solid fa-trash" id="tymDel<%= item.id_tym %>"></i>
             </div>
-            
+            <%- include('./universal_components/tym_edit_popup', { item }) %>
+            <%- include('./universal_components/tym_delete_popup', { item }) %>
           </div>
         </div>
       <% }); %>
@@ -88,9 +89,52 @@
       
 
       <script>
+      function previewImage(inputId, previewId) {
+        const preview = document.querySelector(previewId);
+        const file = document.querySelector(inputId).files[0];
+        const reader = new FileReader();
+
+        reader.addEventListener("load", function () {
+          // convert image file to base64 string
+          preview.src = reader.result;
+        }, false);
+
+        if (file) {
+          reader.readAsDataURL(file);
+        }
+      }
         document.querySelector('#add').addEventListener('click', function () {
           document.querySelector('#add_popup').style.display = 'block';
         });
+        
+        document.getElementById('image').addEventListener('change', function () {
+          previewImage('#image', '#previewImage');
+        });
+        document.querySelector('form').addEventListener('submit', function(event) {
+          var image = document.getElementById('image');
+          var nadpis = document.getElementById('cname');
+          var popisek = document.querySelector('textarea[name="popisek"]');
+          var checkboxes = document.querySelectorAll('input[type=checkbox]');
+
+          if (!image.value || !nadpis.value || !popisek.value || !Array.prototype.some.call(checkboxes, checkbox => checkbox.checked)) {
+            event.preventDefault();
+            alert('není vše vyplněno');
+          }
+        });
+
+        <% tymy.forEach(item => { %>
+        document.querySelector('#tym<%= item.id_tym %>').addEventListener('click', function () {
+          document.querySelector('#popupEdit<%= item.id_tym %>').style.display = 'block';
+        });
+
+        document.getElementById('image<%= item.id_tym %>').addEventListener('change', function () {
+          previewImage('#image<%= item.id_tym %>', '#previewImage<%= item.id_tym %>');
+        });
+
+        document.querySelector('#tymDel<%= item.id_tym %>').addEventListener('click', function () {
+          document.querySelector('#popupDel<%= item.id_tym %>').style.display = 'block';
+        });
+        <% }) %>
       </script>
       <script src="/scripts/adminPanel.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
