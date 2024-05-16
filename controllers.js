@@ -210,6 +210,48 @@ router.post("/sponzori_popup", uploadSponzor.fields([{ name: 'logo', maxCount: 1
   return res.redirect("/sprava");
 });
 
+router.post("/sponzori_new_popup", uploadSponzor.fields([{ name: 'logo', maxCount: 1 }]), async (req, res) => {
+  const { odkaz } = req.body;
+  const logo = req.files['logo'] ? req.files['logo'][0] : null; 
+
+  if (odkaz || logo ) {
+    try {
+      const newSponzor = await Sponzor.create({ 
+        odkaz: odkaz, 
+        logo: logo ? logo.originalname : null 
+      });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ message: err.message });
+    }
+  }
+  return res.redirect("/sprava");
+});
+router.post('/del_sponzor', async (req, res) => {
+  const { id_sponzor_to_del } = req.body;
+
+  // Fetch the sponsor from the database
+  const sponzor = await Sponzor.findByPk(id_sponzor_to_del);
+
+  // If the sponsor does not exist, return an error
+  if (!sponzor) {
+    return res.status(404).send('Sponzor not found');
+  }
+
+  // Remove the logo associated with the sponsor
+  fs.unlink(path.join(__dirname, './public/img/sponzor/', sponzor.logo), err => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+  });
+
+  // Remove the sponsor itself
+  await sponzor.destroy();
+
+  return res.redirect("/sprava");
+});
+
 router.post("/add_prispevek", uploadPrispevek.fields([{ name: 'foto', maxCount: 1 }]), async (req, res) => {
   const { nadpis, popisek, tag } = req.body;
   const foto = req.files['foto'] ? req.files['foto'][0].originalname : null; // Get the filename of the uploaded file

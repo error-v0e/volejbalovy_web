@@ -132,6 +132,13 @@
           </a>
           <%- include('./universal_components/sponzor_popup', { item }) %>
             <% }) %>
+            <a class="col sponzors editeble" id="sponzorNew">
+              <button class="p-4 buttplus bg_secondary_white_color" type="button">
+                <i class="fa-solid fa-plus fa-2xl"></i>
+              </button>
+            </a>
+            <%- include('./universal_components/sponzor_new_popup') %>
+          
   
       </div>
     </div>
@@ -181,6 +188,13 @@
       this.parentNode.submit();
     });
   });
+  document.querySelector('#sponzorNew').addEventListener('click', function () {
+      document.querySelector('#popupNew').style.display = 'block';
+    });
+
+    document.getElementById('LogoSponzorNew').addEventListener('change', function () {
+      previewImage('#LogoSponzorNew', '#previewsponzorNew');
+    });
 
         <% sponzori.forEach(item => { %>
     document.querySelector('#sponzor<%= item.id_sponzor %>').addEventListener('click', function () {
@@ -190,6 +204,9 @@
     document.getElementById('LogoSponzor<%= item.id_sponzor %>').addEventListener('change', function () {
       previewImage('#LogoSponzor<%= item.id_sponzor %>', '#previewsponzor<%= item.id_sponzor %>');
     });
+    document.querySelector('#sponzorDel<%= item.id_sponzor %>').addEventListener('click', function () {
+          document.querySelector('#popupDel<%= item.id_sponzor %>').style.display = 'block';
+        });
         <% }) %>
   </script>
   <script src="/scripts/adminPanel.js"></script>

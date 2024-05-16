@@ -1,6 +1,9 @@
 <div class="popup" id="popup<%= item.id_sponzor %>" style="display: none;">
   <form method="post" action="/api/sponzori_popup" enctype="multipart/form-data">
     <div class="action"><!--Ulozit-->
+      <div class="sponzorDel">
+        <i class="fa-solid fa-trash" id="sponzorDel<%= item.id_sponzor %>"></i>
+      </div>
       <a class="butt-dis butt mb-1" href="/sprava">Zahodit změny</a>
       <input  class="butt-sub butt" type="submit" value="Ulozit">
     </div>
@@ -17,4 +20,15 @@
       </div>
     </div>
   </form>
+</div>
+<div class="row-cols-1 row-cols-lg-3" id="popupDel<%= item.id_sponzor %>" style="display: none;"> 
+  <div class="popup media del">
+    <form method="post" action="/api/del_sponzor">
+      <div class="action"><!--Ulozit-->
+        <a class="butt-sub buttDel mb-1" href="/sprava/">Zachovat</a>
+        <input class="butt-dis buttDel" type="submit" value="Smazat">
+        <input type="hidden" name="id_sponzor_to_del" value="<%= item.id_sponzor %>">
+      </div>
+    </form>
+  </div>
 </div>

@@ -18,6 +18,21 @@
 .butt-sub:hover{
   background-color: rgb(0, 105, 0);
 }
+.sponzorDel:hover{
+  background-color: rgb(204, 1, 1);
+}
+.sponzorDel{
+  color: white;
+  background-color: red;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-style:none;
+  border-radius: 5px;
+  float: right;
+  margin-left: 10px;
+
+}
 .butt{
   color: white;
   padding: 5px;
