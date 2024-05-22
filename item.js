@@ -172,6 +172,44 @@ const Img = sequelize.define('img', {
   },
 }, {freezeTableName: true,});
 
+const Akce = sequelize.define('akce', {
+  id_akce: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+    allowNull: false,
+  },
+  nazev: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  start: {
+    type: DataTypes.DATE,
+    allowNull: false,
+  },
+  konec: {
+    type: DataTypes.DATE,
+    allowNull: false,
+  },
+}, {freezeTableName: true,});
+
+const AkceTag = sequelize.define('akceTag', {
+  id_akceTag: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+    allowNull: false,
+  },
+  id_akce: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  id_tag: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+}, {freezeTableName: true,});
+
 Img.belongsTo(Prispevek, { foreignKey: 'id_prispevek', onDelete: 'NO ACTION', onUpdate: 'NO ACTION' });
 Kategorie.belongsTo(Klub, { foreignKey: 'id_klub', onDelete: 'NO ACTION', onUpdate: 'NO ACTION' });
 Universal.belongsTo(Kategorie, { foreignKey: 'id_kategorie', onDelete: 'NO ACTION', onUpdate: 'NO ACTION' });
@@ -184,6 +222,8 @@ Sit.belongsTo(Klub, { foreignKey: 'id_klub', onDelete: 'NO ACTION', onUpdate: 'N
 Prispevek.hasMany(Img, { foreignKey: 'id_prispevek', as: 'imgs'});
 Prispevek.belongsToMany(Tag, { through: 'Tags', foreignKey: 'id_prispevek' });
 Tag.belongsToMany(Prispevek, { through: 'Tags', foreignKey: 'id_tag' });
+Akce.belongsToMany(Tag, { through: 'AkceTag', foreignKey: 'id_akce' });
+Tag.belongsToMany(Akce, { through: 'AkceTag', foreignKey: 'id_tag' });
 
 
 sequelize.sync();
@@ -198,5 +238,7 @@ module.exports = {
   Prispevek,
   Tags,
   Sit,
-  Img
+  Img,
+  Akce,
+  AkceTag
 };
