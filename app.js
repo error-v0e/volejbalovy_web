@@ -16,6 +16,7 @@ var media_routes = require('./routes/public/media.routes');
 var nabor_routes = require('./routes/public/nabor.routes');
 var kontakty_routes = require('./routes/public/kontakty.routes');
 var tymy_routes = require('./routes/public/tymy.routes');
+var kalendar_routes = require('./routes/public/kalendar.routes');
 
 const app = express();
 app.use(express.static('public'));
@@ -49,10 +50,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/', home_routes);
+app.use('/tymy/', tymy_routes);
+app.use('/kalendar', kalendar_routes);
 app.use('/media', media_routes);
 app.use('/nabor', nabor_routes);
 app.use('/kontakty', kontakty_routes);
-app.use('/tymy/', tymy_routes);
 app.use("/api/", controllers); 
 app.use("/", sprava_routes);
 

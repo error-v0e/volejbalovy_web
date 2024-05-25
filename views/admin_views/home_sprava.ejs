@@ -83,9 +83,10 @@
       <div class="col-xl-6 borderl"> <!--Akce-->
         <div class="row ps-3">
           <div class="col-xl-2 p-0 pe-3"> <!--Akce-plus-->
-            <button class="py-3 buttplus bg_secondary_white_color" type="button">
+            <button class="py-3 buttplus bg_secondary_white_color" id="add" type="button">
               <i class="fa-solid fa-plus fa-2xl"></i>
             </button>
+          <%- include('./universal_components/akce_new_popup', {tag}) %>
           </div>
           <div class="col-xl-10 ps-0"> <!--Akce-list-->
             <div class="akce-box  position-sticky" style="top: 2rem;">
@@ -195,7 +196,13 @@
     document.getElementById('LogoSponzorNew').addEventListener('change', function () {
       previewImage('#LogoSponzorNew', '#previewsponzorNew');
     });
-
+        document.getElementById('image').addEventListener('change', function () {
+          previewImage('#image', '#previewImage');
+        });
+        
+        document.querySelector('#add').addEventListener('click', function () {
+          document.querySelector('#add_popup').style.display = 'block';
+        });
         <% sponzori.forEach(item => { %>
     document.querySelector('#sponzor<%= item.id_sponzor %>').addEventListener('click', function () {
       document.querySelector('#popup<%= item.id_sponzor %>').style.display = 'block';

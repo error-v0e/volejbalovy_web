@@ -1,0 +1,34 @@
+<div class="row-cols-1 row-cols-lg-3" id="add_popup" style="display: none;">
+  <div class="popup media">
+    <form method="post" action="/api/add_prispevek" enctype="multipart/form-data">
+      <div class="action"><!--Ulozit-->
+        <a class="butt-dis butt mb-1" href="/sprava/">Zahodit změny</a>
+        <input class="butt-sub butt" type="submit" value="Ulozit">
+      </div>
+      <div class="prispevekEdit my-2">
+        <div class="editeble"> <!--Logo-->
+          <input type="file" id="image" accept="image/*" name="foto" style="display: none;" />
+          <img class="editeble previewImage" id="previewImage" src="/img/add_img.png"
+            onclick="document.getElementById('image').click();" alt="Image preview...">
+          <i class="fa-solid fa-10x fa-pen pen"
+            onclick="document.getElementById('image').click();"></i>
+        </div>
+        <div class="primary_color">
+          <label for="nadpis">Nadpis:</label><br>
+          <input class="cname primary_color" type="text" id="nadpis" name="nadpis" value=""><br>
+        </div>
+        <div class="primary_color">
+          <label>Tag:</label><br>
+          <% tag.forEach(item => { %> 
+            <input type="checkbox" class="btn-check" id="btncheck<%= item.nazev %>" name="tag" value="<%= item.id_tag %>" autocomplete="off">
+            <label class="btn btn-outline-primary primary_color" for="btncheck<%= item.nazev %>"><%= item.nazev %></label>
+          <% }); %>
+        </div>
+        <div class="primary_color mb-3">
+          <label for="popisek">Popisek:</label><br>
+          <textarea class="popisek primary_color" id="popisek" name="popisek"></textarea><br>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

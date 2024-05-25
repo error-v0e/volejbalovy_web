@@ -198,7 +198,14 @@ button.bg_secondary_white_color:hover {
   background-color: var(--secondary-hover-color) !important;
   color: #dbdbdb !important;
 }
-input[type=button]:hover {
+.fc-button {
+  background-color: var(--secondary-color) !important;
+  color: #ffffff !important;
+}
+.fc-button:focus {
+  box-shadow: none !important;
+}
+.fc-button:hover {
   background-color: var(--secondary-hover-color) !important;
   color: #dbdbdb !important;
 }
@@ -257,4 +264,85 @@ select:focus-visible{
 }
 .btn-check:checked+.btn{
   background-color: var(--active-color);
+}
+#calendar {
+  width: 100%;
+  max-width: 1000px; /* Maximum width for larger screens */
+  margin: 0 auto;
+}
+
+.fc {
+  height: auto;
+  min-height: 500px; /* Adjust the minimum height as needed */
+}
+
+/* Header toolbar adjustments */
+.fc-toolbar {
+  padding: 10px 0; /* Adjust padding as needed */
+}
+.fc-event-time {
+      display: none; /* Hide the event time */
+    }
+
+/* Day cell styles */
+.fc-daygrid-day {
+height: auto;
+}
+.fc-event-title-container{
+  padding: 3px;
+  border-radius: 5px;
+}
+.fc-daygrid-day-frame {
+      padding: 10px; /* Adjust padding as needed */
+}
+
+/* Event title adjustments */
+.fc-event-title {
+font-size: 0.875rem; /* Use relative font size */
+}
+
+/* Event time adjustments */
+.fc-event-time {
+font-size: 0.75rem; /* Use relative font size */
+}
+.fc .fc-daygrid-day.fc-day-today
+/* Today's date highlight */
+.fc-day-today, .fc .fc-daygrid-day.fc-day-today {
+background-color: #ffffff00;
+}
+.fc-daygrid-day.fc-day-today > div > div > .fc-daygrid-day-number{
+background-color: var(--secondary-color); 
+color: var(--primary-color);
+border-radius: 10px;
+}
+.fc-daygrid-day-number{
+  color: var(--secondary-color);
+  text-decoration: none;
+  padding: 7px !important;
+  text-align: center;
+}
+.fc-col-header-cell-cushion{
+  color: var(--secondary-color);
+  text-decoration: none;
+}
+/* Event hover effect */
+.fc-event:hover {
+opacity: 0.8;
+}
+.fc-dayGridMonth-button{
+  display: none !important;
+}
+
+.fc-toolbar {
+flex-direction: column; /* Stack toolbar items vertically /
+align-items: flex-start; / Align toolbar items to the start */
+}
+
+.fc-event {
+font-size: 0.875rem; /* Adjust font size for small screens /
+padding: 3px; / Adjust padding for small screens */
+}
+
+.fc-event-title, .fc-event-time {
+font-size: 0.75rem; /* Adjust font sizes */
 }
