@@ -19,7 +19,7 @@ router.get('/', async function(req, res) {
             res.status(500).send('Chyba serveru');
         }
     } else {
-        return res.redirect("login");
+        return res.redirect("/login");
     }
 });
 module.exports = router; 

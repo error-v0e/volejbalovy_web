@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require("./models");
 const passport = require("passport");
 const bcrypt = require("bcrypt");
-const { Klub, Sponzor, Prispevek, Tag, Tags, Img, Tym } = require('./item');
+const { Klub, Sponzor, Prispevek, Tag, Tags, Img, Tym, Akce, AkceTag } = require('./item');
 const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
@@ -506,23 +506,29 @@ return res.redirect("/sprava/tymy");
 
 router.post("/add_akce", async (req, res) => {
   const { nadpis, tag, start, end } = req.body;
-
+  console.log(nadpis + " "  + start + " "  + end);
+  console.log(1);
   if (nadpis && start && end) {
+    console.log(2);
     // Vytvoření nové akce
     const newAkce = await Akce.create({
       nazev: nadpis,
       start: start,
       konec: end
     });
+    console.log(3);
 
     // Přiřazení tagů k akci
-    for (let i = 0; i < tag.length; i++) {
-      const newAkceTag = await AkceTag.create({
-        id_akce: newAkce.id_akce,
-        id_tag: tag[i]
-      });
+    if (tag) {
+      for (let i = 0; i < tag.length; i++) {
+        const newAkceTag = await AkceTag.create({
+          id_akce: newAkce.id_akce,
+          id_tag: tag[i]
+        });
+      }
     }
   }
+  console.log(4);
 
   return res.redirect("/sprava/");
 });
