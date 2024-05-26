@@ -319,6 +319,7 @@ border-radius: 10px;
   color: var(--secondary-color);
   text-decoration: none;
   padding: 7px !important;
+  padding-left: 11px !important;
   text-align: center;
 }
 .fc-col-header-cell-cushion{

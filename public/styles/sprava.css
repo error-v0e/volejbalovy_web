@@ -224,3 +224,13 @@ body.popup-active .popup {
   height: 70px;
   overflow: hidden;
 }
+input[type="datetime-local"] {
+  padding: 10px;
+  border: none;
+  border-bottom: 3px solid var(--primary-color);
+}
+
+input[type="datetime-local"]:focus {
+  border-bottom: 3px solid var(--active-color);
+  outline: none;
+}

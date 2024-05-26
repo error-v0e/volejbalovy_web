@@ -504,4 +504,27 @@ await tym.destroy();
 return res.redirect("/sprava/tymy");
 });
 
+router.post("/add_akce", async (req, res) => {
+  const { nadpis, tag, start, end } = req.body;
+
+  if (nadpis && start && end) {
+    // Vytvoření nové akce
+    const newAkce = await Akce.create({
+      nazev: nadpis,
+      start: start,
+      konec: end
+    });
+
+    // Přiřazení tagů k akci
+    for (let i = 0; i < tag.length; i++) {
+      const newAkceTag = await AkceTag.create({
+        id_akce: newAkce.id_akce,
+        id_tag: tag[i]
+      });
+    }
+  }
+
+  return res.redirect("/sprava/");
+});
+
 module.exports = router;
