@@ -94,6 +94,10 @@
               <ul class="akce-list">
                 <% akce.forEach(item => { %> 
                   <li class="borderl akce ml-3"> <!--Akce-->
+                    <div class="prispevky_options">
+                      <i class="fa-solid fa-pen" id="akce<%= item.id_akce %>"></i>
+                      <i class="fa-solid fa-trash" id="akceDel<%= item.id_akce %>"></i>
+                    </div>
                     <div>
                       <p>
                         <% 
@@ -114,6 +118,8 @@
                       <h4><%= item.nazev %></h4>
                     </div>
                   </li>
+                  <%- include('./universal_components/akce_edit_popup', { item }) %>
+                  <%- include('./universal_components/akce_delete_popup', { item }) %>
                 <% }); %>
             </div>
           </div>
@@ -212,6 +218,16 @@
     });
     document.querySelector('#sponzorDel<%= item.id_sponzor %>').addEventListener('click', function () {
           document.querySelector('#popupDel<%= item.id_sponzor %>').style.display = 'block';
+        });
+        <% }) %>
+
+        <% akce.forEach(item => { %>
+        document.querySelector('#akce<%= item.id_akce %>').addEventListener('click', function () {
+          document.querySelector('#popupEdit<%= item.id_akce %>').style.display = 'block';
+        });
+
+        document.querySelector('#akceDel<%= item.id_akce %>').addEventListener('click', function () {
+          document.querySelector('#popupAkceDel<%= item.id_akce %>').style.display = 'block';
         });
         <% }) %>
   </script>

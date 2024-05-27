@@ -15,6 +15,13 @@ router.get('/', async function(req, res) {
             });
             const sponzori = await Sponzor.findAll();
             const akce = await Akce.findAll({
+                include: [
+              {
+                model: Tag,
+                as: 'tags',
+                required: false,
+                attributes: ['id_tag'],
+              }],
                 where: {
                   konec: {
                     [Op.gte]: new Date()
