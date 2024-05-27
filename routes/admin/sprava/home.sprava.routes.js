@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { Klub, Kategorie, Sponzor, Tag} = require('../../../item');
+const { Klub, Kategorie, Sponzor, Tag, Akce } = require('../../../item');
+const { Op } = require('sequelize');
 
 router.get('/', async function(req, res) {
     if (req.session.name) { 
@@ -13,7 +14,17 @@ router.get('/', async function(req, res) {
               order: [['poradi', 'ASC']]
             });
             const sponzori = await Sponzor.findAll();
-            res.render('admin_views/home_sprava', {res, kluby, tag, kategorie, sponzori});
+            const akce = await Akce.findAll({
+                where: {
+                  konec: {
+                    [Op.gte]: new Date()
+                  }
+                },
+                order: [
+                  ['start', 'ASC']
+                ]
+              });
+            res.render('admin_views/home_sprava', {res, kluby, tag, kategorie, sponzori, akce});
         } catch (error) {
             console.error(error);
             res.status(500).send('Chyba serveru');
