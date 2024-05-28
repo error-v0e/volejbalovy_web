@@ -506,17 +506,13 @@ return res.redirect("/sprava/tymy");
 
 router.post("/add_akce", async (req, res) => {
   const { nadpis, tag, start, end } = req.body;
-  console.log(nadpis + " "  + start + " "  + end);
-  console.log(1);
   if (nadpis && start && end) {
-    console.log(2);
     // Vytvoření nové akce
     const newAkce = await Akce.create({
       nazev: nadpis,
       start: start,
       konec: end
     });
-    console.log(3);
 
     // Přiřazení tagů k akci
     if (tag) {
@@ -528,7 +524,6 @@ router.post("/add_akce", async (req, res) => {
       }
     }
   }
-  console.log(4);
 
   return res.redirect("/sprava/");
 });
@@ -549,17 +544,21 @@ router.post("/edit_akce", async (req, res) => {
     akce.konec = new Date(end);
     await akce.save();
 
-    // Update tags
-    await akce.setTags([]);
-    if(tag){
+    await AkceTag.destroy({ where: { id_akce: id_akce_to_edit } });
+    console.log(1)
+    // Then, add new tags
+    if (tag) {
+      console.log(2)
       // Get all tags from the database
       const allTags = await Tag.findAll({
         where: {
           id_tag: tag // Assuming `tag` is an array of tag IDs
         }
       });
+      console.log(3)
       for (let t of allTags) {
-        const newTag = await Tags.create({
+        console.log(4)
+        await AkceTag.create({
           id_akce: akce.id_akce,
           id_tag: t.id_tag
         });
