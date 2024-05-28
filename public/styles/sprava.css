@@ -89,6 +89,7 @@
 }
 .akce-box{
   padding-left: 0;
+  z-index: 6;
 }
 .form-signin{
   max-width: 440px;

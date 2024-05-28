@@ -532,5 +532,42 @@ router.post("/add_akce", async (req, res) => {
 
   return res.redirect("/sprava/");
 });
+router.post("/edit_akce", async (req, res) => {
+  const { id_akce_to_edit, nadpis, start, end, tag } = req.body;
+
+  if (id_akce_to_edit) {
+    // Find the Akce
+    const akce = await Akce.findByPk(id_akce_to_edit);
+
+    if (!akce) {
+      return res.status(404).send({ message: "Akce not found" });
+    }
+
+    // Update Akce
+    akce.nazev = nadpis;
+    akce.start = new Date(start);
+    akce.konec = new Date(end);
+    await akce.save();
+
+    // Update tags
+    await akce.setTags([]);
+    if(tag){
+      // Get all tags from the database
+      const allTags = await Tag.findAll({
+        where: {
+          id_tag: tag // Assuming `tag` is an array of tag IDs
+        }
+      });
+      for (let t of allTags) {
+        const newTag = await Tags.create({
+          id_akce: akce.id_akce,
+          id_tag: t.id_tag
+        });
+      }
+    }
+  }
+
+  return res.redirect("/sprava/");
+});
 
 module.exports = router;

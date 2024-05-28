@@ -8,22 +8,22 @@
       <div class="prispevekEdit my-2">
         <div class="primary_color">
           <label for="nadpis">Nazev:</label><br>
-          <input class="cname primary_color" type="text" id="nadpis" name="nadpis" value="<%= item.nadpis %>"><br>
+          <input class="cname primary_color" type="text" id="nadpis" name="nadpis" value="<%= item.nazev %>"><br>
         </div>
         <div class="primary_color mb-2">
           <label>Tag:</label><br>
-          <% tag.forEach(item=> { %>
-            <input type="checkbox" class="btn-check" id="btncheck<%= item.nazev %>" name="tag"
-              value="<%= item.id_tag %>" <% if(item.tags) { item.tags.forEach(t=> { if(t.id_tag === item.id_tag) { %> checked <% } }); } %> autocomplete="off">
-            <label class="btn btn-outline-primary primary_color" for="btncheck<%= item.nazev %>">
-              <%= item.nazev %>
+          <% tag.forEach(i=> { %>
+            <input type="checkbox" class="btn-check" id="btncheck<%= i.nazev %>" name="tag"
+              value="<%= item.id_tag %>" <% if(item.tags) { item.tags.forEach(t=> { if(t.id_tag === i.id_tag) { %> checked <% } }); } %> autocomplete="off">
+            <label class="btn btn-outline-primary primary_color" for="tag<%= i.nazev %>">
+              <%= i.nazev %>
             </label>
           <% }); %>
         </div>
         <div class="primary_color">
           <label class="mb-1">Datum:</label><br>
-          <input class="primary_color" type="datetime-local" name="start" value="<%= item.start %>" required />
-          <input class="primary_color" type="datetime-local" name="end" value="<%= item.end %>" required />
+<input class="primary_color" type="datetime-local" name="start" value="<%= item.start.toISOString().slice(0,16) %>" required />
+<input class="primary_color" type="datetime-local" name="end" value="<%= item.konec.toISOString().slice(0,16) %>" required />
         </div>
       </div>
       <input type="hidden" name="id_akce_to_edit" value="<%= item.id_akce %>">

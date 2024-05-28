@@ -117,9 +117,9 @@
                       </p>
                       <h4><%= item.nazev %></h4>
                     </div>
+                    <%- include('./universal_components/akce_edit_popup', { item }) %>
+                    <%- include('./universal_components/akce_delete_popup', { item }) %>
                   </li>
-                  <%- include('./universal_components/akce_edit_popup', { item }) %>
-                  <%- include('./universal_components/akce_delete_popup', { item }) %>
                 <% }); %>
             </div>
           </div>
