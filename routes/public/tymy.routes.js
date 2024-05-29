@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { Klub, Kategorie, Sponzor, Tag, Prispevek, Sit, Tym } = require('../../item');
+const { Klub, Kategorie, Sponzor, Tag, Prispevek, Sit, Tym, Img, Akce } = require('../../item');
+const { Op } = require('sequelize');
 const id_kategorie = 2;
 
 
@@ -26,12 +27,57 @@ router.get('/:tym', async function(req, res) {
         }]
       });
       const sponzori = await Sponzor.findAll();
-      const prispevky = await Prispevek.findAll({
-        limit: 2,
-        order: [['cas_pridani', 'DESC']]
-      });
+      const { Op } = require('sequelize'); // Import the Op object
+
+// ...
+
+const prispevky = await Prispevek.findAll({
+  limit: 2,
+  order: [['cas_pridani', 'DESC']],
+  include: [{
+    model: Img,
+    as: 'imgs',
+    required: false,
+    attributes: ['id_img', 'img'],
+  }, {
+    model: Tag,
+    through: 'Tags',
+    as: 'tags',
+    where: { 
+      [Op.or]: [
+        { id_tag: tagTymu.id_tag },
+        { id_tag: 1 }
+      ]
+    },
+    required: true
+  }]
+});
+
+const akce = await Akce.findAll({
+  include: [{
+    model: Tag,
+    through: 'AkceTag',
+    as: 'tags',
+    where: { 
+      [Op.or]: [
+        { id_tag: tagTymu.id_tag },
+        { id_tag: 1 }
+      ]
+    },
+    required: true,
+    attributes: ['id_tag'],
+  }],
+  where: {
+    konec: {
+      [Op.gte]: new Date()
+    }
+  },
+  order: [
+    ['start', 'ASC']
+  ]
+});
       const site = await Sit.findAll();
-      res.render('public_views/tym', {res, kluby, kategorie, tagTymu, sponzori, tymy, tags, prispevky, site, id_kategorie});
+      res.render('public_views/tym', {res, kluby, kategorie, tagTymu, sponzori, tymy, tags, prispevky, site, id_kategorie, akce});
     } catch (error) {
       console.error(error);
       res.status(500).send('Chyba serveru');

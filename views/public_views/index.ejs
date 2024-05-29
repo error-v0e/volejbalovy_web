@@ -26,7 +26,9 @@
                 <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
                   <h3 class="mb-0 title-home"><%= item.nadpis %></h3>
                   <div class="col-auto me-4 d-lg-block">
-                    <img class="img-fluid" src="/img/<%= item.cesta %>" alt="Foto" width="450px">
+                    <% item.imgs.forEach(img => { %>
+                      <img class="img-fluid" src="/img/prispevky/<%= img.img %>" alt="Foto" width="450px">
+                    <% }); %>
                   </div>
                   <div class="col d-flex flex-column position-static caption-home">
                     <p class="caption-home-p"><%= item.popisek %></p>
@@ -48,27 +50,29 @@
               <h2>Nadcházející akce</h2>
               <ul class="akce-list">
 
+                <% akce.forEach(item => { %> 
                 <li class="borderl akce"> <!--Akce-->
                   <div>
-                    <p>8. 10. 2023</p>
-                    <h4>U20 - Volejbal Sokolov XXXX</h4>
+                    <p>
+                      <% 
+                        const startDate = new Date(item.start);
+                        const endDate = new Date(item.konec);
+                        const startDateFormat = `${startDate.getDate()}.${startDate.getMonth()+1}.${startDate.getFullYear()}`;
+                        const endDateFormat = `${endDate.getDate()}.${endDate.getMonth()+1}.${endDate.getFullYear()}`;
+              
+                        if (startDate.getDate() === endDate.getDate() && startDate.getMonth() === endDate.getMonth() && startDate.getFullYear() === endDate.getFullYear()) {
+                          // If the start and end dates are the same, display only one date
+                          %><%= startDateFormat %><%
+                        } else {
+                          // If the start and end dates are different, display both dates
+                          %><%= startDateFormat %> - <%= endDateFormat %><%
+                        }
+                      %>
+                    </p>
+                    <h4><%= item.nazev %></h4>
                   </div>
                 </li>
-                
-                <li class="borderl akce"> <!--Akce-->
-                  <div>
-                    <p>8. 10. 2023</p>
-                    <h4>U20 - SKV Usti n.L.</h4>
-                  </div>
-                </li>
-                
-                <li class="borderl akce"> <!--Akce-->
-                  <div>
-                    <p>8. 10. 2023</p>
-                    <h4>U20 - Volejbal Sokolov</h4>
-                  </div>
-                </li>
-
+                <% }); %>
               </ul>
             </div>
           </div>

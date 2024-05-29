@@ -19,6 +19,7 @@ router.get('/', async (req, res) => {
       }]
     });
     const prispevky = await Prispevek.findAll({
+      order: [['cas_pridani', 'DESC']],
       include: [{
         model: Img,
         as: 'imgs',
