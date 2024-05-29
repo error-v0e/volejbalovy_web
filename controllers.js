@@ -545,22 +545,12 @@ router.post("/edit_akce", async (req, res) => {
     await akce.save();
 
     await AkceTag.destroy({ where: { id_akce: id_akce_to_edit } });
-    console.log(1)
     // Then, add new tags
     if (tag) {
-      console.log(2)
-      // Get all tags from the database
-      const allTags = await Tag.findAll({
-        where: {
-          id_tag: tag // Assuming `tag` is an array of tag IDs
-        }
-      });
-      console.log(3)
-      for (let t of allTags) {
-        console.log(4)
-        await AkceTag.create({
+      for (let i = 0; i < tag.length; i++) {
+        const newAkceTag = await AkceTag.create({
           id_akce: akce.id_akce,
-          id_tag: t.id_tag
+          id_tag: tag[i]
         });
       }
     }
@@ -568,5 +558,16 @@ router.post("/edit_akce", async (req, res) => {
 
   return res.redirect("/sprava/");
 });
+router.post('/del_akce', async (req, res) => {
+  const akceId = req.body.id_akce_to_del;
 
+  // Delete the AkceTags
+  await AkceTag.destroy({ where: { id_akce: akceId } });
+
+  // Delete the Akce
+  await Akce.destroy({ where: { id_akce: akceId } });
+
+  // Redirect to the management page
+  res.redirect('/sprava/');
+});
 module.exports = router;
