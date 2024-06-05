@@ -213,13 +213,13 @@
     document.querySelector('#sponzor<%= item.id_sponzor %>').addEventListener('click', function () {
       document.querySelector('#popup<%= item.id_sponzor %>').style.display = 'block';
     });
+    document.querySelector('#sponzorDel<%= item.id_sponzor %>').addEventListener('click', function () {
+          document.querySelector('#popupDel<%= item.id_sponzor %>').style.display = 'block';
+        });
 
     document.getElementById('LogoSponzor<%= item.id_sponzor %>').addEventListener('change', function () {
       previewImage('#LogoSponzor<%= item.id_sponzor %>', '#previewsponzor<%= item.id_sponzor %>');
     });
-    document.querySelector('#sponzorDel<%= item.id_sponzor %>').addEventListener('click', function () {
-          document.querySelector('#popupDel<%= item.id_sponzor %>').style.display = 'block';
-        });
         <% }) %>
 
         <% akce.forEach(item => { %>
