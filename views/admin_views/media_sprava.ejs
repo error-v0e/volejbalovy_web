@@ -17,9 +17,10 @@
     <link rel="icon" href="/img/sprava.ico">
 </head>
 <body class="d-flex flex-column">
-  <div class="container bg_primary_color p-2 stat-box " onmouseover="toggleVisibility('logout', true)" onmouseout="toggleVisibility('logout', false)">
+  <div class="container bg_primary_color p-2 stat-box " onmouseover="toggleVisibility('logout', true), toggleVisibility('register', true)" onmouseout="toggleVisibility('logout', false), toggleVisibility('register', false)">
     <div class="px-1 pe-3" "><i class="fa-solid fa-gear fa-lg pe-1"></i> Sprava
     </div>
+    <a href="/register" class="primary_color rounded p-1 nav-link" style="display: none;" id="register"><i class="fa-solid fa-solid fa-user-plus fa-lg pe-1"></i>Pridat trenera</a>
     <a href="/api/logout" class="primary_color rounded p-1 nav-link" style="display: none;" id="logout"><i class="fa-solid fa-sign-out fa-lg pe-1"></i>Odhlasit</a>
   </div>
   

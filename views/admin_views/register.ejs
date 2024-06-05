@@ -20,7 +20,9 @@
     <main class="form-signin">
       <form method="post" , action="/api/register">
         <div class="text-center">
-          <img class="mb-4" src="../img/<%= kluby.icona %>" alt=""  height="110">
+          <a href="/sprava">
+            <img class="mb-4" src="../img/<%= kluby.icona %>" alt=""  height="110">
+          </a>
           <h1 class="h3 mb-3 fw-normal primary_color">Přidat trenéra</h1>
         </div>
         <% if(error) { %> 
@@ -46,6 +48,9 @@
 							type="submit" onClick={submit}> 
 						Přidat 
 					</button> 
+          <div class="mt-2 text-center">
+            <a href="/sprava" class="primary_color">zpet</a>
+          </div>
         
       </form>
     </main>
