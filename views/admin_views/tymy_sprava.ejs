@@ -127,14 +127,14 @@
         document.querySelector('#tym<%= item.id_tym %>').addEventListener('click', function () {
           document.querySelector('#popupEdit<%= item.id_tym %>').style.display = 'block';
         });
-
-        document.getElementById('#image<%= item.id_tym %>').addEventListener('change', function () {
-          previewImage('#image<%= item.id_tym %>', '#previewImage<%= item.id_tym %>');
-        });
-
+        
         document.querySelector('#tymDel<%= item.id_tym %>').addEventListener('click', function () {
           document.querySelector('#popupDel<%= item.id_tym %>').style.display = 'block';
         });
+        
+                document.getElementById('image<%= item.id_tym %>').addEventListener('change', function () {
+                  previewImage('#image<%= item.id_tym %>', '#previewImage<%= item.id_tym %>');
+                });
         <% }) %>
       </script>
       <script src="/scripts/adminPanel.js"></script>

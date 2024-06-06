@@ -403,7 +403,7 @@ router.post("/add_tym", uploadTym.fields([{ name: 'foto', maxCount: 1 }]), async
   const { nazev, popisek } = req.body;
   const foto = req.files['foto'] ? req.files['foto'][0].originalname : null; // Get the filename of the uploaded file
 
-  if (nazev && popisek && foto) {
+  if (nazev && foto) {
     // Create new Tym
     const tym = await Tym.create({
       photo: foto,
