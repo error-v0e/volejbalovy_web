@@ -235,3 +235,20 @@ input[type="datetime-local"]:focus {
   border-bottom: 3px solid var(--active-color);
   outline: none;
 }
+.fa-eye-slash, .fa-eye{
+  background-color: rgb(107, 107, 107);
+  color: white;
+}
+.fa-eye-slash:hover, .fa-eye:hover{
+  opacity: 100%;
+}
+.arrowBtn{
+  border: none;
+  color: var(--secondary-color);
+  background-color: white;
+}
+.arrowBtn:hover{
+  background-color: var(--secondary-color);
+  color: white;
+  border-radius: 10px;
+}

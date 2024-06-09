@@ -45,6 +45,11 @@ const Kategorie = sequelize.define('kategorie', {
     type: DataTypes.TINYINT,
     allowNull: false,
   },
+  active: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: true,
+  },
 }, {freezeTableName: true,});
 
 const Universal = sequelize.define('universal', {
@@ -224,6 +229,7 @@ Prispevek.belongsToMany(Tag, { through: 'Tags', foreignKey: 'id_prispevek' });
 Tag.belongsToMany(Prispevek, { through: 'Tags', foreignKey: 'id_tag' });
 Akce.belongsToMany(Tag, { through: 'AkceTag', foreignKey: 'id_akce' });
 Tag.belongsToMany(Akce, { through: 'AkceTag', foreignKey: 'id_tag' });
+Kategorie.hasOne(Universal, { foreignKey: 'id_kategorie' });
 
 
 sequelize.sync();

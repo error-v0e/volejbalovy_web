@@ -9,8 +9,8 @@ body{
   display: flex;
   flex-direction: column;
 }
-*{
-  font-family: 'Inter', sans-serif;
+*, pre{
+  font-family: 'Inter', sans-serif; 
 }
 *::-webkit-scrollbar {
   width: 5px; 
@@ -41,6 +41,9 @@ p, h1, h2, h3, h4, h5, h6{
 .bg_secondary_white_color {
   background-color: var(--secondary-color) !important;
   color: white ;
+}
+.obsah{
+  text-align: center;
 }
 .logo{
   border-style: solid;
@@ -174,7 +177,7 @@ body{
   max-width: 250px;
   max-height: 160px;
 }
-.fa-arrow-right-to-bracket::before, .fa-angle-down::before {
+.fa-arrow-right-to-bracket::before {
   margin-left: 43%;
   transform: translate(-50%);
 }
