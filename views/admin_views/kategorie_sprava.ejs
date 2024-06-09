@@ -93,9 +93,17 @@
             </div>
             <div class="col-md-2 prispevky_options p-2">
               <% if(item.active == 1){%>
-                <i class="fa-solid fa-eye" id="kategorieDel<%= item.id_kategorie %>"></i>
+                <form class="activeForm">
+                  <button type="submit" class="activeBtn">
+                    <i class="fa-solid fa-eye" id="kategorieDel<%= item.id_kategorie %>"></i>
+                  </button>
+                </form>
               <% } else{ %>
-              <i class="fa-solid fa-eye-slash" id="kategorie<%= item.id_kategorie %>"></i>
+                <form class="activeForm">
+                  <button type="submit" class="activeBtn">
+                    <i class="fa-solid fa-eye-slash" id="kategorie<%= item.id_kategorie %>"></i>
+                  </button>
+                </form>
               <% } %>
               <i class="fa-solid fa-pen" id="kategorie<%= item.id_kategorie %>"></i>
               <% if(item.universal_ano == 1){ %>
