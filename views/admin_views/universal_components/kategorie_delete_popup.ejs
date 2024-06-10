@@ -1,10 +1,10 @@
-<div class="row-cols-1 row-cols-lg-3" id="popupDel<%= item.id_tym %>" style="display: none;"> 
+<div class="row-cols-1 row-cols-lg-3" id="popupDel<%= item.id_kategorie %>" style="display: none;"> 
   <div class="popup media del">
-    <form method="post" action="/api/del_tym">
+    <form method="post" action="/api/del_kategorie">
       <div class="action"><!--Ulozit-->
-        <a class="butt-sub buttDel mb-1" href="/sprava/tymy">Zachovat</a>
+        <a class="butt-sub buttDel mb-1" href="/sprava/kategorie">Zachovat</a>
         <input class="butt-dis buttDel" type="submit" value="Smazat">
-        <input type="hidden" name="id_tym_to_del" value="<%= item.id_tym %>">
+        <input type="hidden" name="id_kategorie_to_del" value="<%= item.id_kategorie %>">
       </div>
     </form>
   </div>

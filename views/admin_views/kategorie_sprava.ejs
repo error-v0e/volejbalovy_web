@@ -96,19 +96,25 @@
               <% if(item.active == 1){%>
                 <form class="activeForm">
                   <button type="submit" class="activeBtn">
-                    <i class="fa-solid fa-eye" id="kategorieDel<%= item.id_kategorie %>"></i>
+                    <i class="fa-solid fa-eye"></i>
                   </button>
                 </form>
               <% } else{ %>
                 <form class="activeForm">
                   <button type="submit" class="activeBtn">
-                    <i class="fa-solid fa-eye-slash" id="kategorie<%= item.id_kategorie %>"></i>
+                    <i class="fa-solid fa-eye-slash"></i>
                   </button>
                 </form>
               <% } %>
               <i class="fa-solid fa-pen" id="kategorie<%= item.id_kategorie %>"></i>
               <% if(item.universal_ano == 1){ %>
+                <%- include('./universal_components/kategorie_edit_popup_universal', { item }) %>
+              <% } else{ %>
+                <%- include('./universal_components/kategorie_edit_popup', { item }) %>
+              <% } %>
+              <% if(item.universal_ano == 1){ %>
               <i class="fa-solid fa-trash" id="kategorieDel<%= item.id_kategorie %>"></i>
+              <%- include('./universal_components/kategorie_delete_popup', { item }) %>
               <% } %>
             </div>
           </div>
@@ -137,7 +143,18 @@
           document.querySelector('#add_popup').style.display = 'block';
         });
         
+        <% kategorie.forEach(item => { %>
+        document.querySelector('#kategorie<%= item.id_kategorie %>').addEventListener('click', function () {
+          document.querySelector('#popupEdit<%= item.id_kategorie %>').style.display = 'block';
+        });
         
+        <% if(item.universal_ano == 1){ %>
+        document.querySelector('#kategorieDel<%= item.id_kategorie %>').addEventListener('click', function () {
+          document.querySelector('#popupDel<%= item.id_kategorie %>').style.display = 'block';
+        });
+        
+        <% } %>
+        <% }) %>
 
         
       </script>

@@ -1,4 +1,4 @@
-<div class="row-cols-1 row-cols-lg-3" id="popupEdit<%= item.id_kategorie %>" style="display: none;">
+<div class="row-cols-1 row-cols-lg-2" id="popupEdit<%= item.id_kategorie %>" style="display: none;">
   <div class="popup media">
     <form method="post" action="/api/edit_kategorii">
       <div class="action"><!--Ulozit-->
@@ -9,6 +9,10 @@
         <div class="primary_color">
           <label for="nazev">Nazev:</label><br>
           <input class="cname primary_color" type="text" id="nazev" name="nazev" value="<%= item.nazev %>"><br>
+        </div>
+        <div class="primary_color mb-3">
+          <label for="popisek">Popisek:</label><br>
+          <textarea class="popisek popisekobsah text-center primary_color" id="popisek" name="popisek"><%= item.universal.obsah %></textarea><br>
         </div>
         <input type="hidden" name="id_kategorie_to_edit" value="<%= item.id_kategorie %>">
       </div>
