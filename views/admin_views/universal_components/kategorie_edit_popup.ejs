@@ -1,0 +1,28 @@
+<div class="row-cols-1 row-cols-lg-3" id="popupEdit<%= item.id_tym %>" style="display: none;">
+  <div class="popup media">
+    <form method="post" action="/api/edit_tym" enctype="multipart/form-data">
+      <div class="action"><!--Ulozit-->
+        <a class="butt-dis butt mb-1" href="/sprava/tymy">Zahodit změny</a>
+        <input class="butt-sub butt" type="submit" value="Ulozit">
+      </div>
+      <div class="prispevekEdit my-2">
+        <div class="editeble"> <!--Logo-->
+          <input type="file" id="image<%= item.id_tym %>" accept="image/*" name="foto" style="display: none;" />
+          <img class="editeble previewImage" id="previewImage<%= item.id_tym %>" src="/img/tymy/<%= item.photo %>"
+            onclick="document.getElementById('image<%= item.id_tym %>').click();" alt="Image preview...">
+          <i class="fa-solid fa-10x fa-pen pen"
+            onclick="document.getElementById('image<%= item.id_tym %>').click();"></i>
+        </div>
+        <div class="primary_color">
+          <label for="nazev">Nazev:</label><br>
+          <input class="cname primary_color" type="text" id="nazev" name="nazev" value="<%= item.tag.nazev %>"><br>
+        </div>
+        <div class="primary_color mb-3">
+          <label for="popisek">Popisek:</label><br>
+          <textarea class="popisek primary_color" id="popisek" name="popisek"><%= item.popisek %></textarea><br>
+        </div>
+        <input type="hidden" name="id_tym_to_edit" value="<%= item.id_tym %>">
+      </div>
+    </form>
+  </div>
+</div>
