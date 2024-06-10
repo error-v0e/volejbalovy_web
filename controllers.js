@@ -3,10 +3,11 @@ const router = express.Router();
 const User = require("./models");
 const passport = require("passport");
 const bcrypt = require("bcrypt");
-const { Klub, Sponzor, Prispevek, Tag, Tags, Img, Tym, Akce, AkceTag } = require('./item');
+const { Klub, Sponzor, Prispevek, Tag, Tags, Img, Tym, Akce, AkceTag, Universal, Kategorie } = require('./item');
 const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
+const { Op } = require('sequelize');
 
 const storage = multer.diskStorage({
   destination: './public/img/', // Specify the directory where the files will be saved
@@ -570,4 +571,34 @@ router.post('/del_akce', async (req, res) => {
   // Redirect to the management page
   res.redirect('/sprava/');
 });
+
+router.post("/add_kategorii", async (req, res) => {
+  const { nazev, obsah } = req.body;
+
+  if (nazev && obsah) {
+    const maxPoradi = await Kategorie.max('poradi');
+
+    const kategorie = await Kategorie.create({
+      nazev: nazev,
+      href: normalizeString(nazev), 
+      poradi: maxPoradi ? maxPoradi + 1 : 1, 
+      universal_ano: 1, 
+      active: true,
+      id_klub: 1,
+    });
+    
+    const universal = await Universal.create({
+      id_kategorie: kategorie.id_kategorie,
+      obsah: obsah, 
+    });
+  }
+
+  return res.redirect("/sprava/kategorie");
+});
+
+
+function normalizeString(str) {
+  return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '_');
+}
+
 module.exports = router;

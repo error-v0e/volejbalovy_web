@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const { Klub, Kategorie, Sponzor, Tym, Prispevek, Sit, Universal} = require('../../item');
-const id_kategorie = 5;
 
-router.get('/', async (req, res) => {
+router.get('/:href', async (req, res) => {
   try {
     const kluby = await Klub.findOne();
     const kategorie = await Kategorie.findAll({
@@ -21,17 +20,24 @@ router.get('/', async (req, res) => {
       limit: 2,
       order: [['cas_pridani', 'DESC']]
     });
+    const kategorieHref = await Kategorie.findOne({
+      where: {
+        href: req.params.href
+      }
+    });
+    if (!kategorieHref) {
+      return res.status(404).send('Kategorie nebyla nalezena');
+    }
     const universal = await Universal.findOne({
       where: {
-        id_kategorie: id_kategorie
+        id_kategorie: kategorieHref.id_kategorie
       }
     });
     const site = await Sit.findAll();
-    res.render('public_views/universal', { kluby, kategorie, sponzori, tags, prispevky, site, universal, id_kategorie });
+    res.render('public_views/universal', { kluby, kategorie, sponzori, tags, prispevky, site, universal, id_kategorie: kategorieHref.id_kategorie });
   } catch (error) {
     console.error(error);
     res.status(500).send('Chyba serveru');
   }
 });
-
 module.exports = router;

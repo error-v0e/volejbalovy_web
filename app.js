@@ -13,8 +13,7 @@ const session = require("express-session");
 
 var home_routes = require('./routes/public/home.routes.js');
 var media_routes = require('./routes/public/media.routes');
-var nabor_routes = require('./routes/public/nabor.routes');
-var kontakty_routes = require('./routes/public/kontakty.routes');
+var universal_routes = require('./routes/public/universal.routes.js');
 var tymy_routes = require('./routes/public/tymy.routes');
 var kalendar_routes = require('./routes/public/kalendar.routes');
 
@@ -53,8 +52,7 @@ app.use('/', home_routes);
 app.use('/tymy/', tymy_routes);
 app.use('/kalendar', kalendar_routes);
 app.use('/media', media_routes);
-app.use('/nabor', nabor_routes);
-app.use('/kontakty', kontakty_routes);
+app.use('/', universal_routes);
 app.use("/api/", controllers); 
 app.use("/", sprava_routes);
 
