@@ -119,6 +119,8 @@
         });
         
         document.querySelector('#add').addEventListener('click', function () {
+          document.querySelector('body').style.pointerEvents = 'none';
+          document.querySelector('#add_popup').style.pointerEvents = 'auto';
           document.querySelector('#add_popup').style.display = 'block';
         });
 
@@ -136,6 +138,8 @@
 
         <% prispevky.forEach(item => { %>
         document.querySelector('#prispevek<%= item.id_prispevek %>').addEventListener('click', function () {
+          document.querySelector('body').style.pointerEvents = 'none';
+          document.querySelector('#popupEdit<%= item.id_prispevek %>').style.pointerEvents = 'auto';
           document.querySelector('#popupEdit<%= item.id_prispevek %>').style.display = 'block';
         });
 
@@ -144,6 +148,8 @@
         });
 
         document.querySelector('#prispevekDel<%= item.id_prispevek %>').addEventListener('click', function () {
+          document.querySelector('body').style.pointerEvents = 'none';
+          document.querySelector('#popupDel<%= item.id_prispevek %>').style.pointerEvents = 'auto';
           document.querySelector('#popupDel<%= item.id_prispevek %>').style.display = 'block';
         });
         <% }) %>

@@ -199,38 +199,52 @@
     });
   });
   document.querySelector('#sponzorNew').addEventListener('click', function () {
-      document.querySelector('#popupNew').style.display = 'block';
-    });
+  document.querySelector('body').style.pointerEvents = 'none';
+  document.querySelector('#popupNew').style.pointerEvents = 'auto';
+  document.querySelector('#popupNew').style.display = 'block';
+});
 
-    document.getElementById('LogoSponzorNew').addEventListener('change', function () {
-      previewImage('#LogoSponzorNew', '#previewsponzorNew');
-    });
-        
-        document.querySelector('#add').addEventListener('click', function () {
-          document.querySelector('#add_popup').style.display = 'block';
-        });
-        <% sponzori.forEach(item => { %>
-    document.querySelector('#sponzor<%= item.id_sponzor %>').addEventListener('click', function () {
-      document.querySelector('#popup<%= item.id_sponzor %>').style.display = 'block';
-    });
-    document.querySelector('#sponzorDel<%= item.id_sponzor %>').addEventListener('click', function () {
-          document.querySelector('#popupDel<%= item.id_sponzor %>').style.display = 'block';
-        });
+document.getElementById('LogoSponzorNew').addEventListener('change', function () {
+  previewImage('#LogoSponzorNew', '#previewsponzorNew');
+});
 
-    document.getElementById('LogoSponzor<%= item.id_sponzor %>').addEventListener('change', function () {
-      previewImage('#LogoSponzor<%= item.id_sponzor %>', '#previewsponzor<%= item.id_sponzor %>');
-    });
-        <% }) %>
+document.querySelector('#add').addEventListener('click', function () {
+  document.querySelector('body').style.pointerEvents = 'none';
+  document.querySelector('#add_popup').style.pointerEvents = 'auto';
+  document.querySelector('#add_popup').style.display = 'block';
+});
 
-        <% akce.forEach(item => { %>
-        document.querySelector('#akce<%= item.id_akce %>').addEventListener('click', function () {
-          document.querySelector('#popupEdit<%= item.id_akce %>').style.display = 'block';
-        });
+<% sponzori.forEach(item => { %>
+document.querySelector('#sponzor<%= item.id_sponzor %>').addEventListener('click', function () {
+  document.querySelector('body').style.pointerEvents = 'none';
+  document.querySelector('#popup<%= item.id_sponzor %>').style.pointerEvents = 'auto';
+  document.querySelector('#popup<%= item.id_sponzor %>').style.display = 'block';
+});
 
-        document.querySelector('#akceDel<%= item.id_akce %>').addEventListener('click', function () {
-          document.querySelector('#popupAkceDel<%= item.id_akce %>').style.display = 'block';
-        });
-        <% }) %>
+document.querySelector('#sponzorDel<%= item.id_sponzor %>').addEventListener('click', function () {
+  document.querySelector('body').style.pointerEvents = 'none';
+  document.querySelector('#popupDel<%= item.id_sponzor %>').style.pointerEvents = 'auto';
+  document.querySelector('#popupDel<%= item.id_sponzor %>').style.display = 'block';
+});
+
+document.getElementById('LogoSponzor<%= item.id_sponzor %>').addEventListener('change', function () {
+  previewImage('#LogoSponzor<%= item.id_sponzor %>', '#previewsponzor<%= item.id_sponzor %>');
+});
+<% }) %>
+
+<% akce.forEach(item => { %>
+document.querySelector('#akce<%= item.id_akce %>').addEventListener('click', function () {
+  document.querySelector('body').style.pointerEvents = 'none';
+  document.querySelector('#popupEdit<%= item.id_akce %>').style.pointerEvents = 'auto';
+  document.querySelector('#popupEdit<%= item.id_akce %>').style.display = 'block';
+});
+
+document.querySelector('#akceDel<%= item.id_akce %>').addEventListener('click', function () {
+  document.querySelector('body').style.pointerEvents = 'none';
+  document.querySelector('#popupAkceDel<%= item.id_akce %>').style.pointerEvents = 'auto';
+  document.querySelector('#popupAkceDel<%= item.id_akce %>').style.display = 'block';
+});
+<% }) %>
   </script>
   <script src="/scripts/adminPanel.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
