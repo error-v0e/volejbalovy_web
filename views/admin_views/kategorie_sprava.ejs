@@ -73,15 +73,17 @@
           <div class="row align-items-stretch mx-auto container-xl media mt-1">
             <div class="col-md-1 primary_color p-2 pb-0">
               <!--poradi-->
-              <form action="">
+              <form method="post" action="/api/up">
                 <button type="submit" class="arrowBtn px-3 py-1">
                   <i class="fa-solid fa-xl fa-angle-up"></i>
                 </button>
+                <input type="hidden" name="id_kategorie" value="<%= item.id_kategorie %>">
               </form>
-              <form action="">
+              <form method="post" action="/api/down">
                 <button type="submit" class="arrowBtn px-3 py-1">
                   <i class="fa-solid fa-xl fa-angle-down"></i>
                 </button>
+                <input type="hidden" name="id_kategorie" value="<%= item.id_kategorie %>">
               </form>
             </div>
             <div class="col-md-2 primary_color p-2"><%= item.nazev %></div>

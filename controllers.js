@@ -45,6 +45,10 @@ const tymStorage = multer.diskStorage({
 
 const uploadTym = multer({ storage: tymStorage });
 
+function normalizeString(str) {
+  return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '_');
+}
+
 // User registration route
 router.post("/register", async (req, res) => {
   const { username, email, password, confirmpassword } = req.body;
@@ -615,9 +619,61 @@ router.post("/edit_kategorii", async (req, res) => {
 
   return res.redirect("/sprava/kategorie");
 });
+router.post("/del_kategorie", async (req, res) => {
+  const { id_kategorie_to_del } = req.body;
 
-function normalizeString(str) {
-  return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '_');
-}
+  const kategorie = await Kategorie.findByPk(id_kategorie_to_del);
+  if (kategorie) {
+    const universals = await Universal.findAll({ where: { id_kategorie: id_kategorie_to_del } });
+    for (let universal of universals) {
+      await universal.destroy();
+    }
+
+    await kategorie.destroy();
+  }
+
+  return res.redirect("/sprava/kategorie");
+});
+router.post("/up", async (req, res) => {
+  const { id_kategorie } = req.body;
+
+  const kategorie = await Kategorie.findByPk(id_kategorie);
+  if (kategorie && kategorie.poradi > 1) {
+    const lowerPoradi = kategorie.poradi - 1;
+
+    const lowerKategorie = await Kategorie.findOne({ where: { poradi: lowerPoradi } });
+    if (lowerKategorie) {
+      lowerKategorie.poradi += 1;
+      await lowerKategorie.save();
+
+      kategorie.poradi -= 1;
+      await kategorie.save();
+    }
+  }
+
+  return res.redirect("/sprava/kategorie");
+});
+router.post("/down", async (req, res) => {
+  const { id_kategorie } = req.body;
+
+  const maxPoradi = await Kategorie.max('poradi');
+
+  const kategorie = await Kategorie.findByPk(id_kategorie);
+  if (kategorie && kategorie.poradi < maxPoradi) {
+    const higherPoradi = kategorie.poradi + 1;
+
+    const higherKategorie = await Kategorie.findOne({ where: { poradi: higherPoradi } });
+    if (higherKategorie) {
+      higherKategorie.poradi -= 1;
+      await higherKategorie.save();
+
+      kategorie.poradi += 1;
+      await kategorie.save();
+    }
+  }
+
+  return res.redirect("/sprava/kategorie");
+});
+
 
 module.exports = router;
