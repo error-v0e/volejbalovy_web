@@ -595,7 +595,26 @@ router.post("/add_kategorii", async (req, res) => {
 
   return res.redirect("/sprava/kategorie");
 });
+router.post("/edit_kategorii", async (req, res) => {
+  const { id_kategorie_to_edit, nazev, obsah } = req.body;
 
+  const kategorie = await Kategorie.findByPk(id_kategorie_to_edit);
+  if (kategorie) {
+    kategorie.nazev = nazev;
+    kategorie.href = normalizeString(nazev);
+    await kategorie.save();
+
+    if (obsah) {
+      const universal = await Universal.findOne({ where: { id_kategorie: id_kategorie_to_edit } });
+      if (universal) {
+        universal.obsah = obsah;
+        await universal.save();
+      }
+    }
+  }
+
+  return res.redirect("/sprava/kategorie");
+});
 
 function normalizeString(str) {
   return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '_');
