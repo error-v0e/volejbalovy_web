@@ -52,9 +52,9 @@ app.use('/', home_routes);
 app.use('/tymy/', tymy_routes);
 app.use('/kalendar', kalendar_routes);
 app.use('/media', media_routes);
-app.use('/', universal_routes);
 app.use("/api/", controllers); 
 app.use("/", sprava_routes);
+app.use('/', universal_routes);
 
 
 app.use(express.static('public'));
