@@ -236,8 +236,8 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('#editA<%= item.id_akce %>').addEventListener('submit', function(event) {
       event.preventDefault(); // stop form from automatically submitting
 
-      var startDate = new Date(document.querySelector('input[name="start<%= item.id_akce %>"]').value);
-      var endDate = new Date(document.querySelector('input[name="end<%= item.id_akce %>"]').value);
+      var startDate = new Date(document.querySelector('#start<%= item.id_akce %>').value);
+      var endDate = new Date(document.querySelector('#end<%= item.id_akce %>').value);
       var now = new Date();
 
       if (endDate <= startDate) {
@@ -254,8 +254,8 @@ document.addEventListener('DOMContentLoaded', function() {
 document.querySelector('#newA').addEventListener('submit', function(event) {
   event.preventDefault(); // stop form from automatically submitting
 
-  var startDate = new Date(document.querySelector('input[name="start"]').value);
-  var endDate = new Date(document.querySelector('input[name="end"]').value);
+  var startDate = new Date(document.querySelector('#start').value);
+  var endDate = new Date(document.querySelector('#end').value);
   var now = new Date();
 
   if (endDate <= startDate) {

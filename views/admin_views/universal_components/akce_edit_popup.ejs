@@ -22,8 +22,8 @@
         </div>
         <div class="primary_color">
           <label class="mb-1">Datum:</label><br>
-          <input class="primary_color" type="datetime-local" name="start<%= item.id_akce %>" value="<%= item.start.toISOString().slice(0,16) %>" required />
-          <input class="primary_color" type="datetime-local" name="end<%= item.id_akce %>" value="<%= item.konec.toISOString().slice(0,16) %>" required />
+          <input class="primary_color" type="datetime-local" id="start<%= item.id_akce %>" name="start" value="<%= item.start.toISOString().slice(0,16) %>" required />
+          <input class="primary_color" type="datetime-local" id="end<%= item.id_akce %>" name="end" value="<%= item.konec.toISOString().slice(0,16) %>" required />
         </div>
       </div>
       <input type="hidden" name="id_akce_to_edit" value="<%= item.id_akce %>">
