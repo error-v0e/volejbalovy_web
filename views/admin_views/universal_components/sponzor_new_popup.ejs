@@ -6,11 +6,11 @@
     </div>
     <div class="name primary_color mb-3">
       <label for="odkaz">Odkaz:</label><br>
-      <input class="cname primary_color" type="text" id="cname" name="odkaz" value=""><br>
+      <input class="cname primary_color" type="text" id="cname" name="odkaz" value="" required><br>
     </div>
     <div class="row">
       <div class="mb-2 editeble"> <!--Logo-->
-        <input type="file" id="LogoSponzorNew" accept="image/*" name="logo" style="display: none;" />
+        <input type="file" id="LogoSponzorNew" accept="image/*" name="logo" style="display: none;" required/>
         <img class="editeble previewsponzor" id="previewsponzorNew" src="/img/add_img.png" onclick="document.getElementById('LogoSponzorNew').click();" alt="Image preview...">
         <i class="fa-solid fa-5x fa-pen pen" onclick="document.getElementById('LogoSponzorNew').click();"></i>
       </div>

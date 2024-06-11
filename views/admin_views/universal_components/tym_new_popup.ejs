@@ -7,7 +7,7 @@
       </div>
       <div class="prispevekEdit my-2">
         <div class="editeble"> <!--Logo-->
-          <input type="file" id="image" accept="image/*" name="foto" style="display: none;" />
+          <input type="file" id="image" accept="image/*" name="foto" style="display: none;" required/>
           <img class="editeble previewImage" id="previewImage" src="/img/add_img.png"
             onclick="document.getElementById('image').click();" alt="Image preview...">
           <i class="fa-solid fa-10x fa-pen pen"
@@ -15,11 +15,11 @@
         </div>
         <div class="primary_color">
           <label for="nazev">Nazev:</label><br>
-          <input class="cname primary_color" type="text" id="nazev" name="nazev" value=""><br>
+          <input class="cname primary_color" type="text" id="nazev" name="nazev" value="" required><br>
         </div>
         <div class="primary_color mb-3">
           <label for="popisek">Popisek:</label><br>
-          <textarea class="popisek primary_color" id="popisek" name="popisek"></textarea><br>
+          <textarea class="popisek primary_color" id="popisek" name="popisek" required></textarea><br>
         </div>
       </div>
     </form>

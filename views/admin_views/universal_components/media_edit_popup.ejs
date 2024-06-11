@@ -18,7 +18,7 @@
       </div>
       <div class="primary_color">
         <label for="nadpis">Nadpis:</label><br>
-        <input class="cname primary_color" type="text" id="nadpis" name="nadpis_to_edit" value="<%= item.nadpis %>"><br>
+        <input class="cname primary_color" type="text" id="nadpis" name="nadpis_to_edit" value="<%= item.nadpis %>" required><br>
       </div>
       <div class="primary_color">
         <label>Tag:</label><br>
@@ -34,7 +34,7 @@
       </div>
       <div class="primary_color mb-3">
         <label for="popisek">Popisek:</label><br>
-        <textarea class="popisek primary_color" id="popisek" name="popisek_to_edit"><%= item.popisek %></textarea><br>
+        <textarea class="popisek primary_color" id="popisek" name="popisek_to_edit" required><%= item.popisek %></textarea><br>
       </div>
       <input type="hidden" name="id_prispevek_to_edit" value="<%= item.id_prispevek %>">
     </div>

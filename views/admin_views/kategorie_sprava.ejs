@@ -87,27 +87,14 @@
               </form>
             </div>
             <div class="col-md-2 primary_color p-2"><%= item.nazev %></div>
-            <div class="col-md-7 primary_color popisek_tym p-2">
+            <div class="col-md-8 primary_color popisek_tym p-2">
               <% if(item.universal_ano == 1){ %>
                 <%= item.universal.obsah %>
               <%}else{ %>
                 Obsah je generován automaticky
               <% } %>
             </div>
-            <div class="col-md-2 prispevky_options p-2">
-              <% if(item.active == 1){%>
-                <form class="activeForm">
-                  <button type="submit" class="activeBtn">
-                    <i class="fa-solid fa-eye"></i>
-                  </button>
-                </form>
-              <% } else{ %>
-                <form class="activeForm">
-                  <button type="submit" class="activeBtn">
-                    <i class="fa-solid fa-eye-slash"></i>
-                  </button>
-                </form>
-              <% } %>
+            <div class="col-md-1 prispevky_options p-2">
               <i class="fa-solid fa-pen" id="kategorie<%= item.id_kategorie %>"></i>
               <% if(item.universal_ano == 1){ %>
                 <%- include('./universal_components/kategorie_edit_popup_universal', { item }) %>
