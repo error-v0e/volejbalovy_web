@@ -631,6 +631,15 @@ router.post("/del_kategorie", async (req, res) => {
       await universal.destroy();
     }
 
+    // Find all categories with a higher order
+    const higherOrderCategories = await Kategorie.findAll({ where: { poradi: { [Op.gt]: kategorie.poradi } } });
+
+    // Decrease the order of each category by one
+    for (let higherOrderCategory of higherOrderCategories) {
+      higherOrderCategory.poradi -= 1;
+      await higherOrderCategory.save();
+    }
+
     await kategorie.destroy();
   }
 
@@ -640,7 +649,7 @@ router.post("/up", async (req, res) => {
   const { id_kategorie } = req.body;
 
   const kategorie = await Kategorie.findByPk(id_kategorie);
-  if (kategorie && kategorie.poradi > 1) {
+  if (kategorie && kategorie.poradi > 0) {
     const lowerPoradi = kategorie.poradi - 1;
 
     const lowerKategorie = await Kategorie.findOne({ where: { poradi: lowerPoradi } });
