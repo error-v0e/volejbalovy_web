@@ -12,7 +12,7 @@ router.get('/', async function(req, res) {
       const tymy = await Tym.findAll({
         include: Tag
       });
-      res.render('admin_views/tymy_sprava', {res, kluby, tymy });
+      res.render('admin_views/tymy_sprava', {res, kluby, tymy, name });
     } catch (error) {
       console.error(error);
       res.status(500).send('Chyba serveru');

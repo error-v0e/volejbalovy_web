@@ -34,7 +34,7 @@ router.get('/', async function(req, res) {
         ]
       });
 
-      res.render('admin_views/media_sprava', {res, kluby, tag, tags, prispevky });
+      res.render('admin_views/media_sprava', {res, kluby, tag, tags, prispevky, name });
     } catch (error) {
       console.error(error);
       res.status(500).send('Chyba serveru');

@@ -31,7 +31,7 @@ router.get('/', async function(req, res) {
                   ['start', 'ASC']
                 ]
               });
-            res.render('admin_views/home_sprava', {res, kluby, tag, kategorie, sponzori, akce});
+            res.render('admin_views/home_sprava', {res, kluby, tag, kategorie, sponzori, akce, name});
         } catch (error) {
             console.error(error);
             res.status(500).send('Chyba serveru');

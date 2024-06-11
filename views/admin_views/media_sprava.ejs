@@ -17,11 +17,12 @@
     <link rel="icon" href="/img/sprava.ico">
 </head>
 <body class="d-flex flex-column">
-  <div class="container bg_primary_color p-2 stat-box " onmouseover="toggleVisibility('logout', true), toggleVisibility('register', true)" onmouseout="toggleVisibility('logout', false), toggleVisibility('register', false)">
-    <div class="px-1 pe-3" "><i class="fa-solid fa-gear fa-lg pe-1"></i> Sprava
+  <div class="container bg_primary_color p-2 stat-box " onmouseover="toggleVisibility('logout', true), toggleVisibility('register', true), toggleVisibility('user', true)" onmouseout="toggleVisibility('logout', false), toggleVisibility('register', false), toggleVisibility('user', false)">
+    <div class="px-1 pe-3" "><i class="fa-solid fa-gear fa-lg pe-1"></i> Správa
     </div>
-    <a href="/register" class="primary_color rounded p-1 nav-link" style="display: none;" id="register"><i class="fa-solid fa-solid fa-user-plus fa-lg pe-1"></i>Pridat trenera</a>
-    <a href="/api/logout" class="primary_color rounded p-1 nav-link" style="display: none;" id="logout"><i class="fa-solid fa-sign-out fa-lg pe-1"></i>Odhlasit</a>
+    <a class="primary_color rounded p-1 nav-link" style="display: none;" id="user"><i class="fa-solid fa-solid fa-user fa-lg pe-1"></i><%= name %></a>
+    <a href="/register" class="primary_color rounded p-1 nav-link" style="display: none;" id="register"><i class="fa-solid fa-solid fa-user-plus fa-lg pe-1"></i>Přidat trenéra</a>
+    <a href="/api/logout" class="primary_color rounded p-1 nav-link" style="display: none;" id="logout"><i class="fa-solid fa-sign-out fa-lg pe-1"></i>Odhlásit</a>
   </div>
   
   <nav class="bg_primary_color navbar navbar-expand-md container-fluid" aria-label="Fourth navbar example">
@@ -37,13 +38,13 @@
       <div class="collapse navbar-collapse" id="navbarsExample04">
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
           <li class="nav-item">
-            <a class="nav-link primary_color" aria-current="page" href="/sprava">Home</a>
+            <a class="nav-link primary_color" aria-current="page" href="/sprava">Domů</a>
           </li>
           <li class="nav-item">
             <a class="nav-link bg_primary_color" href="/sprava/tymy">Týmy</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active bg_primary_color" href="/sprava/media">Media</a>
+            <a class="nav-link active bg_primary_color" href="/sprava/media">Média</a>
           </li>
           <li class="nav-item">
             <a class="nav-link bg_primary_color" href="/sprava/kategorie">Kategorie</a>

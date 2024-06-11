@@ -3,7 +3,7 @@
     <form method="post" action="/api/edit_tym" enctype="multipart/form-data">
       <div class="action"><!--Ulozit-->
         <a class="butt-dis butt mb-1" href="/sprava/tymy">Zahodit změny</a>
-        <input class="butt-sub butt" type="submit" value="Ulozit">
+        <input class="butt-sub butt" type="submit" value="Uložit">
       </div>
       <div class="prispevekEdit my-2">
         <div class="editeble"> <!--Logo-->
@@ -14,11 +14,11 @@
             onclick="document.getElementById('image<%= item.id_tym %>').click();"></i>
         </div>
         <div class="primary_color">
-          <label for="nazev">Nazev:</label><br>
+          <label for="nazev">Název:</label><br>
           <input class="cname primary_color" type="text" id="nazev" name="nazev" value="<%= item.tag.nazev %>" required><br>
         </div>
         <div class="primary_color mb-3">
-          <label for="popisek">Popisek:</label><br>
+          <label for="popisek">Popis:</label><br>
           <textarea class="popisek primary_color" id="popisek" name="popisek" required><%= item.popisek %></textarea><br>
         </div>
         <input type="hidden" name="id_tym_to_edit" value="<%= item.id_tym %>">

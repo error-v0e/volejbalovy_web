@@ -18,7 +18,7 @@ router.get('/', async function(req, res) {
         },
         order: [['poradi', 'ASC']]
       });
-      res.render('admin_views/kategorie_sprava', {res, kluby, kategorie});
+      res.render('admin_views/kategorie_sprava', {res, kluby, kategorie, name});
     } catch (error) {
       console.error(error);
       res.status(500).send('Chyba serveru');
