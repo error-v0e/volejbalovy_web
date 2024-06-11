@@ -605,16 +605,16 @@ router.post("/edit_kategorii", async (req, res) => {
   const kategorie = await Kategorie.findByPk(id_kategorie_to_edit);
   if (kategorie) {
     kategorie.nazev = nazev;
-    kategorie.href = normalizeString(nazev);
-    await kategorie.save();
 
     if (obsah) {
       const universal = await Universal.findOne({ where: { id_kategorie: id_kategorie_to_edit } });
       if (universal) {
+        kategorie.href = normalizeString(nazev);
         universal.obsah = obsah;
         await universal.save();
       }
     }
+    await kategorie.save();
   }
 
   return res.redirect("/sprava/kategorie");
