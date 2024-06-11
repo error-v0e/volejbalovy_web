@@ -8,11 +8,20 @@ const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
 const { Op } = require('sequelize');
+const crypto = require('crypto');
+
+function generateUniqueName(originalName) {
+  const uniqueName = crypto.randomBytes(16).toString('hex');
+
+  const ext = path.extname(originalName);
+
+  return `${uniqueName}${ext}`;
+}
 
 const storage = multer.diskStorage({
   destination: './public/img/', // Specify the directory where the files will be saved
   filename: (req, file, cb) => {
-    cb(null, file.originalname); // Generate a unique file name
+    cb(null, generateUniqueName(file.originalname)); // Generate a unique file name
   }
 });
 
@@ -21,7 +30,7 @@ const upload = multer({ storage });
 const sponzorStorage = multer.diskStorage({
   destination: './public/img/sponzor/', // Specify the directory where the files will be saved
   filename: (req, file, cb) => {
-    cb(null, file.originalname); // Generate a unique file name
+    cb(null, generateUniqueName(file.originalname)); // Generate a unique file name
   }
 });
 
@@ -30,7 +39,7 @@ const uploadSponzor = multer({ storage: sponzorStorage });
 const prispevekStorage = multer.diskStorage({
   destination: './public/img/prispevky/', // Specify the directory where the files will be saved
   filename: (req, file, cb) => {
-    cb(null, file.originalname); // Generate a unique file name
+    cb(null, generateUniqueName(file.originalname)); // Generate a unique file name
   }
 });
 
@@ -39,7 +48,7 @@ const uploadPrispevek = multer({ storage: prispevekStorage });
 const tymStorage = multer.diskStorage({
   destination: './public/img/tymy/', // Specify the directory where the files will be saved
   filename: (req, file, cb) => {
-    cb(null, file.originalname); // Generate a unique file name
+    cb(null, generateUniqueName(file.originalname)); // Generate a unique file name
   }
 });
 
