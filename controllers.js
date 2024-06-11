@@ -160,7 +160,7 @@ router.post("/sprava_klubu", upload.fields([{ name: 'logo', maxCount: 1 }, { nam
         }
       }
       try {
-        await Klub.update({ logo: logo.originalname }, { where: { id_klub: kluby.id_klub } });
+        await Klub.update({ logo: logo.filename }, { where: { id_klub: kluby.id_klub } });
       } catch (err) {
         console.error(err);
         return res.status(500).json({ message: err.message });
@@ -176,8 +176,7 @@ router.post("/sprava_klubu", upload.fields([{ name: 'logo', maxCount: 1 }, { nam
         }
       }
       try {
-        // Uložení cesty k souboru do databáze místo obsahu souboru
-        await Klub.update({ icona: icon.originalname }, { where: { id_klub: kluby.id_klub } });
+        await Klub.update({ icona: icon.filename }, { where: { id_klub: kluby.id_klub } });
       } catch (err) {
         console.error(err);
         return res.status(500).json({ message: err.message });
@@ -214,7 +213,7 @@ router.post("/sponzori_popup", uploadSponzor.fields([{ name: 'logo', maxCount: 1
         }
       }
       try {
-        await Sponzor.update({ logo: logo.originalname }, { where: { id_sponzor: id } });
+        await Sponzor.update({ logo: logo.filename }, { where: { id_sponzor: id } });
       } catch (err) {
         console.error(err);
         return res.status(500).json({ message: err.message });
@@ -232,7 +231,7 @@ router.post("/sponzori_new_popup", uploadSponzor.fields([{ name: 'logo', maxCoun
     try {
       const newSponzor = await Sponzor.create({ 
         odkaz: odkaz, 
-        logo: logo ? logo.originalname : null 
+        logo: logo ? logo.filename : null 
       });
     } catch (err) {
       console.error(err);
@@ -268,7 +267,7 @@ router.post('/del_sponzor', async (req, res) => {
 
 router.post("/add_prispevek", uploadPrispevek.fields([{ name: 'foto', maxCount: 1 }]), async (req, res) => {
   const { nadpis, popisek, tag } = req.body;
-  const foto = req.files['foto'] ? req.files['foto'][0].originalname : null; // Get the filename of the uploaded file
+  const foto = req.files['foto'] ? req.files['foto'][0].filename : null; // Get the filename of the uploaded file
 
   if (nadpis && popisek && foto) {
     // Create new Prispevek
@@ -297,7 +296,7 @@ router.post("/add_prispevek", uploadPrispevek.fields([{ name: 'foto', maxCount: 
     if (foto) {
       // Create a new Img
       const img = await Img.create({
-        img: foto, // This will now be the filename
+        img: foto, // This is already the filename
         id_prispevek: prispevek.id_prispevek // Add this line
       });
     }
@@ -307,12 +306,8 @@ router.post("/add_prispevek", uploadPrispevek.fields([{ name: 'foto', maxCount: 
 });
 
 router.post("/edit_prispevek", uploadPrispevek.fields([{ name: 'foto_to_edit', maxCount: 1 }]), async (req, res) => {
-
-  // zkontolovat (tagy zmena hlavne), tagy vybarvit 
-
-
   const { id_prispevek_to_edit, nadpis_to_edit, popisek_to_edit, tag_to_edit } = req.body;
-  const foto_to_edit = req.files['foto_to_edit'] ? req.files['foto_to_edit'][0].originalname : null; // Get the filename of the uploaded file
+  const foto_to_edit = req.files['foto_to_edit'] ? req.files['foto_to_edit'][0].filename : null; // Get the filename of the uploaded file
   console.log(id_prispevek_to_edit);
   if (id_prispevek_to_edit) {
     // Find the Prispevek
@@ -360,14 +355,12 @@ router.post("/edit_prispevek", uploadPrispevek.fields([{ name: 'foto_to_edit', m
       });
 
       if (img) {
-        // Update the Img
         img.img = foto_to_edit; // This will now be the filename
         await img.save();
       } else {
-        // If no Img was found, create a new one
         const newImg = await Img.create({
           img: foto_to_edit, // This will now be the filename
-          id_prispevek: prispevek.id_prispevek // Add this line
+          id_prispevek: prispevek.id_prispevek
         });
       }
     }
@@ -415,7 +408,7 @@ router.post('/del_prispevek', async (req, res) => {
 
 router.post("/add_tym", uploadTym.fields([{ name: 'foto', maxCount: 1 }]), async (req, res) => {
   const { nazev, popisek } = req.body;
-  const foto = req.files['foto'] ? req.files['foto'][0].originalname : null; // Get the filename of the uploaded file
+  const foto = req.files['foto'] ? req.files['foto'][0].filename : null; // Get the filename of the uploaded file
 
   if (nazev && foto) {
     // Create new Tym
@@ -439,7 +432,7 @@ router.post("/add_tym", uploadTym.fields([{ name: 'foto', maxCount: 1 }]), async
 });
 router.post("/edit_tym", uploadTym.fields([{ name: 'foto', maxCount: 1 }]), async (req, res) => {
   const { id_tym_to_edit, nazev, popisek } = req.body;
-  const foto = req.files['foto'] ? req.files['foto'][0].originalname : null;
+  const foto = req.files['foto'] ? req.files['foto'][0].filename : null;
 
   if (id_tym_to_edit) {
     const tym = await Tym.findByPk(id_tym_to_edit);
