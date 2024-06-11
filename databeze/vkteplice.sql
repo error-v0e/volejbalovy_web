@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Počítač: 127.0.0.1
--- Vytvořeno: Ned 09. čen 2024, 23:04
+-- Vytvořeno: Úte 11. čen 2024, 22:43
 -- Verze serveru: 10.4.28-MariaDB
 -- Verze PHP: 8.0.28
 
@@ -42,9 +42,11 @@ CREATE TABLE `akce` (
 
 INSERT INTO `akce` (`id_akce`, `nazev`, `start`, `konec`, `createdAt`, `updatedAt`) VALUES
 (15, 'U16', '2024-05-16 20:31:00', '2024-05-31 20:31:00', '2024-05-29 20:31:16', '2024-05-29 20:31:16'),
-(16, 'soustředění Klíny', '2024-08-25 06:00:00', '2024-08-30 12:00:00', '2024-06-05 19:10:29', '2024-06-05 19:10:29'),
-(17, 'Ukončovací trénink', '2024-06-27 15:00:00', '2024-06-27 17:00:00', '2024-06-06 17:06:13', '2024-06-06 17:06:13'),
-(18, 'beachvolejbaloví turnaj U20', '2024-06-22 07:00:00', '2024-06-22 13:00:00', '2024-06-06 17:08:05', '2024-06-06 17:08:05');
+(16, 'Soustředění Klíny', '2024-08-25 04:00:00', '2024-08-30 10:00:00', '2024-06-05 19:10:29', '2024-06-11 18:38:11'),
+(17, 'Ukončovací trénink', '2024-06-27 13:00:00', '2024-06-27 15:00:00', '2024-06-06 17:06:13', '2024-06-11 18:37:18'),
+(18, 'Beachvolejbalový turnaj U20', '2024-06-22 05:00:00', '2024-06-22 11:00:00', '2024-06-06 17:08:05', '2024-06-11 18:38:34'),
+(27, 'U20', '2024-06-11 17:07:00', '2024-06-11 17:07:00', '2024-06-11 17:07:57', '2024-06-11 17:07:57'),
+(39, 'Turnaj Praha', '2024-07-20 10:23:00', '2024-08-03 10:23:00', '2024-06-11 18:23:38', '2024-06-11 18:38:01');
 
 -- --------------------------------------------------------
 
@@ -65,9 +67,17 @@ CREATE TABLE `akcetag` (
 --
 
 INSERT INTO `akcetag` (`id_akceTag`, `id_akce`, `id_tag`, `createdAt`, `updatedAt`) VALUES
-(33, 16, 1, '2024-06-05 19:10:29', '2024-06-05 19:10:29'),
-(34, 17, 1, '2024-06-06 17:06:13', '2024-06-06 17:06:13'),
-(35, 18, 5, '2024-06-06 17:08:05', '2024-06-06 17:08:05');
+(36, 35, 5, '2024-06-11 18:16:43', '2024-06-11 18:16:43'),
+(37, 35, 10, '2024-06-11 18:16:43', '2024-06-11 18:16:43'),
+(38, 36, 5, '2024-06-11 18:17:25', '2024-06-11 18:17:25'),
+(39, 36, 10, '2024-06-11 18:17:25', '2024-06-11 18:17:25'),
+(42, 37, 5, '2024-06-11 18:18:33', '2024-06-11 18:18:33'),
+(43, 37, 10, '2024-06-11 18:18:33', '2024-06-11 18:18:33'),
+(45, 17, 1, '2024-06-11 18:37:18', '2024-06-11 18:37:18'),
+(48, 39, 5, '2024-06-11 18:38:01', '2024-06-11 18:38:01'),
+(49, 39, 10, '2024-06-11 18:38:01', '2024-06-11 18:38:01'),
+(50, 16, 1, '2024-06-11 18:38:11', '2024-06-11 18:38:11'),
+(51, 18, 5, '2024-06-11 18:38:34', '2024-06-11 18:38:34');
 
 -- --------------------------------------------------------
 
@@ -88,9 +98,6 @@ CREATE TABLE `img` (
 --
 
 INSERT INTO `img` (`id_img`, `img`, `createdAt`, `updatedAt`, `id_prispevek`) VALUES
-(24, '70-Red-Black-Wallpapers-on-WallpaperPlay.jpg', '2024-05-04 20:49:57', '2024-05-04 20:50:28', 45),
-(25, '52e59c2e71edccfca17ca794af0e4a44.png', '2024-05-04 20:50:08', '2024-05-04 20:50:08', 46),
-(26, '031.834-----tce-h-03675-0--m--metelkovo-nam-skola-pohl.jpg', '2024-05-04 20:53:57', '2024-05-04 20:53:57', 47),
 (28, '340315678_1657565348048042_7161687477589764510_n.jpg', '2024-06-06 17:02:09', '2024-06-06 17:02:09', 48),
 (29, '339685409_758287539008358_8276807528558597363_n.jpg', '2024-06-06 17:03:10', '2024-06-06 17:03:10', 49),
 (30, '336101406_208684155166729_5562596102683739861_n.jpg', '2024-06-06 17:03:58', '2024-06-06 17:03:58', 50);
@@ -118,12 +125,12 @@ CREATE TABLE `kategorie` (
 --
 
 INSERT INTO `kategorie` (`id_kategorie`, `nazev`, `href`, `poradi`, `universal_ano`, `createdAt`, `updatedAt`, `id_klub`, `active`) VALUES
-(1, 'Domu', '/', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1),
-(2, 'Týmy', '/tymy', 2, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1),
-(3, 'Kalendář', '/kalendar', 3, 0, '2024-02-02 19:39:13', '2024-02-02 19:39:13', 1, 1),
-(4, 'Media', '/media', 4, 0, '2024-02-02 19:40:37', '2024-02-02 19:40:37', 1, 1),
-(5, 'Nábor', '/nabor', 5, 1, '2024-02-02 19:41:40', '2024-02-02 19:41:40', 1, 1),
-(6, 'Kontakty', '/kontakty', 6, 1, '2024-02-02 19:41:40', '2024-02-02 19:41:40', 1, 1);
+(1, 'Domů', '', 0, 0, '0000-00-00 00:00:00', '2024-06-11 19:39:20', 1, 1),
+(2, 'Týmy', 'tymy', 1, 0, '0000-00-00 00:00:00', '2024-06-11 19:05:58', 1, 1),
+(3, 'Kalendář', 'kalendar', 2, 0, '2024-02-02 19:39:13', '2024-06-11 19:05:59', 1, 1),
+(4, 'Média', 'media', 3, 0, '2024-02-02 19:40:37', '2024-06-11 19:39:09', 1, 1),
+(12, 'Nábor', 'Nabor', 4, 1, '2024-06-11 18:45:13', '2024-06-11 20:37:51', 1, 1),
+(15, 'Kontakty', 'Kontakty', 5, 1, '2024-06-11 19:07:37', '2024-06-11 20:37:51', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -145,7 +152,7 @@ CREATE TABLE `klub` (
 --
 
 INSERT INTO `klub` (`id_klub`, `jmeno`, `logo`, `icona`, `createdAt`, `updatedAt`) VALUES
-(1, 'VK Teplice', 'logo.png', 'download_066_icon.ico', '0000-00-00 00:00:00', '2024-04-02 20:43:30');
+(1, 'VK Teplice', 'ff3298aaf595804e3a5fb9662d2ed74b.png', '12e439d51fdf179f68cb6b3f320ba22c.ico', '0000-00-00 00:00:00', '2024-06-11 20:14:38');
 
 -- --------------------------------------------------------
 
@@ -188,9 +195,6 @@ CREATE TABLE `prispevek` (
 --
 
 INSERT INTO `prispevek` (`id_prispevek`, `nadpis`, `popisek`, `cas_pridani`, `createdAt`, `updatedAt`) VALUES
-(45, 'rd', 'fdfgfg', '2024-05-04 20:49:57', '2024-05-04 20:49:57', '2024-05-04 20:49:57'),
-(46, 'ghmghm', 'ghmghmghmhmg', '2024-05-04 20:50:08', '2024-05-04 20:50:08', '2024-05-04 20:50:08'),
-(47, 'nav', 'afsd arfged  hrta cytfgjhtrh rt  hrtyrty yh rth srthjhj rtshhj rsr hjs rth shjrrtyhjs rt s rtyh wsr rt yhs   trsyhhr ts ht   thsryhj styhjsrty   ', '2024-05-04 20:53:57', '2024-05-04 20:53:57', '2024-05-04 20:53:57'),
 (48, 'U20 v akci', 'Nejstarší kluci U20 obsadili 3.místo v kraji.', '2024-06-06 17:02:09', '2024-06-06 17:02:09', '2024-06-06 17:02:09'),
 (49, 'U16 ', 'Starší žáci (U16) s pomocí dvou našich děvčat obsadili celkové 9.místo', '2024-06-06 17:03:10', '2024-06-06 17:03:10', '2024-06-06 17:03:10'),
 (50, 'U16 v UnL', 'V neděli bylo odehráno předposlední kolo čtyřkového volejbalu v Ústí 😊😊 Hra A i B týmu se postupně zlepšuje, ale stále nás trápí jistota na servisu a následný příjem, což je pro nás limitující abychom byli ještě více úspěšnější 😶😶 Celkově jsme tak třikrát zvítězili a pětkrát prohráli', '2024-06-06 17:03:58', '2024-06-06 17:03:58', '2024-06-06 17:03:58');
@@ -238,10 +242,10 @@ CREATE TABLE `sponzor` (
 --
 
 INSERT INTO `sponzor` (`id_sponzor`, `logo`, `odkaz`, `createdAt`, `updatedAt`, `id_klub`) VALUES
-(1, 'cv.png', 'https://www.cvf.cz/', '0000-00-00 00:00:00', '2024-04-02 20:41:24', 1),
 (2, 'j.jpg', 'https://www.jadberg.eu/', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
 (3, 'CoA_of_Teplice.svg', 'https://www.teplice.cz/', '2024-02-02 18:38:52', '2024-05-16 19:13:21', 1),
-(4, 'uk.png', 'https://www.kr-ustecky.cz/', '2024-02-02 18:38:52', '2024-02-02 18:38:52', 1);
+(4, 'f3983538297490a5be71d2ff6f5c1e1d.png', 'https://www.kr-ustecky.cz/', '2024-02-02 18:38:52', '2024-06-11 14:48:47', 1),
+(14, 'c956c446b99ec8e7a2dab1fcfc668de8.png', 'https://www.cvf.cz/', '2024-06-11 20:33:18', '2024-06-11 20:33:18', NULL);
 
 -- --------------------------------------------------------
 
@@ -285,8 +289,6 @@ CREATE TABLE `tags` (
 --
 
 INSERT INTO `tags` (`id_tags`, `createdAt`, `updatedAt`, `id_tag`, `id_prispevek`) VALUES
-(32, '2024-05-28 22:05:02', '2024-05-28 22:05:02', 5, 45),
-(35, '2024-05-29 20:45:45', '2024-05-29 20:45:45', 1, 47),
 (36, '2024-06-06 17:02:09', '2024-06-06 17:02:09', 5, 48),
 (37, '2024-06-06 17:03:10', '2024-06-06 17:03:10', 9, 49),
 (38, '2024-06-06 17:03:58', '2024-06-06 17:03:58', 9, 50);
@@ -312,7 +314,7 @@ CREATE TABLE `tym` (
 --
 
 INSERT INTO `tym` (`id_tym`, `photo`, `popisek`, `createdAt`, `updatedAt`, `id_tag`, `id_klub`) VALUES
-(1, 'U20.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget rhoncus risus. Vivamus ante tortor, aliquet nec turpis et, viverra sodales lorem. Cras ut sem dolor. Donec elementum lorem vitae lacus faucibus semper.', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 5, 1),
+(1, 'U20.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget rhoncus risus. Vivamus ante tortor, aliquet nec turpis et, viverra sodales lorem.', '0000-00-00 00:00:00', '2024-06-11 18:40:53', 5, 1),
 (5, '339685409_758287539008358_8276807528558597363_n.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ', '2024-06-06 17:00:50', '2024-06-06 17:58:48', 9, 1);
 
 -- --------------------------------------------------------
@@ -334,8 +336,8 @@ CREATE TABLE `universal` (
 --
 
 INSERT INTO `universal` (`id_universal`, `id_kategorie`, `obsah`, `createdAt`, `updatedAt`) VALUES
-(1, 5, 'Lorem ipsum dolor sit amet, consectetur \r\n\r\n adipiscing elit. Pellentesque eget rhoncus risus. Vivamus ante tortor, aliquet nec turpis et, viverra sodales lorem. Cras ut sem dolor.\r\n\r\n Donec elementum lorem vitae lacus faucibus semper. Proin feugiat interdum massa non mollis. Suspendisse egestas ultricies lacus et dictum.\r\n\r\n Nulla eros nibh, tempor sit amet elit id, fermentum consectetur nulla. Duis laoreet quam sem, in volutpat libero faucibus sit amet.\r\n', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(2, 6, 'Edisonova 1732/9, 415 01 Teplice 1 \r\n\r\n\r\n Email: asdfds@qwerty.cz\r\n\r\n telefon trenéři:\r\n\r\n Pepa Novak: +420 789 456 321\r\n\r\n  Pepa Novak: +420 789 456 321\r\n', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+(8, 12, 'Lorem ipsum dolor sit amet, consectetur \r\n\r\n adipiscing elit. Pellentesque eget rhoncus risus. Vivamus ante tortor, aliquet nec turpis et, viverra sodales lorem. Cras ut sem dolor.\r\n\r\n Donec elementum lorem vitae lacus faucibus semper. Proin feugiat interdum massa non mollis. Suspendisse egestas ultricies lacus et dictum.\r\n\r\nNulla eros nibh, tempor sit amet elit id, fermentum consectetur nulla. Duis laoreet quam sem, in volutpat libero faucibus sit amet.', '2024-06-11 18:45:13', '2024-06-11 20:41:09'),
+(11, 15, 'Edisonova 1732/9, 415 01 Teplice 1 \r\n\r\n\r\n Email: asdfds@qwerty.cz\r\n\r\ntelefon trenéři:\r\n\r\nPepa Novak: +420 789 456 321\r\n\r\nPepa Novak: +420 789 456 321', '2024-06-11 19:07:37', '2024-06-11 20:36:43');
 
 --
 -- Indexy pro exportované tabulky
@@ -403,7 +405,8 @@ ALTER TABLE `sponzor`
 -- Indexy pro tabulku `tag`
 --
 ALTER TABLE `tag`
-  ADD PRIMARY KEY (`id_tag`);
+  ADD PRIMARY KEY (`id_tag`),
+  ADD KEY `tag_ibfk_1` (`id_pohlavi`);
 
 --
 -- Indexy pro tabulku `tags`
@@ -436,25 +439,25 @@ ALTER TABLE `universal`
 -- AUTO_INCREMENT pro tabulku `akce`
 --
 ALTER TABLE `akce`
-  MODIFY `id_akce` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_akce` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT pro tabulku `akcetag`
 --
 ALTER TABLE `akcetag`
-  MODIFY `id_akceTag` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id_akceTag` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT pro tabulku `img`
 --
 ALTER TABLE `img`
-  MODIFY `id_img` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id_img` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT pro tabulku `kategorie`
 --
 ALTER TABLE `kategorie`
-  MODIFY `id_kategorie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_kategorie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT pro tabulku `klub`
@@ -472,7 +475,7 @@ ALTER TABLE `pohlavi`
 -- AUTO_INCREMENT pro tabulku `prispevek`
 --
 ALTER TABLE `prispevek`
-  MODIFY `id_prispevek` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id_prispevek` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT pro tabulku `sit`
@@ -484,31 +487,31 @@ ALTER TABLE `sit`
 -- AUTO_INCREMENT pro tabulku `sponzor`
 --
 ALTER TABLE `sponzor`
-  MODIFY `id_sponzor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_sponzor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT pro tabulku `tag`
 --
 ALTER TABLE `tag`
-  MODIFY `id_tag` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_tag` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pro tabulku `tags`
 --
 ALTER TABLE `tags`
-  MODIFY `id_tags` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id_tags` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT pro tabulku `tym`
 --
 ALTER TABLE `tym`
-  MODIFY `id_tym` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_tym` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT pro tabulku `universal`
 --
 ALTER TABLE `universal`
-  MODIFY `id_universal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_universal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Omezení pro exportované tabulky
