@@ -27,9 +27,7 @@ router.get('/:tym', async function(req, res) {
         }]
       });
       const sponzori = await Sponzor.findAll();
-      const { Op } = require('sequelize'); // Import the Op object
-
-// ...
+      const { Op } = require('sequelize'); 
 
 const prispevky = await Prispevek.findAll({
   limit: 2,
@@ -83,7 +81,6 @@ const akce = await Akce.findAll({
       res.status(500).send('Chyba serveru');
     }
   } else {
-    // vrátí chybu 404, pokud tag neexistuje
     res.status(404).send('Not found');
   }
 });
