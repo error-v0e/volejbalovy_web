@@ -194,7 +194,6 @@ router.post("/sponzori_popup", uploadSponzor.fields([{ name: 'logo', maxCount: 1
   });
   const pathL = './public/img/sponzor/' + sponzor.logo;
 
-  if (odkaz || logo ) {
     if(odkaz != sponzor.odkaz){
       try {
         await Sponzor.update({ odkaz: odkaz }, { where: { id_sponzor: id } });
@@ -219,7 +218,6 @@ router.post("/sponzori_popup", uploadSponzor.fields([{ name: 'logo', maxCount: 1
         return res.status(500).json({ message: err.message });
       }
     }
-  }
   return res.redirect("/sprava");
 });
 

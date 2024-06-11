@@ -21,13 +21,13 @@
       <form method="post" , action="/api/login">
         <div class="text-center">
           <img class="mb-4" src="../img/<%= kluby.icona %>" alt=""  height="110">
-          <h1 class="h3 mb-3 fw-normal primary_color">Přihlásit se</h1>
+          <h1 class="h3 mb-3 fw-normal primary_color">Přihlásit se správy</h1>
         </div>
         <% if(error) { %> 
 					<p style="color: red;"><%= error %></p> 
 				<% } %> 
         <div class="name primary_color">
-          <label for="username">Jmeno:</label><br>
+          <label for="username">Jméno:</label><br>
           <input class="cname primary_color" type="text" id="username" name="username" placeholder="Pepa Novak"><br>
         </div>
         <div class="name primary_color">
