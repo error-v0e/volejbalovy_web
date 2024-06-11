@@ -231,6 +231,41 @@ document.querySelector('#akceDel<%= item.id_akce %>').addEventListener('click', 
   document.querySelector('#popupAkceDel<%= item.id_akce %>').style.display = 'block';
 });
 <% }) %>
+document.addEventListener('DOMContentLoaded', function() {
+  <% akce.forEach(item => { %>
+    document.querySelector('#editA<%= item.id_akce %>').addEventListener('submit', function(event) {
+      event.preventDefault(); // stop form from automatically submitting
+
+      var startDate = new Date(document.querySelector('input[name="start<%= item.id_akce %>"]').value);
+      var endDate = new Date(document.querySelector('input[name="end<%= item.id_akce %>"]').value);
+      var now = new Date();
+
+      if (endDate <= startDate) {
+        alert('Konečné datum a čas musí být později než počáteční datum a čas.');
+      } else if (endDate <= now) {
+        alert('Konečné datum a čas musí být později než aktuální datum a čas.');
+      } else {
+        event.target.submit(); // manually submit form if validation is successful
+      }
+    });
+  <% }) %>
+});
+  
+document.querySelector('#newA').addEventListener('submit', function(event) {
+  event.preventDefault(); // stop form from automatically submitting
+
+  var startDate = new Date(document.querySelector('input[name="start"]').value);
+  var endDate = new Date(document.querySelector('input[name="end"]').value);
+  var now = new Date();
+
+  if (endDate <= startDate) {
+    alert('Konečné datum a čas musí být později než počáteční datum a čas.');
+  } else if (endDate <= now) {
+    alert('Konečné datum a čas musí být později než aktuální datum a čas.');
+  } else {
+    event.target.submit(); // manually submit form if validation is successful
+  }
+});
   </script>
   <script src="/scripts/adminPanel.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
