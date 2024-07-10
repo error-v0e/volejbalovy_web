@@ -1,0 +1,21 @@
+<div class="popup" id="popupUser" style="display: none;">
+  <form method="post" action="/api/user" enctype="multipart/form-data">
+    <div class="action"><!--Ulozit-->
+      <a class="butt-dis butt mb-1" href="/sprava">Zahodit změny</a>
+      <input  class="butt-sub butt" type="submit" value="Uložit">
+    </div>
+    <div class="name primary_color mb-3">
+      <label for="odkaz">Jméno:</label><br>
+      <input class="cname primary_color" type="text" id="cname" name="odkaz" value="<%= name %>"><br>
+    </div>
+    <div class="name primary_color">
+      <label for="passwordNew">Nové heslo:</label><br>
+      <input class="cname primary_color" type="password" id="passwordNew" name="passwordNew"><br>
+    </div>
+    <div class="name primary_color">
+      <label for="password">Aktualní heslo pro potvrzení:</label><br>
+      <input class="cname primary_color" type="password" id="password" name="password" required><br>
+    </div>
+    
+  </form>
+</div>

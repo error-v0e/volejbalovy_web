@@ -23,7 +23,7 @@
     <a href="/register" class="primary_color rounded p-1 nav-link" style="display: none;" id="register"><i class="fa-solid fa-solid fa-user-plus fa-lg pe-1"></i>Přidat trenéra</a>
     <a href="/api/logout" class="primary_color rounded p-1 nav-link" style="display: none;" id="logout"><i class="fa-solid fa-sign-out fa-lg pe-1"></i>Odhlásit</a>
   </div>
-  
+  <%- include('./universal_components/user_popup', {name}) %>
   <nav class="bg_primary_color navbar navbar-expand-md container-fluid" aria-label="Fourth navbar example">
     <div class="container-xl container-fluid">
       <a class="navbar-brand " href="/sprava">
@@ -218,6 +218,12 @@ document.getElementById('LogoSponzor<%= item.id_sponzor %>').addEventListener('c
   previewImage('#LogoSponzor<%= item.id_sponzor %>', '#previewsponzor<%= item.id_sponzor %>');
 });
 <% }) %>
+
+document.querySelector('#user').addEventListener('click', function () {
+  document.querySelector('body').style.pointerEvents = 'none';
+  document.querySelector('#popupUser').style.pointerEvents = 'auto';
+  document.querySelector('#popupUser').style.display = 'block';
+});
 
 <% akce.forEach(item => { %>
 document.querySelector('#akce<%= item.id_akce %>').addEventListener('click', function () {
