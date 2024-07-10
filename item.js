@@ -96,6 +96,7 @@ const Tag = sequelize.define('tag', {
   nazev: {
     type: DataTypes.STRING(45),
     allowNull: false,
+    unique: true,
   },
 }, {freezeTableName: true,});
 

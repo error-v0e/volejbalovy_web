@@ -1,24 +1,28 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('./user_db');
 
-
 const User = sequelize.define('user', {
     email: {
-    type: DataTypes.STRING(64),
-      allowNull: false,
-      unique: true
+        type: DataTypes.STRING(64),
+        allowNull: false,
+        unique: true
     },
     username: {
-      type: DataTypes.STRING(64),
-      allowNull: false,
-      unique: true
+        type: DataTypes.STRING(64),
+        allowNull: false,
+        unique: true
     },
     password: {
-      type: DataTypes.STRING(64),
-      allowNull: false
+        type: DataTypes.STRING(64),
+        allowNull: false
+    },
+    admin: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
     }
 }, {freezeTableName: true,});
 
 sequelize.sync();
-  
+
 module.exports = User;
