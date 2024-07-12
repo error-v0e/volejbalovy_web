@@ -635,4 +635,55 @@ router.post("/down", async (req, res) => {
 });
 
 
+router.post('/user', async (req, res) => {
+  const { nameNew, passwordNew, password, name } = req.body;
+
+  // Debugging: Log the values of name and nameNew
+  console.log('Received name:', name);
+  console.log('Received nameNew:', nameNew);
+
+  try {
+    if (!name) {
+      return res.status(400).send('Username is required');
+    }
+
+    const user = await User.findOne({
+      where: { username: name }
+    });
+
+    if (!user) {
+      return res.status(404).send('User not found');
+    }
+
+    // Check if the new username already exists
+    const usernameExists = await User.findOne({
+      where: { username: nameNew }
+    });
+
+    const updateData = { username: nameNew };
+
+    if (passwordNew) {
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        
+      }
+
+      const salt = await bcrypt.genSalt(15);
+      const hashedPasswordNew = await bcrypt.hash(passwordNew, salt);
+      updateData.password = hashedPasswordNew;
+    }
+
+    await User.update(updateData, {
+      where: { id: user.id }
+    });
+    
+    req.session.name = nameNew;
+
+    return res.redirect("/sprava");
+  } catch (error) {
+    console.error("Error updating user:", error);
+    return res.status(500).send("An error occurred");
+  }
+});
+
 module.exports = router;
